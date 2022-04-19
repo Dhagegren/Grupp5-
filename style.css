@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    background-color: black;
+    height: 50px;
+    text-align: center;
+}
+
+header h1 {
+    color: white
+}
+
+.search div {
+    height: 60px;   
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    margin:  20px 20px 0 20px;
+
+}
+
+.search input {
+    border: none;
+    height: 40px;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 300px;
+    outline : none;
+    font-size: 1em;
+}
+
+.search button {
+    background-color: #4563FF;
+    border: none;
+    color: white;
+    border-radius: 0px 0px 10px 10px;
+    height: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+
+.links .linkbox {
+    min-width: 250px;
+    width: 350px;
+    height: 130px;
+    margin: 20px 0px 0px 20px;
+    border-radius: 20px;
+    background-image: linear-gradient(to top, rgba(163, 157, 160, 0.2), rgba(0, 0, 0, 0.8)), url(camp.jpg);
+    background-size: cover;
+}
+
+.links .linkbox p {
+    color: white;
+    padding: 20px 0 0 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+
