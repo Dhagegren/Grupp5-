@@ -1,0 +1,83 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    background-color: black;
+    height: 50px;
+    text-align: center;
+    color: white;
+}
+
+main {
+    position: relative;
+    height: 450px;
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp3.jpg);
+}
+
+.webbpage {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px
+}
+
+.map {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px
+}
+
+main h1{
+    position: absolute;
+    top: 300px;
+    left: 25px;
+    color: white;
+    font-weight: 550;
+    font-size: 1.7em;
+}
+
+main h2{
+    position: absolute;
+    top: 300px;
+    right: 25px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+main > p{
+    position: absolute;
+    top: 340px;
+    left: 25px;
+    color: white;
+    font-size: 0.8gitem;
+}
+
+section {
+   color: black;
+   background-color: white;
+   position: absolute;
+   top: 400px;
+   width: 100%;
+   border-radius: 20px 20px 0 0;
+}
+
+section p {
+    padding: 25px;
+    font-size: 0.9em;
+}
+  
