@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+header {
+    background-color: black;
+    height: 50px;
+    text-align: center;
+}
+
+header h1 {
+    color: white
+}
+
+#filterDiv{
+    display: inline;
+    align-items:center;   
+}
+
+#filterList{
+    display:flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    padding: 5px;
+}
+
+li{
+ display: flex;
+ align-items: center;
+ flex-direction: column;
+}
+
+li img{
+    height: 30px;
+    width: 30px;
+}
+
+.search{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.search input{
+    padding: 6px;
+    width: 90%;
+    height: 30px; 
+    border-radius: 1.625rem;
+    background-color:#efecec;
+    border:none;
+}
+
+#campingDiv{
+    margin: 20px;
+}
+
+.itemDiv{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 1.625rem;
+    height: 100px;
+    background-color:#efecec ;
+}
+
+#textDiv{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    gap:10px;
+}
+
+.itemDiv img{
+    border-top-left-radius:1.625rem; 
+    border-bottom-left-radius:1.625rem;
+    margin-right: 10px;
+    width: 120px;
+    height: 100px;
+}
+
+ button{
+    position: absolute;
+    right: 25px;
+    bottom: 5px;
+    width: 70px;
+    height: 40px;
+    background-color: #4BF466;
+    border-radius: 8px;
+}
+
+
+
+
+
