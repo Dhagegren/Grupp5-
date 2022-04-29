@@ -1,12 +1,14 @@
-var mymap // Min karta
+var mymap1; // Min karta
+
 
 function init(){
-    initMap();
+    initMap1();
+	
 }
 
 window.addEventListener("load", init);
 
-function initMap() {
+function initMap1() {
 	myMap = new google.maps.Map(
 			document.getElementById('map'),
 			{
@@ -19,3 +21,6 @@ function initMap() {
 			}
 		);
 } // End initMap
+
+
+

@@ -7,18 +7,18 @@
     <title>Document</title>
     <link rel="stylesheet" href="styleinformationpage.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx44xtf58fau8qDMi7x2ZiNW2xj6LoDCw"></script>
-	<script type="text/javascript" src="js/informationpagescript.js"></script>
+	<script type="text/javascript" src="js/informationpagemapscript.js"></script>
 </head>
 <body>
     <header>
         <h1>Logo</h1>
     </header>
     <main>
-        <div class="webbpage">
+        <a href="https://www.w3schools.com"><div class="webbpage">
             <img src="ikoner/wikis.svg" alt="webbpage">
             <p>Webbplats</p>
-        </div>
-        <div class="map">
+        </div></a>
+        <div class="map" id="map2">
             <img src="ikoner/location-marker.svg" alt="Karta">
             <p>Karta</p>
         </div>
@@ -80,21 +80,23 @@
                 <h3>Nära Lasses camping</h3>
                 <div class="filter">
                     <div class="knappar">
-                        <button id="aktiviteter"><img src="ikoner/Bike.svg"         alt="Aktiviteter"> Aktiviteter</button>
-                        <button id="mat"><img src="ikoner/Restaurant.svg" alt="Mat"> Mat</button>
+                        <button id="aktivitetsknapp" class="active" ><img src="ikoner/Bikewhite.svg" alt="Aktiviteter"> Aktiviteter</button>
+                        <button id="matknapp"><img src="ikoner/Restaurant.svg" alt="Mat"> Mat</button>
                     </div>
                     <div class="ikon2">
-                        <img src="ikoner/Filters Vertical.svg" alt="filter">
+                        <img  src="ikoner/Filters Vertical.svg" alt="filter">
                         <p>Filter</p>
                     </div>
                 </div>
                
-            </div>  
-            <div id="map"></div> 
-            <div id="lista">
-                  <img src="ikoner/cheveron-down.svg" alt="">
-                  <p>Visa lita</p>
-            </div>
+            </div> 
+            <div class="karta">
+                <div id="map"></div> 
+                <div id="lista">
+                    <img src="ikoner/cheveron-down.svg" alt="">
+                    <p>Visa lista</p>
+                </div>
+            </div> 
         </section>
     </main>
 
