@@ -19,7 +19,7 @@ main {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center center fixed;
+    rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center fixed;
 }
 
 .webbpage, .map {
@@ -95,7 +95,7 @@ section {
 }
 
 .faciliteter {
-    padding: 10px 25px 0 25px;
+    padding: 15px 25px 0 25px;
 }
 
 .ikoner{
@@ -105,7 +105,7 @@ section {
     gap: .5em;
 }
 
-.ikon {
+.ikon, .ikon2 {
     width: 30px;
     display: flex;
     flex-direction: column;
@@ -126,7 +126,74 @@ section {
 
 .recensioner {
     padding: 10px 25px 0 25px;
+    margin-top: 35px;
+    
+}
+
+.recensioner p {
+    text-align: center;
+    padding: 70px 40px 40px 40px;
+    color: #bcbcbc;
+}
+
+.close {
+    padding: 10px 25px 0 25px;
     margin-top: 25px;
+}
+
+.knappar {
+    padding: 10px 0 10px 0;
+    
+}
+
+.knappar button {
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 50px;
+    font-size: .8em;
+    font-weight: 500;
+    border: none ;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+    padding: 7px 7px 7px 30px;
+    position: relative;
+    margin-right: 10px;
+}
+
+.knappar button img {
+    height: 18px;
+    position: absolute;
+    left: 7px;
+}
+
+.filter{
+    display: flex;
+    justify-content: space-between;
+    max-width: 300px;
+}
+
+.ikon2{
+   padding: 10px 0 0 0; 
+}
+
+.ikon2 img {
+    height: 25px;
+    width: 25px;
+
+}
+
+.ikon2 p {
+    font-size: .8em;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+}
+
+#lista {
+    display: grid;
+    place-items: center;
 }
 
 
