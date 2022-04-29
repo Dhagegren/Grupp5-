@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>page two</title>
+    <link rel="stylesheet" href="style2.css">
+    <script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Logo</h1>
+    </header>
+
+    <div id="filterDiv"> 
+        <ul id="filterList">
+            <button class="myBtn">
+                <img src="img/sort.svg" alt="sorterings ikon">
+                Sortera
+            </button>
+        
+            <button class="myBtn">
+                <img src="img/FIlter.svg" alt="filtrerings ikon">
+                Filter   
+            </button>
+
+            <button class="myBtn">
+                <img src="img/LocMarker.svg" alt="ikon för karta">
+                Karta   
+            </button>
+        </ul>
+    </div>
+
+    <hr>
+
+    <div class="search">
+        <input type="text" placeholder="Sök på camping">        
+    </div>
+
+    <div id="campingDiv">
+        <div class="itemDiv">
+            <img src="img/camp2.jpg" alt="bild på camping">
+         
+            <div id="textDiv"> 
+                <h2> Lasses Camping</h2>
+                <p> 5km från växjö</p>
+                <p> Visa på karta</p>
+                <p> 4.4/5</p>
+            </div>
+                
+            <button id="infoBtn"> Info</button>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <input type="checkbox" class="modalCheck" name="natur">
+            <label for="natur"> Campingar nära naturen</label>
+            <input type="checkbox" class="modalCheck" name="småland">
+            <label for="småland"> Campingar i småland</label>
+            <input type="checkbox" class="modalCheck" name="strand">
+            <label for="strand"> Campinar nära stranden</label>
+            <input type="checkbox" class="modalCheck" name="öland">
+            <label for="öland"> Campingar på Öland </label>
+        </div>
+    </div>
+</body>
+</html>
