@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styleinformationpage.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx44xtf58fau8qDMi7x2ZiNW2xj6LoDCw"></script>
+	<script type="text/javascript" src="js/informationpagescript.js"></script>
 </head>
 <body>
     <header>
@@ -31,14 +33,7 @@
         </p>
         <section>
             <div class="beskrivning">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Deleniti, vitae sed eum ipsam officiis illo asperiores 
-                quos alias voluptatibus ad molestias amet. Excepturi 
-                autem totam ea doloribus minima. Similique blanditiis 
-                aspernatur, voluptate deleniti quasi expedita architecto
-                 ducimus quaerat inventore doloremque nam ut, corporis 
-                 esse quibusdam accusantium unde asperiores iusto a? 
-                 Saepe assumenda eveniet cupiditate velit, nihil 
+                <p>Trevlig camping nära till hav, sol och strand. På sommraren är denna småländska idyll den perfekta platsen att koppla av med familj eller vänner. Lasses camping har drivits av familjen Lasseson sen 1956 och är nu inne på den tredje generationen. Vi på Lasses har alltid strävat efter att erbjuda den bästa camping upplevelsen där det finns tid för både avkopplande och fest i vår loge, där vi haft stora artister genom åren, såsom Lasse Stefanz och Kendrick Lamar.
                 </p>
             </div>
             <div class="faciliteter">
@@ -81,8 +76,27 @@
                     <p>Inga recensioner</p>
                 </div>
             </div>
+            <div class="close">
+                <h3>Nära Lasses camping</h3>
+                <div class="filter">
+                    <div class="knappar">
+                        <button id="aktiviteter"><img src="ikoner/Bike.svg"         alt="Aktiviteter"> Aktiviteter</button>
+                        <button id="mat"><img src="ikoner/Restaurant.svg" alt="Mat"> Mat</button>
+                    </div>
+                    <div class="ikon2">
+                        <img src="ikoner/Filters Vertical.svg" alt="filter">
+                        <p>Filter</p>
+                    </div>
+                </div>
+               
+            </div>  
+            <div id="map"></div> 
+            <div id="lista">
+                  <img src="ikoner/cheveron-down.svg" alt="">
+                  <p>Visa lita</p>
+            </div>
         </section>
     </main>
-    
+
 </body>
 </html>
