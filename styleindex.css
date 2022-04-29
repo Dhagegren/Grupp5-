@@ -113,12 +113,16 @@ header h1 {
     color: white;
     font-size: 0.9em;
     position: absolute;
-    bottom: 5px;
-    left: 15px;
+    bottom: 10px;
+    left: 10px;
 }
 
 #long {
-    background-image: linear-gradient(to bottom, rgba(55, 54, 54, 0.1) 0%, #000000 130%), url(img/camp2.jpg);
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg) ;
     background-size: cover;
     grid-area: long;
     height: 270px;
@@ -126,14 +130,22 @@ header h1 {
 }
 
 #short1{
-    background-image: linear-gradient(to bottom, rgba(55, 54, 54, 0.1) 0%, #000000 130%), url(img/camp2.jpg);
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
     background-size: cover;
     grid-area: short1;
     
 }
 
 #short2{
-    background-image: linear-gradient(to bottom, rgba(55, 54, 54, 0.1) 0%, #000000 130%), url(img/camp2.jpg);
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
     background-size: cover;
     grid-area: short2;
     
