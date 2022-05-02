@@ -1,10 +1,13 @@
 
 var modal = document.getElementsByClassName("modal");//Reference to modal
+var campingRef = document.getElementsByClassName("campingDivs");
 var searchValue = window.location.search;
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var srcValue =""; 
 
 function init() {
+	console.log(campingRef);
+	campingRef = campingRef[0];
     searchValue = new URLSearchParams(searchValue);
     srcValue = searchValue.get("value");
     console.log(srcValue);
@@ -49,13 +52,36 @@ function requestCamping() {
         console.log("hej")
         let theResponse = JSON.parse(response);//Konverterar json svaret
         let search = srcValue;
+		let tempCamping = "";
         console.log(search);
         theResponse = theResponse.payload;
         console.log(theResponse);
         for (let i = 0; i < theResponse.length; i++) {
             if (theResponse[i].city == search || theResponse[i].municipality == search + " kommun" || theResponse[i].name.includes(search)) {
-                console.log(theResponse[i]);
+				tempCamping += "<div class='campingDiv'><div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
+				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p> Visa på karta </p> <p>" +parseFloat(theResponse[i].rating) + "/5</p>"+
+				'</div> <button class="infoBtn"> Info</button></div></div>';
+                console.log(tempCamping);
+				campingRef.innerHTML = tempCamping;
+
             }
         }
+
     }
 }
+
+/*     <div class="campingDiv">        
+<div class="itemDiv">
+            <img src="img/camp2.jpg" alt="bild på camping">
+            
+            <div id="textDiv"> 
+                <h2> Lasses Camping</h2>
+                <p> 5km från växjö</p>
+                <p> Visa på karta</p>
+                <p> 4.4/5</p>
+            </div>
+                
+            <button id="infoBtn"> Info</button>
+        
+			</div>*/
+		
