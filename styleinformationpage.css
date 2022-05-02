@@ -92,6 +92,7 @@ section {
     font-size: 0.8em;
     font-weight: 500;
     line-height: 1.5em;
+    max-width: 500px;
 }
 
 .faciliteter {
@@ -124,16 +125,45 @@ section {
     padding: 5px 0 0 0;
 }
 
-.recensioner {
+.recensionercover {
     padding: 10px 25px 0 25px;
     margin-top: 35px;
     
 }
 
-.recensioner p {
+.ingarecensioner p {
     text-align: center;
     padding: 70px 40px 40px 40px;
     color: #bcbcbc;
+    display: none;
+}
+
+#recensioner {
+    padding: 10px 0 0 0;
+    display: flex;
+    overflow-x: scroll;
+    
+}
+
+#recensioner {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+#recensioner::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.recensionerobjekt {
+    padding: 10px;
+    margin-right: 10px;
+    height: 100px;
+    min-width: 250px;
+    background-color: rgb(243, 243, 243);
+}
+
+.recensionerobjekt p {
+    padding-top: 10px;
+    font-size: .75em;
 }
 
 .close {
@@ -188,7 +218,7 @@ section {
 
 .knappar .active{
     color: white;
-    background-color: rgb(0, 156, 0);
+    background-color: #290cad;
 }
 
 
@@ -196,7 +226,22 @@ section {
     width: 100%;
     height: 400px;
     margin-top: 10px;
+    
 }
+
+
+#listan {
+    overflow-y: scroll;
+    height: 410px;¨
+    
+   
+}
+
+.kartalista .hidden {
+    display: none;
+}
+
+
 
 .listobjekt {
    background-color: #FCFCFC;
@@ -225,6 +270,7 @@ section {
 .listobjekt ul li {
     padding: 0 40px 5px 0;
     font-size: .75em;
+    font-weight: 500;
 }
 
 #maporlist {
@@ -241,11 +287,12 @@ section {
     flex-direction: column;
     padding: 10px;
     font-size: .7em;
+    cursor: pointer;
 }
 
 #maporlist .active {
     color: white;
-    background-color: rgb(0, 156, 0);
+    background-color: #290cad;
 } 
 
 #maporlist button img {
