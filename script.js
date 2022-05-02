@@ -1,5 +1,5 @@
 
-var modal = document.getElementsByClassName("modal");
+var modal = document.getElementsByClassName("modal");//Reference to modal
 
 function init() {
 	let btn = document.getElementsByClassName("myBtn");
@@ -14,17 +14,17 @@ function init() {
 window.onload = init;
 ;
 
-// When the user clicks on the button, open the modal
+//Open up modal
 function showModal() {
 	modal[0].style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
+//Close modal
 function hideModal() {
 	modal[0].style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
+//Click outside modal to close
 window.onclick = function(event) {
 	if (event.target == modal[0]) {
 		modal[0].style.display = "none";
