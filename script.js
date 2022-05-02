@@ -5,7 +5,6 @@ function init() {
 	let btn = document.getElementsByClassName("myBtn");
 	let span = document.getElementsByClassName("close")[0];
 
-	console.log(modal[0]);
 	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", showModal);
@@ -13,6 +12,7 @@ function init() {
 	span.addEventListener("click", hideModal);
 }
 window.onload = init;
+;
 
 // When the user clicks on the button, open the modal
 function showModal() {
