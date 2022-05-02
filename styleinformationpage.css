@@ -12,33 +12,44 @@ header {
 }
 
 main {
+    max-width: 1400px;
     position: relative;
     height: 450px;
-    background-size: cover;
-    background-position: center center;
-    background-image: linear-gradient(to top, 
+    background: linear-gradient(to top, 
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp3.jpg);
+    rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center fixed;
+}
+
+.webbpage, .map {
+    background-color: white;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.webbpage img, .map img {
+    width: 30px;
+    padding: 5px 0 0 0;
+}
+
+.webbpage p, .map p {
+    font-size: .7em;
+    padding: 5px 0 0 0;
 }
 
 .webbpage {
-    background-color: white;
-    position: absolute;
     top: 0;
     left: 0;
-    width: 60px;
-    height: 60px
 }
 
 .map {
-    background-color: white;
-    position: absolute;
     top: 0;
     right: 0;
-    width: 60px;
-    height: 60px
 }
 
 main h1{
@@ -52,10 +63,10 @@ main h1{
 
 main h2{
     position: absolute;
-    top: 300px;
+    top: 305px;
     right: 25px;
     color: white;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.5em;
 }
 
@@ -64,7 +75,7 @@ main > p{
     top: 340px;
     left: 25px;
     color: white;
-    font-size: 0.8gitem;
+    font-size: 0.8em;
 }
 
 section {
@@ -76,8 +87,170 @@ section {
    border-radius: 20px 20px 0 0;
 }
 
-section p {
+.beskrivning {
     padding: 25px;
-    font-size: 0.9em;
+    font-size: 0.8em;
+    font-weight: 500;
+    line-height: 1.5em;
 }
+
+.faciliteter {
+    padding: 15px 25px 0 25px;
+}
+
+.ikoner{
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 50px);
+    gap: .5em;
+}
+
+.ikon, .ikon2 {
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.ikon img {
+    height: 30px;
+    width: 30px;
+
+}
+
+.ikon p {
+    font-size: 0.6em;
+    color: #444444;
+    padding: 5px 0 0 0;
+}
+
+.recensioner {
+    padding: 10px 25px 0 25px;
+    margin-top: 35px;
+    
+}
+
+.recensioner p {
+    text-align: center;
+    padding: 70px 40px 40px 40px;
+    color: #bcbcbc;
+}
+
+.close {
+    padding: 10px 25px 0 25px;
+    margin-top: 25px;
+}
+
+.knappar {
+    padding: 10px 0 10px 0;
+    
+}
+
+.knappar button {
+    margin-top: 5px;
+    background-color: white;
+    border-radius: 50px;
+    font-size: .8em;
+    font-weight: 500;
+    border: none ;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+    padding: 7px 7px 7px 30px;
+    position: relative;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.knappar button img {
+    height: 18px;
+    position: absolute;
+    left: 7px;
+}
+
+.filter{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.ikon2{
+   padding: 10px 0 0 0; 
+}
+
+.ikon2 img {
+    height: 25px;
+    width: 25px;
+
+}
+
+.ikon2 p {
+    font-size: .8em;
+}
+
+.knappar .active{
+    color: white;
+    background-color: rgb(0, 156, 0);
+}
+
+
+#map {
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+}
+
+.listobjekt {
+   background-color: #FCFCFC;
+   box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+   border-radius: 29px; 
+   margin: 10px 20px 15px 20px;
+   padding: 20px 0 0 20px;
+   max-width: 400px;
+}
+
+.title {
+    display:flex;
+
+}
+
+.title p {
+    font-size: .6em;
+}
+
+.listobjekt ul {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.listobjekt ul li {
+    padding: 0 40px 5px 0;
+    font-size: .75em;
+}
+
+#maporlist {
+    height: 50px;
+    display: flex;
+    flex-direction: Row;
+}
+
+#maporlist button {
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-size: .7em;
+}
+
+#maporlist .active {
+    color: white;
+    background-color: rgb(0, 156, 0);
+} 
+
+#maporlist button img {
+    height: 20px;
+}
+
+
   
