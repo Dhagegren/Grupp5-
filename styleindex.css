@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+header {
+    background-color: black;
+    height: 50px;
+    text-align: center;
+}
+
+header h1 {
+    color: white
+}
+
+.search div {
+    height: 60px;   
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    margin:  20px 20px 0 20px;
+
+}
+
+.search input {
+    border: none;
+    height: 40px;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 97%;
+    outline : none;
+    font-size: 1em;
+}
+
+.search button {
+    background-color: #01d71e;
+    border: none;
+    color: white;
+    border-radius: 0px 0px 10px 10px;
+    height: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.indexh1{
+    font-size: 1.3em;
+    padding: 45px 0 0 20px;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+
+.links {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.links::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.links .linkbox {
+    
+    margin: 20px 0px 0px 20px;
+}
+
+.linkbox .linkimg {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+}
+
+.linkbox h1{
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px 0 0 0;
+}
+
+.linkbox p{
+    color: #767676;
+}
+
+.indexgrid {
+    padding: 20px 20px 0 20px;
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "long short1"
+    "long short2";
+    
+}
+
+.indexgridsection{
+    border-radius: 10px;
+    position: relative;
+}
+
+.indexgridsection h1 {
+    color: white;
+    font-size: 0.9em;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+#long {
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg) ;
+    background-size: cover;
+    grid-area: long;
+    height: 270px;
+    
+}
+
+#short1{
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
+    background-size: cover;
+    grid-area: short1;
+    
+}
+
+#short2{
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
+    background-size: cover;
+    grid-area: short2;
+    
+} 
+
