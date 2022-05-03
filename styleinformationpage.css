@@ -12,9 +12,9 @@ header {
 }
 
 main {
-    max-width: 1400px;
+    
     position: relative;
-    height: 450px;
+    height: 400px;
     background: linear-gradient(to top, 
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
@@ -78,10 +78,10 @@ main > p{
     font-size: 0.8em;
 }
 
+
 section {
    color: black;
    background-color: white;
-   position: absolute;
    top: 400px;
    width: 100%;
    border-radius: 20px 20px 0 0;
