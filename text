@@ -1,0 +1,17 @@
+<ul id="filterList">
+            <li>
+                <img src="img/sort.svg" alt="sorterings ikon">
+                Sortera
+            </li>
+            <li>
+                <img src="img/FIlter.svg" alt="filtrerings ikon">
+                Filter
+            </li>
+            <li>
+                <img src="img/LocMarker.svg" alt="ikon för karta">
+                Karta
+            </li>
+        </ul>
+
+
+        <input type="button" value="sortera">
