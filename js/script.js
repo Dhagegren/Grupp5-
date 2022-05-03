@@ -15,6 +15,7 @@ function init() {
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
 	let span = document.getElementsByClassName("close")[0];//Reference to span element
 	//Make all buttons clickable
+	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", showModal);
 	}

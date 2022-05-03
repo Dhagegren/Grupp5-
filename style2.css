@@ -156,3 +156,59 @@ hr{
     text-decoration: none;
     cursor: pointer;
 }
+
+#webDiv{
+    display: none;
+}
+
+@media (min-width: 700px){
+
+    input {
+        margin-right: 5px;
+    }
+    .inputDiv{
+        display: flex;
+        flex-direction:row;
+        margin: 5px;
+    }
+
+#filterDiv{
+    display: none;   
+}
+
+hr {
+    display: none;
+}  
+
+.campingDiv{
+    float: left;
+    width: 60%;
+}
+
+#webDiv{
+    border-radius: 2%;
+    margin-top: 2%;
+    display:inline;
+    float: right;
+    background-color:#efecec;
+    position: absolute;
+    height: 50%;
+    width: 35%;
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+
+
+
+
+
+
+
+}
