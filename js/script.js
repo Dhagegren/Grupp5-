@@ -15,11 +15,22 @@ function init() {
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
 	let span = document.getElementsByClassName("close")[0];//Reference to span element
 	//Make all buttons clickable
+
 	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", showModal);
 	}
 	span.addEventListener("click", hideModal);
+	var input = document.getElementById("searchBar");
+	input.addEventListener("keypress", function(event){
+        if (event.key ==="Enter") 
+        {
+            event.preventDefault();
+			let search = input.value;
+			window.open("page2.html?value="+ search, "_self");
+            searchBtn.click();  
+        }
+    });
 }
 window.onload = init;
 
@@ -54,21 +65,31 @@ function requestCamping() {
         let theResponse = JSON.parse(response);//Konverterar json svaret
         let search = srcValue;
 		let tempCamping = "";
+
         console.log(search);
         theResponse = theResponse.payload;
-        console.log(theResponse);
+		search = search.toLowerCase();
+        console.log(search);
         for (let i = 0; i < theResponse.length; i++) {
-            if (theResponse[i].city == search || theResponse[i].municipality == search + " kommun" || theResponse[i].name.includes(search)) {
+            if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search+" län") {
 				tempCamping += "<div class='campingDiv'><div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
 				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p> Visa på karta </p> <p>" +parseFloat(theResponse[i].rating) + "/5</p>"+
-				'</div> <button class="infoBtn"> Info</button></div></div>';
-                console.log(tempCamping);
+				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div></div>';
 				campingRef.innerHTML = tempCamping;
 
             }
         }
+		let campingBtn = document.getElementsByClassName("infoBtn");
+		for (let i = 0; i < campingBtn.length; i++) {
+			campingBtn[i].addEventListener("click", openNext);
+		}
+
 
     }
+}
+
+function openNext() {
+	window.open("informationpage.html?value="+ this.id, "_self");
 }
 
 /*     <div class="campingDiv">        

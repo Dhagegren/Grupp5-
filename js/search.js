@@ -3,9 +3,19 @@ var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
 function init(){
-    console.log (searchBtn);
     searchBtn = searchBtn[0].children[1];
     searchBtn.addEventListener("click", requestCamping);
+    var input = document.getElementById("searchBar");
+    input.addEventListener("keypress", function(event){
+        if (event.key ==="Enter") 
+        {
+            event.preventDefault();
+
+            searchBtn.click();   
+        }
+    });
+
+  
     popularCamping();
 }
 
@@ -44,13 +54,13 @@ function requestCamping() {
 
 function checkCity(response){
     let theResponse = JSON.parse(response);//Konverterar json svaret
-    searchBar = document.querySelector(".searchBar");
+    let searchBar = document.querySelector(".searchBar");
     let search = searchBar.value;
     window.open("page2.html?value="+ search, "_self");
 
     theResponse = theResponse.payload;
     for (let i = 0; i < theResponse.length; i++) {
-        if (theResponse[i].city == search || theResponse[i].municipality == search + " kommun" || theResponse[i].name.includes(search)) {
+        if (toLowerCase(theResponse[i].city) == toLowerCase(search) || toLowerCase(theResponse[i].municipality) == toLowerCase(search) + " kommun" || toLowerCase(theResponse[i].name.includes(toLowerCase(search)))) {
             console.log(theResponse[i]);
         }
     }
