@@ -32,8 +32,14 @@ function popCamping(response) {
     theResponse = theResponse.payload;
     for (let i = 0; i < theResponse.length; i++) {
         linkBoxes[i].childNodes[3].innerHTML = theResponse[i].name;
+        linkBoxes[i].childNodes[3].setAttribute('id',theResponse[i].id);
         linkBoxes[i].childNodes[5].innerHTML = parseFloat(theResponse[i].rating) + "/5";
+        linkBoxes[i].addEventListener("click", infoPage);
     }
+}
+
+function infoPage() {
+    window.open("informationpage.html?value="+ this.children[1].id, "_self");
 }
 
 function requestCamping() {
