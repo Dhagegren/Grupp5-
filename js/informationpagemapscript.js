@@ -1,16 +1,25 @@
 var mymap; // Min karta
-var knappKarta
-var svgKarta
-var knappLista
-var svgLista
-var knappAktiviteter
-var knappMat
-var mapElem
-var listElem
-var svgAktiviteter
-var svgMat
+var knappKarta;
+var svgKarta;
+var knappLista;
+var svgLista;
+var knappAktiviteter;
+var knappMat;
+var mapElem;
+var listElem;
+var svgAktiviteter;
+var svgMat;
+var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P";
+var getCamp = window.location.search;
+var campId ="";
+var latCamp;
+var lngCamp;
 
 function init(){
+	getCamp = new URLSearchParams(getCamp);
+	campId = getCamp.get("value");
+	console.log(campId);
+	requestCamp();
     initMap1();
 	knappKarta = document.getElementById("knappKarta");
 	knappLista = document.getElementById("knappLista");
@@ -30,6 +39,29 @@ function init(){
 }
 
 window.addEventListener("load", init);
+
+function requestCamp(){
+	let request = new XMLHttpRequest(); // Object för Ajax-anropet
+	request.open("GET", SMAPI + "&controller=establishment&method=getall&ids="+ campId + "&debug=true&format=json&nojsoncallback=1",true);
+	request.send(null); // Skicka begäran till servern
+	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
+		if (request.readyState == 4)
+			if (request.status == 200) checkCamp(request.responseText);
+			else console.log("yes very many");
+	}
+}
+
+function checkCamp(response){
+	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
+	let picture = document.getElementsByClassName("picture")[0];
+	picture.children[2].innerHTML = theResponse.name;
+	picture.children[3].innerHTML = parseFloat(theResponse.rating) + "/5";
+	picture.children[4].innerHTML = theResponse.address;
+	let beskrivning = document.getElementsByClassName("beskrivning")[0];
+	beskrivning.children[0].innerHTML = theResponse.text;
+	latCamp = theResponse.lat;
+	lngCamp = theResponse.lng;
+}
 
 function initMap1() {
 	myMap = new google.maps.Map(
