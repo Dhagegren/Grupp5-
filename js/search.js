@@ -10,12 +10,9 @@ function init(){
         if (event.key ==="Enter") 
         {
             event.preventDefault();
-
             searchBtn.click();   
         }
     });
-
-  
     popularCamping();
 }
 
@@ -33,8 +30,6 @@ function popularCamping(){
 function popCamping(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
     theResponse = theResponse.payload;
-    console.log(theResponse);
-    console.log(linkBoxes);
     for (let i = 0; i < theResponse.length; i++) {
         linkBoxes[i].childNodes[3].innerHTML = theResponse[i].name;
         linkBoxes[i].childNodes[5].innerHTML = parseFloat(theResponse[i].rating) + "/5";
@@ -57,13 +52,6 @@ function checkCity(response){
     let searchBar = document.querySelector(".searchBar");
     let search = searchBar.value;
     window.open("page2.html?value="+ search, "_self");
-
-    theResponse = theResponse.payload;
-    for (let i = 0; i < theResponse.length; i++) {
-        if (toLowerCase(theResponse[i].city) == toLowerCase(search) || toLowerCase(theResponse[i].municipality) == toLowerCase(search) + " kommun" || toLowerCase(theResponse[i].name.includes(toLowerCase(search)))) {
-            console.log(theResponse[i]);
-        }
-    }
 }
 
 window.addEventListener("load", init);
