@@ -15,3 +15,18 @@
 
 
         <input type="button" value="sortera">
+
+
+
+
+
+        <div id="mapModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+    
+                <div id="map"> </div>
+    
+            </div>
+        </div>
