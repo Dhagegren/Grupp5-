@@ -10,7 +10,7 @@ a{
 }
 
 body {
-   background-color:#e2e2e2 ; 
+   background-color:#ececec ; 
 }
 
 main{
@@ -119,14 +119,14 @@ section {
     display: flex;
     justify-content: space-evenly;
     padding: 20px;
-    background-color: #0b0469;
+    background-color: #dfdfdf;
     
 }
 
 .webb-bigscreen, .karta-bigscreen {
     display: flex;
     height: 30px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 500;
 }
 
@@ -368,7 +368,7 @@ footer {
     
       
     main {
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
         background-color: #FCFCFC;
       display: grid;
       grid-template-columns: repeat(2, 50%); 
