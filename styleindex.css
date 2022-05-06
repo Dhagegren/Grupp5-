@@ -5,28 +5,35 @@
     box-sizing: border-box;
 }
 
+  
+
 body{
     overflow-x: hidden;
-    background-color:#ececec ; 
+    background-color:#FCFCFC;
 }
 
 main {
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #FCFCFC;
+    
     padding: 25px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+    
 }
 
 header {
-    background-color: black;
-    height: 50px;
-    text-align: center;
+    background-color: #1a492e;
+    height: 100px;
 }
 
 header h1 {
-    color: white
+    color: white;
+    font-size: 3em;
+}
+
+.information {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .search div {
@@ -36,10 +43,11 @@ header h1 {
 }
 
 .search {
+    background-color: white;
     display: flex;
     flex-direction: column;
-    
-
+   
+   border-radius: 11px;
 }
 
 .search input {
@@ -54,7 +62,7 @@ header h1 {
 }
 
 .search button {
-    background-color: #01d71e;
+    background-color: #0e110f;
     border: none;
     color: white;
     border-radius: 0px 0px 10px 10px;
@@ -69,43 +77,60 @@ header h1 {
     padding: 45px 0 0 0;
 }
 
-.links {
-    
+.swiper-slide {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    overflow-x: auto;
-    
+    justify-content: space-around;
+    padding: 0 !important;
 }
 
-.links {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-}
-.links::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+
+
+div.swiper-button-prev {
+
+background: url(ikoner/pilvänster.svg) no-repeat;
+border-radius: 50px;
+
 }
 
-.links .linkbox {
+
+div.swiper-button-next {
+    background: url(ikoner/pilhöger.svg) no-repeat;
+border-radius: 50px;
+}
+
+div.swiper-button-prev::after, div.swiper-button-next::after {
+    font-size: 50px;
+    display: none;
+    color: white;
+}
+
+.linkbox {
     margin: 20px 0px 0px 0;
-    padding-right: 20px;
     
+    width: 80%;
     
 }
 
-.linkbox .linkimg {
-    background: url(img/camp2.jpg) center center no-repeat;;
-    width: 140px;
-    height: 140px;
-    overflow: hidden;
-
+.linkimg {
+    background: linear-gradient(to top, 
+    rgba(0, 0, 0, 1) 10%, 
+    rgba(0,0,0,.7) 20%, 
+    rgba(0,0,0,.4) 40%, 
+    rgba(0,0,0,0) 50%), url(img/Strand.jpg) center ;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
 }
+
+
 
 .linkbox h1{
     font-size: 1em;
     font-weight: bold;
     padding: 10px 0 0 0;
-   max-width: 140px;
+   max-width: 300px;
 }
 
 .linkbox p{
@@ -142,10 +167,10 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg) center center ;
+    rgba(0,0,0,0) 50%), url(img/öland.jpg) center center ;
     background-size: cover;
     grid-area: long;
-    min-height: 270px;
+    height: 270px;
     
 }
 
@@ -154,7 +179,7 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg) center center;
+    rgba(0,0,0,0) 50%), url(img/Strand.jpg) center center;
     background-size: cover;
     grid-area: short1;
     
@@ -165,16 +190,57 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg) center;
+    rgba(0,0,0,0) 50%), url(img/naturen.jpg) center;
     background-size: cover;
     grid-area: short2;
     
 } 
 
+footer {
+    height: 300px;
+    background-color: #1a492e;
+}
+
 
 @media screen and (min-width: 700px) {
+        
+     
+
+    .search {
+       left: 14%; 
+       right: 14%;
+    }
     
- 
+    #long {
+        
+        height: 570px;
+        
+    }
+    
+    .indexh1{
+        font-size: 2em;
+        
+    }
+
+    .indexgridsection h1 {
+        font-size: 1.5em;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    
+    
+}
+
+@media screen and (max-width: 700px) {
+        
+     
+
+   .small {
+       
+   }
+
+    
     
 }
 
