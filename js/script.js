@@ -1,11 +1,13 @@
-
+var myMap; // Min karta
 var modal = document.getElementsByClassName("modal");//Reference to modal
 var campingRef = document.getElementsByClassName("campingDivs");
 var searchValue = window.location.search;
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var srcValue =""; 
 
+
 function init() {
+	initMap();
 	console.log(campingRef);
 	campingRef = campingRef[0];
     searchValue = new URLSearchParams(searchValue);
@@ -20,25 +22,42 @@ function init() {
 		btn[i].addEventListener("click", showModal);
 	}
 	span.addEventListener("click", hideModal);
+	
+
 }
 window.onload = init;
 
 //Open up modal
 function showModal() {
-	modal[0].style.display = "block";
+	modal[2].style.display = "block";
+
 }
 
 //Close modal
 function hideModal() {
-	modal[0].style.display = "none";
+	modal[2].style.display = "none";
 }
 
 //Click outside modal to close
 window.onclick = function(event) {
-	if (event.target == modal[0]) {
-		modal[0].style.display = "none";
+	if (event.target == modal[2]) {
+		modal[2].style.display = "none";
 	}
 }
+
+function initMap() {
+	myMap = new google.maps.Map(
+			document.getElementById('map'),
+			{
+				center: {lat:56.13708498823629, lng:15.584851190648239},
+				zoom: 12,
+				styles: [
+					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
+					{featureType:"transit.station",stylers:[{visibility:"off"}]}  // No bus stations, etc.
+				]
+			}
+		);		
+} // End initMap
 
 function requestCamping() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet

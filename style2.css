@@ -42,7 +42,7 @@ header h1 {
     border: none;
 }
 
-.campingDiv {
+#campingDiv {
     margin: 20px;
 }
 
@@ -53,13 +53,6 @@ header h1 {
     border-radius: 1.625rem;
     height: 100px;
     background-color: #efecec;
-}
-
-.textDiv {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
-    gap: 10px;
 }
 
 #textDiv {
@@ -142,6 +135,7 @@ hr {
     /* Black w/ opacity */
 }
 
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -191,6 +185,29 @@ hr {
 
     hr {
         display: none;
+    }
+
+    .campingDiv {
+        margin: 2%;
+        float: left;
+        width: 60%;
+    }
+
+    #webDiv {
+        border-radius: 2%;
+        margin-top: 2%;
+        display: inline;
+        float: right;
+        background-color: #efecec;
+        position: absolute;
+        height: 50%;
+        width: 35%;
+    }
+
+    #wrapper {
+        display: flex;
+        flex-direction: column;
+
     }
 
     .campingDiv {

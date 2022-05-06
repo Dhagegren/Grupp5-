@@ -7,7 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>page two</title>
     <link rel="stylesheet" href="style2.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx44xtf58fau8qDMi7x2ZiNW2xj6LoDCw"></script>
     <script type="text/javascript" src="js/script.js"></script>
+   
+	
+    
 </head>
 
 <body>
@@ -41,24 +45,25 @@
             <input type="text" placeholder="Sök på camping">
         </div>
 
-        <div class="campingDivs">
-            <div class="campingDiv">
-                <div class="itemDiv">
-                    <img src="img/camp2.jpg" alt="bild på camping">
+    
+    <div id="map"></div>
+    
 
-                    <div id="textDiv">
-                        <h2> Lasses Camping</h2>
-                        <p> 5km från växjö</p>
-                        <p> Visa på karta</p>
-                        <p> 4.4/5</p>
-                    </div>
+    <div class="campingDiv">
+        <div class="itemDiv">
+            <img src="img/camp2.jpg" alt="bild på camping">
 
-                    <button id="infoBtn"> Info</button>
-                </div>
+            <div id="textDiv">
+                <h2> Lasses Camping</h2>
+                <p> 5km från växjö</p>
+                <p> Visa på karta</p>
+                <p> 4.4/5</p>
             </div>
-        </div>
 
-        <div id="webDiv">
+            <button id="infoBtn"> Info</button>
+        </div>
+    </div>
+    <div id="webDiv">
 
             <div id="wrapper">
                 <h3> Filter </h3>
@@ -88,16 +93,18 @@
 
     </div>
 
+    
+
+  
 
 
-
-
-
-    <div id="myModal" class="modal">
+    <div id="filterModal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
+
+            <h2> Filter </h2>
 
             <input type="checkbox" class="modalCheck" name="natur">
             <label for="natur"> Campingar nära naturen</label>
@@ -107,8 +114,32 @@
             <label for="strand"> Campinar nära stranden</label>
             <input type="checkbox" class="modalCheck" name="öland">
             <label for="öland"> Campingar på Öland </label>
+
+            <button> Applicera filter </button>
         </div>
     </div>
+
+    <div id="sortModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <h2> Sortera efter </h2>
+
+            <input type="checkbox" class="modalCheck" name="betyg">
+            <label for="betyg"> Betyg</label>
+            <input type="checkbox" class="modalCheck" name="avstånd">
+            <label for="avstånd"> Avstånd </label>
+
+            <button> Sortera </button>
+
+
+
+        </div>
+    </div>
+
+  
 </body>
 
 </html>

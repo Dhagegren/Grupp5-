@@ -2,10 +2,21 @@
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
 }
 
 body{
     overflow-x: hidden;
+    background-color:#ececec ; 
+}
+
+main {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FCFCFC;
+    padding: 25px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
 }
 
 header {
@@ -27,7 +38,7 @@ header h1 {
 .search {
     display: flex;
     flex-direction: column;
-    margin:  20px 20px 0 20px;
+    
 
 }
 
@@ -36,9 +47,10 @@ header h1 {
     height: 40px;
     margin-left: 20px;
     margin-top: 10px;
-    width: 97%;
+    width: 90%;
     outline : none;
     font-size: 1em;
+    background-color: #FCFCFC;
 }
 
 .search button {
@@ -54,13 +66,16 @@ header h1 {
 
 .indexh1{
     font-size: 1.3em;
-    padding: 45px 0 0 20px;
+    padding: 45px 0 0 0;
 }
 
 .links {
+    
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     overflow-x: auto;
+    
 }
 
 .links {
@@ -72,20 +87,25 @@ header h1 {
 }
 
 .links .linkbox {
+    margin: 20px 0px 0px 0;
+    padding-right: 20px;
     
-    margin: 20px 0px 0px 20px;
+    
 }
 
 .linkbox .linkimg {
+    background: url(img/camp2.jpg) center center no-repeat;;
     width: 140px;
     height: 140px;
     overflow: hidden;
+
 }
 
 .linkbox h1{
     font-size: 1em;
     font-weight: bold;
     padding: 10px 0 0 0;
+   max-width: 140px;
 }
 
 .linkbox p{
@@ -93,7 +113,7 @@ header h1 {
 }
 
 .indexgrid {
-    padding: 20px 20px 0 20px;
+    padding: 20px 0 0 0;
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr 1fr;
@@ -122,10 +142,10 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg) ;
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg) center center ;
     background-size: cover;
     grid-area: long;
-    height: 270px;
+    min-height: 270px;
     
 }
 
@@ -134,7 +154,7 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg) center center;
     background-size: cover;
     grid-area: short1;
     
@@ -145,9 +165,17 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
+    rgba(0,0,0,0) 50%), url(img/camp2.jpg) center;
     background-size: cover;
     grid-area: short2;
     
 } 
+
+
+@media screen and (min-width: 700px) {
+    
+ 
+    
+}
+
 
