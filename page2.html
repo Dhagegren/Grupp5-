@@ -21,17 +21,17 @@
 
     <div id="filterDiv">
         <ul id="filterList">
-            <button class="myBtn">
+            <button class="myBtn" id="sortBtn">
                 <img src="img/sort.svg" alt="sorterings ikon">
                 Sortera
             </button>
 
-            <button class="myBtn">
+            <button class="myBtn" id="filterBtn">
                 <img src="img/FIlter.svg" alt="filtrerings ikon">
                 Filter
             </button>
 
-            <button class="myBtn">
+            <button class="myBtn" id="mapBtn">
                 <img src="img/LocMarker.svg" alt="ikon för karta">
                 Karta
             </button>
@@ -46,7 +46,7 @@
         </div>
 
     
-    <div id="map"></div>
+  
     
 
     <div class="campingDiv">
@@ -138,6 +138,20 @@
 
         </div>
     </div>
+
+    <div id="mapModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <div id="map"></div>
+
+
+
+        </div>
+    </div>
+   
 
   
 </body>

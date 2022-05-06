@@ -15,33 +15,57 @@ function init() {
     console.log(srcValue);
     requestCamping();
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
-	let span = document.getElementsByClassName("close")[0];//Reference to span element
+	let span = document.getElementsByClassName("close");//Reference to span element
 	//Make all buttons clickable
 	
 	for (let i = 0; i < btn.length; i++) {
-		btn[i].addEventListener("click", showModal);
+		btn[i].addEventListener("click", function(){
+			showModal(this.id)
+		});
 	}
-	span.addEventListener("click", hideModal);
+	for(let i = 0; i < span.length; i++){
+		span[i].addEventListener("click", hideModal);
+	}
 	
 
 }
 window.onload = init;
 
 //Open up modal
-function showModal() {
-	modal[2].style.display = "block";
+function showModal(id) {
+	switch (id) {
+		case "sortBtn":
+			modal[0].style.display = "block";
+			activeModal = modal[0]
+			break;
+		case "filterBtn":
+			modal[1].style.display = "block";
+			activeModal = modal[1]
+			break;
+		case "mapBtn":
+			modal[2].style.display = "block"
+			activeModal = modal[2]
+			break;
+		default:
+			break;
+	}
+	//modal[2].style.display = "block";
 
 }
 
 //Close modal
 function hideModal() {
-	modal[2].style.display = "none";
+	//for(let i = 0; i < modal.length; i++){
+	//	modal[i].style.display = "none";
+	//}
+	activeModal.style.display = "none";
+	activeModal = null;
 }
 
 //Click outside modal to close
 window.onclick = function(event) {
-	if (event.target == modal[2]) {
-		modal[2].style.display = "none";
+	if (event.target == activeModal) {
+		hideModal();
 	}
 }
 

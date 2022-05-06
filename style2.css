@@ -47,6 +47,7 @@ header h1 {
 }
 
 .itemDiv {
+    margin: 2%;
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -164,6 +165,11 @@ hr {
 
 #webDiv {
     display: none;
+}
+
+#map{
+    width: 300px;
+    height: 300px;
 }
 
 @media (min-width: 700px) {
