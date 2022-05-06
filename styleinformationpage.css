@@ -119,7 +119,7 @@ section {
     display: flex;
     justify-content: space-evenly;
     padding: 20px;
-    background-color: #dfdfdf;
+    background-color: #ffffff;
     
 }
 
@@ -352,7 +352,7 @@ section {
 
 footer {
     height: 300px;
-    background-color: #1b1a1d;
+    background-color: #1a492e;
 }
 
 
