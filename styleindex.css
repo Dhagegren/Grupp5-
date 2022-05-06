@@ -81,19 +81,26 @@ header h1 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-  
+    padding: 0 !important;
 }
 
-div.swiper-button-prev,
-div.swiper-button-next {
 
-background: url(ikoner/pil.svg) no-repeat;
+
+div.swiper-button-prev {
+
+background: url(ikoner/pilvänster.svg) no-repeat;
 border-radius: 50px;
 
 }
 
+
+div.swiper-button-next {
+    background: url(ikoner/pilhöger.svg) no-repeat;
+border-radius: 50px;
+}
+
 div.swiper-button-prev::after, div.swiper-button-next::after {
-    font-size: 20px;
+    font-size: 50px;
     display: none;
     color: white;
 }
@@ -101,7 +108,7 @@ div.swiper-button-prev::after, div.swiper-button-next::after {
 .linkbox {
     margin: 20px 0px 0px 0;
     
-    width: 23%;
+    width: 80%;
     
 }
 
@@ -123,7 +130,7 @@ div.swiper-button-prev::after, div.swiper-button-next::after {
     font-size: 1em;
     font-weight: bold;
     padding: 10px 0 0 0;
-   max-width: 140px;
+   max-width: 300px;
 }
 
 .linkbox p{
@@ -220,6 +227,18 @@ footer {
         bottom: 20px;
         left: 20px;
     }
+
+    
+    
+}
+
+@media screen and (max-width: 700px) {
+        
+     
+
+   .small {
+       
+   }
 
     
     
