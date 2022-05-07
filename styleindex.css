@@ -31,9 +31,26 @@ header h1 {
     font-size: 3em;
 }
 
-.information {
+.search-cover {
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('img/campinghead.jpeg');
+    height: 600px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    max-width: 1350px;
     margin-left: auto;
     margin-right: auto;
+    
+    
+}
+
+.search-cover h1 {
+    width: 70%;
+    color: white;
+    font-size: 4em;
+    font-weight: 900;
+    position: absolute;
+    top: 150px;
 }
 
 .search div {
@@ -46,8 +63,13 @@ header h1 {
     background-color: white;
     display: flex;
     flex-direction: column;
-   
-   border-radius: 11px;
+    width: 70%;
+    border-radius: 11px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 510px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .search input {
@@ -67,7 +89,7 @@ header h1 {
     color: white;
     border-radius: 0px 0px 10px 10px;
     height: 50px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   
     font-size: 1.6em;
     font-weight: 600;
 }
@@ -113,11 +135,7 @@ div.swiper-button-prev::after, div.swiper-button-next::after {
 }
 
 .linkimg {
-    background: linear-gradient(to top, 
-    rgba(0, 0, 0, 1) 10%, 
-    rgba(0,0,0,.7) 20%, 
-    rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/Strand.jpg) center ;
+    background:  url(img/Strand.jpg) center ;
     background-size: cover;
     position: relative;
     width: 100%;
@@ -206,10 +224,6 @@ footer {
         
      
 
-    .search {
-       left: 14%; 
-       right: 14%;
-    }
     
     #long {
         
@@ -223,7 +237,7 @@ footer {
     }
 
     .indexgridsection h1 {
-        font-size: 1.5em;
+        font-size: 1.9em;
         bottom: 20px;
         left: 20px;
     }
@@ -234,11 +248,38 @@ footer {
 
 @media screen and (max-width: 700px) {
         
-     
-
-   .small {
+    .search-cover {
        
-   }
+        height: 400px;
+        
+        
+        
+    }
+    
+    .search-cover h1 {
+        width: 70%;
+        color: white;
+        font-size: 2em;
+        font-weight: 900;
+        position: absolute;
+        top: 100px;
+    }
+    
+    
+    
+    .search {
+        
+        flex-direction: column;
+        width: 90%;
+        border-radius: 11px;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        top: 310px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+   
 
     
     
