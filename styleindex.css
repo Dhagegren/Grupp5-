@@ -80,7 +80,7 @@ header h1 {
 .swiper-slide {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 0 !important;
 }
 
@@ -108,7 +108,7 @@ div.swiper-button-prev::after, div.swiper-button-next::after {
 .linkbox {
     margin: 20px 0px 0px 0;
     
-    width: 80%;
+    width: 100%;
     
 }
 

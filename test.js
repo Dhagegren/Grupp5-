@@ -2,15 +2,19 @@
         const swiper = new Swiper('.swiper', {
             slidesPerView: 2,
             slidesPerGroup: 2,
+            spaceBetween: 10,
             breakpoints: {
-                480: {
-                  slidesPerView: 4,
-                  spaceBetween: 40,
+                
+                700: {
+                  slidesPerView: 3,
+                  slidesPerGroup: 3,
+                  spaceBetween: 15,
                 },
-                640: {
-                  slidesPerView: 5,
-                  spaceBetween: 50,
-                }
+                1000: {
+                  slidesPerView: 4,
+                  slidesPerGroup: 4,
+                  spaceBetween: 15,
+                },
               },
     navigation: {
       nextEl: '.swiper-button-next',
