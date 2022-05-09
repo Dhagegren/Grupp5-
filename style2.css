@@ -47,6 +47,7 @@ header h1 {
 }
 
 .itemDiv {
+    margin: 2%;
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -135,6 +136,7 @@ hr {
     /* Black w/ opacity */
 }
 
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -165,6 +167,11 @@ hr {
     display: none;
 }
 
+#map{
+    width: 300px;
+    height: 300px;
+}
+
 @media (min-width: 700px) {
 
     input {
@@ -175,6 +182,7 @@ hr {
         display: flex;
         flex-direction: row;
         margin: 5px;
+        margin-left: 15px;
     }
 
     #filterDiv {
@@ -208,12 +216,38 @@ hr {
 
     }
 
+    .campingDiv {
+        float: left;
+        width: 55%;
+    }
 
+    h3 {
+        margin-top: 2%;
+        margin-left: 5%;
+    }
 
+    #webDiv {
+        border: 1px solid grey;
+        border-radius: 2%;
+        margin-top: 2%;
+        display: inline;
+        float: right;
 
+        position: absolute;
+        height: 50%;
+        width: 25%;
+    }
 
+    #wrapper {
+        display: flex;
+        flex-direction: column;
 
+    }
 
+    #marginDiv {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
 
 
 

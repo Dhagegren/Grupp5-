@@ -1,4 +1,5 @@
 var mymap; // Min karta
+
 var knappKarta;
 var svgKarta;
 var knappLista;

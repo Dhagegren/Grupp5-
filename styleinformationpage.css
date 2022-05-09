@@ -5,20 +5,25 @@
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+}
+
 body {
-    background-color: #fcfcec;
+   background-color:#ececec ; 
 }
 
 main{
-    background-color: #fcfcec;
+    background-color: #000000;
    max-width: 1400px;
    margin-left: auto;
    margin-right: auto;
+   
 }
 
 header {
     width: 100%;
-    background-color: black;
+    background-color: #1b1a1d;
     height: 50px;
     text-align: center;
     color: white;
@@ -96,25 +101,47 @@ header {
 section {
    color: black;
    grid-area: beskrivning;
-   
+   background-color: #FCFCFC;
    border-radius: 20px 20px 0 0;
 }
 
 .beskrivning {
-   
-    padding: 25px;
+    
+    padding: 25px 25px 0 25px;
     font-size: 0.8em;
     font-weight: 500;
     line-height: 1.5em;
     max-width: 500px;
+    
+}
+
+.bigscreen-cover{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    background-color: #ffffff;
+    
+}
+
+.webb-bigscreen, .karta-bigscreen {
+    display: flex;
+    height: 30px;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+}
+
+.webb-bigscreen img, .karta-bigscreen img {
+    padding-right: 10px;
 }
 
 .faciliteter {
     grid-area: faciliteter;
-    padding: 15px 25px 0 25px;
+    padding: 45px 25px 0 25px;
+    background-color: #FCFCFC;
 }
 
 .ikoner{
+    padding-left: 5px;
     margin-top: 15px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 50px);
@@ -141,9 +168,10 @@ section {
 }
 
 .recensionercover {
-    padding: 10px 25px 0 25px;
-    margin-top: 35px;
+    padding: 45px 25px 0 25px;
+    
     grid-area: recensioner; 
+    background-color: #FCFCFC;
 }
 
 .ingarecensioner p {
@@ -175,6 +203,7 @@ section {
     min-height: 100px;
     max-height: 150px;
     min-width: 250px;
+    max-width: 500px;
     background-color: rgb(243, 243, 243);
     overflow: hidden;
 }
@@ -186,8 +215,8 @@ section {
 
 .close {
     grid-area: upptäck;
-    padding: 10px 25px 0 25px;
-    margin-top: 25px;
+    padding: 35px 25px 10px 25px;
+    background-color: #FCFCFC;
 }
 
 .knappar {
@@ -246,19 +275,19 @@ section {
 
 #map {
     height: 400px;
-    margin-top: 10px;
+   
 }
 
 
 #listan {
     overflow-y: scroll;
-    height: 410px;¨
-    
+    height: 400px;
+    background-color: #FCFCFC;
 
 }
 
 .kartalista .hidden {
-    display: none;
+    display:none;
 }
 
 
@@ -321,25 +350,48 @@ section {
     height: 20px;
 }
 
+footer {
+    height: 300px;
+    background-color: #1a492e;
+}
+
 
 /* media queries*/
+
+@media screen and (max-width: 700px) {
+    .bigscreen-cover{
+        display: none;
+    }
+}
+
 @media screen and (min-width: 700px) {
+    
+      
     main {
-    padding: 0 20px 40px 20px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+        background-color: #FCFCFC;
       display: grid;
       grid-template-columns: repeat(2, 50%); 
       grid-template-rows:auto;
-      row-gap: 1em;
+      
       grid-template-areas: 
     "picture beskrivning"
-    "faciliteter recensioner"
-    "upptäck upptäck"
+
+    "faciliteter faciliteter "
+    "recensioner recensioner"
+    "upptäck ."
     "listakarta listakarta";
     }
 
-    .webb-bigscreen {
-        display: flex;
-        
+
+    .beskrivning{
+        font-size: .9em;
+        font-weight: 400;
+    }
+
+    .p-cover {
+        display: grid;
+        place-items: center;
     }
 
      .kartalista{
@@ -352,6 +404,7 @@ section {
        
   
     }
+
     #listan{
         width: 50%;
     }
@@ -377,20 +430,11 @@ section {
         rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center ;
     }
 
-    .faciliteter {
-        padding: 50px 0 0 0;
-    }
-
     .close {
-        padding-left: 0;
-    }
-
-    .listobjekt {
-        margin-left: 2px;
-    }
-    
-
+        margin-top: 40px;
         
+    }
+ 
     .ikon p {
         font-size: 0.7em;
         color: #444444;
@@ -405,13 +449,17 @@ section {
         font-size: 20px
     }
 
-   
+  }
 
-    .beskrivning{
-        font-size: .9em;
-        font-weight: 400;
+  @media screen and (min-width: 1400px) {
+    header{
+        height: 60px;
+        margin-bottom: 20px;
     }
 
+    footer {
+        margin: 20px 0 0 0;
+    }
   }
 
   

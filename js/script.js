@@ -1,22 +1,28 @@
-
+var myMap; // Min karta
 var modal = document.getElementsByClassName("modal");//Reference to modal
 var campingRef = document.getElementsByClassName("campingDivs");
 var searchValue = window.location.search;
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var srcValue =""; 
 
+
 function init() {
+
+	initMap();
+	console.log(campingRef);
 	campingRef = campingRef[0];
     searchValue = new URLSearchParams(searchValue);
     srcValue = searchValue.get("value");
     requestCamping();
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
-	let span = document.getElementsByClassName("close")[0];//Reference to span element
+	let span = document.getElementsByClassName("close");//Reference to span element
 	//Make all buttons clickable
 
 	
 	for (let i = 0; i < btn.length; i++) {
-		btn[i].addEventListener("click", showModal);
+		btn[i].addEventListener("click", function(){
+			showModal(this.id)
+		});
 	}
 	span.addEventListener("click", hideModal);
 	var input = document.getElementById("searchBar");
@@ -26,28 +32,68 @@ function init() {
             event.preventDefault();
 			let search = input.value;
 			window.open("page2.html?value="+ search, "_self");
-            searchBtn.click();  
+            searchBtn.click();
         }
     });
+=======
+	for(let i = 0; i < span.length; i++){
+		span[i].addEventListener("click", hideModal);
+	}
+
 }
 window.onload = init;
 
 //Open up modal
-function showModal() {
-	modal[0].style.display = "block";
+function showModal(id) {
+	switch (id) {
+		case "sortBtn":
+			modal[0].style.display = "block";
+			activeModal = modal[0]
+			break;
+		case "filterBtn":
+			modal[1].style.display = "block";
+			activeModal = modal[1]
+			break;
+		case "mapBtn":
+			modal[2].style.display = "block"
+			activeModal = modal[2]
+			break;
+		default:
+			break;
+	}
+	//modal[2].style.display = "block";
+
 }
 
 //Close modal
 function hideModal() {
-	modal[0].style.display = "none";
+	//for(let i = 0; i < modal.length; i++){
+	//	modal[i].style.display = "none";
+	//}
+	activeModal.style.display = "none";
+	activeModal = null;
 }
 
 //Click outside modal to close
 window.onclick = function(event) {
-	if (event.target == modal[0]) {
-		modal[0].style.display = "none";
+	if (event.target == activeModal) {
+		hideModal();
 	}
 }
+
+function initMap() {
+	myMap = new google.maps.Map(
+			document.getElementById('map'),
+			{
+				center: {lat:56.13708498823629, lng:15.584851190648239},
+				zoom: 12,
+				styles: [
+					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
+					{featureType:"transit.station",stylers:[{visibility:"off"}]}  // No bus stations, etc.
+				]
+			}
+		);		
+} // End initMap
 
 function requestCamping() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet

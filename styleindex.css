@@ -2,20 +2,55 @@
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
 }
+
+  
 
 body{
     overflow-x: hidden;
+    background-color:#FCFCFC;
+}
+
+main {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    padding: 25px;
+    
 }
 
 header {
-    background-color: black;
-    height: 50px;
-    text-align: center;
+    background-color: #1a492e;
+    height: 100px;
 }
 
 header h1 {
-    color: white
+    color: white;
+    font-size: 3em;
+}
+
+.search-cover {
+    background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('img/campinghead.jpeg');
+    height: 600px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    max-width: 1350px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+
+.search-cover h1 {
+    width: 70%;
+    color: white;
+    font-size: 4em;
+    font-weight: 900;
+    position: absolute;
+    top: 150px;
 }
 
 .search div {
@@ -25,10 +60,16 @@ header h1 {
 }
 
 .search {
+    background-color: white;
     display: flex;
     flex-direction: column;
-    margin:  20px 20px 0 20px;
-
+    width: 70%;
+    border-radius: 11px;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 510px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .search input {
@@ -36,56 +77,78 @@ header h1 {
     height: 40px;
     margin-left: 20px;
     margin-top: 10px;
-    width: 97%;
+    width: 90%;
     outline : none;
     font-size: 1em;
+    background-color: #FCFCFC;
 }
 
 .search button {
-    background-color: #01d71e;
+    background-color: #0e110f;
     border: none;
     color: white;
     border-radius: 0px 0px 10px 10px;
     height: 50px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   
     font-size: 1.6em;
     font-weight: 600;
 }
 
 .indexh1{
     font-size: 1.3em;
-    padding: 45px 0 0 20px;
+    padding: 45px 0 0 0;
 }
 
-.links {
+.swiper-slide {
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
+    justify-content: space-between;
+    padding: 0 !important;
 }
 
-.links {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-}
-.links::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+
+
+div.swiper-button-prev {
+
+background: url(ikoner/pilvänster.svg) no-repeat;
+border-radius: 50px;
+
 }
 
-.links .linkbox {
+
+div.swiper-button-next {
+    background: url(ikoner/pilhöger.svg) no-repeat;
+border-radius: 50px;
+}
+
+div.swiper-button-prev::after, div.swiper-button-next::after {
+    font-size: 50px;
+    display: none;
+    color: white;
+}
+
+.linkbox {
+    margin: 20px 0px 0px 0;
     
-    margin: 20px 0px 0px 20px;
+    width: 100%;
+    
 }
 
-.linkbox .linkimg {
-    width: 140px;
-    height: 140px;
-    overflow: hidden;
+.linkimg {
+    background:  url(img/Strand.jpg) center ;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
 }
+
+
 
 .linkbox h1{
     font-size: 1em;
     font-weight: bold;
     padding: 10px 0 0 0;
+   max-width: 300px;
 }
 
 .linkbox p{
@@ -93,7 +156,7 @@ header h1 {
 }
 
 .indexgrid {
-    padding: 20px 20px 0 20px;
+    padding: 20px 0 0 0;
     display: grid;
     gap: 1em;
     grid-template-columns: 1fr 1fr;
@@ -122,7 +185,7 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg) ;
+    rgba(0,0,0,0) 50%), url(img/öland.jpg) center center ;
     background-size: cover;
     grid-area: long;
     height: 270px;
@@ -134,7 +197,7 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
+    rgba(0,0,0,0) 50%), url(img/Strand.jpg) center center;
     background-size: cover;
     grid-area: short1;
     
@@ -145,9 +208,81 @@ header h1 {
     rgba(0, 0, 0, 1) 10%, 
     rgba(0,0,0,.7) 20%, 
     rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp2.jpg);
+    rgba(0,0,0,0) 50%), url(img/naturen.jpg) center;
     background-size: cover;
     grid-area: short2;
     
 } 
+
+footer {
+    height: 300px;
+    background-color: #1a492e;
+}
+
+
+@media screen and (min-width: 700px) {
+        
+     
+
+    
+    #long {
+        
+        height: 570px;
+        
+    }
+    
+    .indexh1{
+        font-size: 2em;
+        
+    }
+
+    .indexgridsection h1 {
+        font-size: 1.9em;
+        bottom: 20px;
+        left: 20px;
+    }
+
+    
+    
+}
+
+@media screen and (max-width: 700px) {
+        
+    .search-cover {
+       
+        height: 400px;
+        
+        
+        
+    }
+    
+    .search-cover h1 {
+        width: 70%;
+        color: white;
+        font-size: 2em;
+        font-weight: 900;
+        position: absolute;
+        top: 100px;
+    }
+    
+    
+    
+    .search {
+        
+        flex-direction: column;
+        width: 90%;
+        border-radius: 11px;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        top: 310px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+
+   
+
+    
+    
+}
+
 
