@@ -3,9 +3,16 @@ var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
 function init(){
-    console.log (searchBtn);
     searchBtn = searchBtn[0].children[1];
     searchBtn.addEventListener("click", requestCamping);
+    var input = document.getElementById("searchBar");
+    input.addEventListener("keypress", function(event){
+        if (event.key ==="Enter") 
+        {
+            event.preventDefault();
+            searchBtn.click();   
+        }
+    });
     popularCamping();
 }
 
@@ -23,12 +30,16 @@ function popularCamping(){
 function popCamping(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
     theResponse = theResponse.payload;
-    console.log(theResponse);
-    console.log(linkBoxes);
     for (let i = 0; i < theResponse.length; i++) {
         linkBoxes[i].childNodes[3].innerHTML = theResponse[i].name;
+        linkBoxes[i].childNodes[3].setAttribute('id',theResponse[i].id);
         linkBoxes[i].childNodes[5].innerHTML = parseFloat(theResponse[i].rating) + "/5";
+        linkBoxes[i].addEventListener("click", infoPage);
     }
+}
+
+function infoPage() {
+    window.open("informationpage.html?value="+ this.children[1].id, "_self");
 }
 
 function requestCamping() {
@@ -44,16 +55,9 @@ function requestCamping() {
 
 function checkCity(response){
     let theResponse = JSON.parse(response);//Konverterar json svaret
-    searchBar = document.querySelector(".searchBar");
+    let searchBar = document.querySelector(".searchBar");
     let search = searchBar.value;
     window.open("page2.html?value="+ search, "_self");
-
-    theResponse = theResponse.payload;
-    for (let i = 0; i < theResponse.length; i++) {
-        if (theResponse[i].city == search || theResponse[i].municipality == search + " kommun" || theResponse[i].name.includes(search)) {
-            console.log(theResponse[i]);
-        }
-    }
 }
 
 window.addEventListener("load", init);
