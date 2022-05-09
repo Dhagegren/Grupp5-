@@ -168,8 +168,7 @@ hr {
 }
 
 #map{
-    width: 400px;
-    height: 300px;
+     height: 300px;
 }
 
 @media (min-width: 700px) {
