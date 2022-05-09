@@ -2,13 +2,12 @@ var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
-function init(){
+function init() {
     searchBtn = searchBtn[0].children[1];
     searchBtn.addEventListener("click", requestCamping);
     var input = document.getElementById("searchBar");
     input.addEventListener("keypress", function(event){
-        if (event.key ==="Enter") 
-        {
+        if (event.key ==="Enter") {
             event.preventDefault();
             searchBtn.click();   
         }
@@ -16,7 +15,7 @@ function init(){
     popularCamping();
 }
 
-function popularCamping(){
+function popularCamping() {
     let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET", SMAPI + "&controller=establishment&method=getall&descriptions=camping&sort_in=desc&order_by=rating&per_page=4&debug=true&format=json&nojsoncallback=1",true);
 	request.send(null); // Skicka begäran till servern
@@ -53,7 +52,7 @@ function requestCamping() {
 	};
 } // End requestNewImgs
 
-function checkCity(response){
+function checkCity(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
     let searchBar = document.querySelector(".searchBar");
     let search = searchBar.value;

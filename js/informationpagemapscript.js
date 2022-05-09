@@ -15,7 +15,7 @@ var campId ="";
 var latCamp;
 var lngCamp;
 
-function init(){
+function init() {
 	getCamp = new URLSearchParams(getCamp);
 	campId = getCamp.get("value");
 	console.log(campId);
@@ -37,10 +37,9 @@ function init(){
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
 }
-
 window.addEventListener("load", init);
 
-function requestCamp(){
+function requestCamp() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET", SMAPI + "&controller=establishment&method=getall&ids="+ campId + "&debug=true&format=json&nojsoncallback=1",true);
 	request.send(null); // Skicka begäran till servern
@@ -51,7 +50,7 @@ function requestCamp(){
 	}
 }
 
-function checkCamp(response){
+function checkCamp(response) {
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
 	let picture = document.getElementsByClassName("picture")[0];
 	picture.children[2].innerHTML = theResponse.name;
@@ -77,7 +76,7 @@ function initMap1() {
 		);
 } // End initMap
 
-function showMap(){
+function showMap() {
 	if (mapElem.classList.contains("hidden")){
 		listElem.classList.add("hidden");
 		mapElem.classList.remove("hidden");
@@ -89,12 +88,11 @@ function showMap(){
 		svgKarta.src = "ikoner/kartaVit.svg"
 	}
 	else {
-		
 		return;
 	}
 }
 
-function showList(){
+function showList() {
 	if (listElem.classList.contains("hidden")){
 		mapElem.classList.add("hidden");
 		listElem.classList.remove("hidden");
@@ -106,12 +104,11 @@ function showList(){
 		svgLista.src = "ikoner/menuVit.svg"
 	}
 	else {
-		
 		return;
 	}
 }
 
-function showActive(){
+function showActive() {
 	if (knappMat.classList.contains("active")){
 		knappMat.classList.remove("active");
 		svgMat.src = "ikoner/restaurantSvart.svg";
@@ -124,7 +121,7 @@ function showActive(){
 	}
 }
 
-function showFood(){
+function showFood() {
 	if (knappAktiviteter.classList.contains("active")){
 		knappAktiviteter.classList.remove("active");
 		svgAktiviteter.src = "ikoner/aktiviteterSvart.svg";

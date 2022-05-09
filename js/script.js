@@ -14,6 +14,10 @@ function init() {
 	let span = document.getElementsByClassName("close")[0];//Reference to span element
 	//Make all buttons clickable
 
+	let checkboxes = document.getElementsByClassName("modalCheck"); // Filterknaparna
+	for (let i = 0; i < checkboxes.length; i++) {
+		checkboxes[i].addEventListener("click", requestCamping);
+	}
 	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", showModal);
@@ -51,7 +55,7 @@ window.onclick = function(event) {
 
 function requestCamping() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
-	request.open("GET", SMAPI + "&controller=establishment&method=getall&descriptions=camping&debug=true&format=json&nojsoncallback=1",true);
+	request.open("GET", SMAPI + "&controller=establishment&method=getall&descriptions=camping&debug=true", true);
 	request.send(null); // Skicka begäran till servern
 	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
 		if (request.readyState == 4)
@@ -63,6 +67,9 @@ function requestCamping() {
         let search = srcValue;
 		let tempCamping = "";
         theResponse = theResponse.payload;
+
+		theResponse = searchFilters(theResponse);
+		
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
             if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search+" län") {
@@ -76,11 +83,100 @@ function requestCamping() {
 		for (let i = 0; i < campingBtn.length; i++) {
 			campingBtn[i].addEventListener("click", openNext);
 		}
-
-
     }
 }
 
 function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
+}
+
+function searchFilters(resp) {
+	let ixList = [];
+	let ixDubble = false;
+
+	let filterCheckbox = document.getElementsByClassName("modalCheck");
+	let smaland = document.getElementById("smaland");
+	let oland = document.getElementById("oland");
+	let strand = document.getElementById("strand");
+	let natur = document.getElementById("natur");
+	
+	for (let i = 0; i < resp.length; i++) {	// index listan kommer innehålla alla index från den som har flest, detta kommer inte funka
+		if (smaland.checked == true) {
+			if (resp[i].provinces == "Småland") {
+				for (let j = 0; j < ixList.length; j++) {
+					if (ixList[j] == i) {
+						ixDubble = true;
+					}
+				}
+
+				if (ixDubble == false) {
+					ixList.push(i);
+				}
+				ixDubble = false;
+				console.log("Småland");
+			}
+		}
+
+		if (oland.checked == true) {
+			if (resp[i].provinces == "Öland") {
+				for (let j = 0; j < ixList.length; j++) {
+					if (ixList[j] == i) {
+						ixDubble = true;
+					}
+				}
+
+				if (ixDubble == false) {
+					ixList.push(i);
+				}
+				ixDubble = false;
+				console.log("Öland");
+			}
+		}
+
+		if (strand.checked == true) {
+			if (resp[i].text.includes("strand")) {
+				for (let j = 0; j < ixList.length; j++) {
+					if (ixList[j] == i) {
+						ixDubble = true;
+					}
+				}
+
+				if (ixDubble == false) {
+					ixList.push(i);
+				}
+				ixDubble = false;
+				console.log("Strand");
+			}
+		}
+
+		if (natur.checked == true) {
+			if (resp[i].text.includes("natur")) {
+				for (let j = 0; j < ixList.length; j++) {
+					if (ixList[j] == i) {
+						ixDubble = true;
+					}
+				}
+				
+				if (ixDubble == false) {
+					ixList.push(i);
+				}
+				ixDubble = false;
+				console.log("Natur");
+			}
+		}
+	}
+	
+	if (filterCheckbox.checked == true && ixList != []) {
+		let newResp = [];
+
+		for (let i = 0; i < ixList.length; i++) {
+			let ix = ixList[i];
+			newResp.push(resp[ix]);
+		}
+
+		resp = newResp;
+		console.log("Filtered");
+	}
+
+	return resp;
 }

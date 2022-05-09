@@ -41,49 +41,44 @@
     </div>
 
     
-<div class="campingDivs">
-    <div class="campingDiv">
-        <div class="itemDiv">
-            <img src="img/camp2.jpg" alt="bild på camping">
+    <div class="campingDivs">
+        <div class="campingDiv">
+            <div class="itemDiv">
+                <img src="img/camp2.jpg" alt="bild på camping">
 
-            <div id="textDiv">
-                <h2> Lasses Camping</h2>
-                <p> 5km från växjö</p>
-                <p> Visa på karta</p>
-                <p> 4.4/5</p>
+                <div id="textDiv">
+                    <h2> Lasses Camping</h2>
+                    <p> 5km från växjö</p>
+                    <p> Visa på karta</p>
+                    <p> 4.4/5</p>
+                </div>
+
+                <button id="infoBtn"> Info</button>
             </div>
-
-            <button id="infoBtn"> Info</button>
         </div>
     </div>
-</div>
-
 
     <div id="webDiv">
-
+        <h3>Filter</h3>
         <div id="wrapper">
             <div class="inputDiv">
-                <input type="checkbox" class="modalCheck" name="natur">
-                <label for="natur"> Campingar nära naturen</label>
-            </div>
-
-
-            <div class="inputDiv">
-                <input type="checkbox" class="modalCheck" name="småland">
-                <label for="småland"> Campingar i småland</label>
+                <input type="checkbox" class="modalCheck" name="småland" id="smaland">
+                <label for="småland"> Campingar i Småland </label>
             </div>
             <div class="inputDiv">
-                <input type="checkbox" class="modalCheck" name="strand">
-                <label for="strand"> Campinar nära stranden</label>
-            </div>
-
-            <div class="inputDiv">
-                <input type="checkbox" class="modalCheck" name="öland">
+                <input type="checkbox" class="modalCheck" name="öland" id="oland">
                 <label for="öland"> Campingar på Öland </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="strand" id="strand">
+                <label for="strand"> Campinar nära stranden </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="natur" id="natur">
+                <label for="natur"> Naturcampingar </label>
             </div>
         </div>
     </div>
-
 
     <div id="filterModal" class="modal">
 
