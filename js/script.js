@@ -69,13 +69,15 @@ function requestCamping() {
         theResponse = theResponse.payload;
 
 		theResponse = searchFilters(theResponse);
+
+		// console.log(theResponse);
 		
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
-            if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search+" län") {
-				tempCamping += "<div class='campingDiv'><div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
-				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p> Visa på karta </p> <p>" +parseFloat(theResponse[i].rating) + "/5</p>"+
-				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div></div>';
+            if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search + " län") {
+				tempCamping += "<div class='campingDiv'><div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>" + 
+				theResponse[i].name + "</h2> <p>5km från " + theResponse[i].city + "</p> <p> Visa på karta </p> <p>" +parseFloat(theResponse[i].rating) + "/5</p>" +
+				'</div> <button class="infoBtn" id=' + theResponse[i].id + '> Info</button></div></div>';
 				campingRef.innerHTML = tempCamping;
             }
         }
@@ -94,15 +96,14 @@ function searchFilters(resp) {
 	let ixList = [];
 	let ixDubble = false;
 
-	let filterCheckbox = document.getElementsByClassName("modalCheck");
 	let smaland = document.getElementById("smaland");
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
 	
-	for (let i = 0; i < resp.length; i++) {	// index listan kommer innehålla alla index från den som har flest, detta kommer inte funka
+	for (let i = 0; i < resp.length; i++) {	// index listan kommer innehålla alla index som nämns, inte gemensamma, detta kommer inte funka
 		if (smaland.checked == true) {
-			if (resp[i].provinces == "Småland") {
+			if (resp[i].province == "Småland") {
 				for (let j = 0; j < ixList.length; j++) {
 					if (ixList[j] == i) {
 						ixDubble = true;
@@ -118,7 +119,7 @@ function searchFilters(resp) {
 		}
 
 		if (oland.checked == true) {
-			if (resp[i].provinces == "Öland") {
+			if (resp[i].province == "Öland") {
 				for (let j = 0; j < ixList.length; j++) {
 					if (ixList[j] == i) {
 						ixDubble = true;
@@ -166,14 +167,15 @@ function searchFilters(resp) {
 		}
 	}
 	
-	if (filterCheckbox.checked == true && ixList != []) {
+	if (ixList.length != 0) {
 		let newResp = [];
-
+		console.log(ixList);
+		
 		for (let i = 0; i < ixList.length; i++) {
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
 		}
-
+		
 		resp = newResp;
 		console.log("Filtered");
 	}
