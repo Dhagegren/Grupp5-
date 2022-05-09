@@ -43,7 +43,7 @@ header h1 {
 }
 
 #campingDiv {
-    margin: 20px;
+    margin: 0%;
 }
 
 .itemDiv {
@@ -194,9 +194,9 @@ hr {
     }
 
     .campingDiv {
-        margin: 2%;
+        margin: 0%;
         float: left;
-        width: 60%;
+        width: 70%;
     }
 
     #webDiv {
@@ -213,13 +213,8 @@ hr {
     #wrapper {
         display: flex;
         flex-direction: column;
-
     }
 
-    .campingDiv {
-        float: left;
-        width: 55%;
-    }
 
     h3 {
         margin-top: 2%;
@@ -232,7 +227,6 @@ hr {
         margin-top: 2%;
         display: inline;
         float: right;
-
         position: absolute;
         height: 50%;
         width: 25%;
