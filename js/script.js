@@ -24,7 +24,6 @@ function init() {
 			showModal(this.id)
 		});
 	}
-	span.addEventListener("click", hideModal);
 	var input = document.getElementById("searchBar");
 	input.addEventListener("keypress", function(event){
         if (event.key ==="Enter") 
@@ -35,7 +34,7 @@ function init() {
             searchBtn.click();
         }
     });
-=======
+
 	for(let i = 0; i < span.length; i++){
 		span[i].addEventListener("click", hideModal);
 	}
