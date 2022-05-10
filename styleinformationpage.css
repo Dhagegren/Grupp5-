@@ -334,11 +334,16 @@ section {
     width: 50%;
     background-color: rgb(255, 255, 255);
     border: none;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+    
+    padding:0px;
     font-size: .7em;
     cursor: pointer;
+    
+}
+
+#maporlist button div {
+    display: flex;
+    flex-direction: column;
 }
 
 #maporlist .active {

@@ -28,8 +28,8 @@ function init(){
 	knappMat = document.getElementById("matknapp");
 	mapElem = document.getElementById("map");
 	listElem = document.getElementById("listan")
-	svgKarta = knappKarta.firstChild;
-	svgLista = knappLista.firstChild;
+	svgKarta = document.getElementById("bildkarta");
+	svgLista = document.getElementById("bildlista");
 	svgAktiviteter = knappAktiviteter.firstChild;
 	svgMat = knappMat.firstChild;
 	// eventListeners
