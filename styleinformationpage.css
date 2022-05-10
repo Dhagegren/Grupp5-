@@ -77,21 +77,23 @@ header {
     left: 25px;
     color: white;
     font-weight: 550;
-    font-size: 1.7em;
+    font-size: 1.3em;
+    max-width: 350px;
 }
 
 .picture h2{
     position: absolute;
-    top: 305px;
+    top: 350px;
     right: 25px;
     color: white;
     font-weight: 500;
     font-size: 1.5em;
+    
 }
 
 .picture > p{
     position: absolute;
-    top: 340px;
+    top: 360px;
     left: 25px;
     color: white;
     font-size: 0.8em;
@@ -113,6 +115,12 @@ section {
     line-height: 1.5em;
     max-width: 500px;
     
+    
+    
+}
+
+#more {
+    display: none;  
 }
 
 .bigscreen-cover{
@@ -287,7 +295,7 @@ section {
 }
 
 .kartalista .hidden {
-    display:none;
+    display: none;
 }
 
 
@@ -335,13 +343,12 @@ section {
     background-color: rgb(255, 255, 255);
     border: none;
     
-    padding:0px;
+    padding: 10px;
     font-size: .7em;
     cursor: pointer;
-    
 }
 
-#maporlist button div {
+#maporlist button div{
     display: flex;
     flex-direction: column;
 }
