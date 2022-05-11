@@ -16,7 +16,7 @@ var campId ="";
 var latCamp;
 var lngCamp;
 var moreText; 
-var btnMerText;
+var btnMoreText;
 
 
 function init(){
@@ -80,10 +80,10 @@ function checkCamp(response){
 
 function visaMerText() {
 	if (more.style.display === "inline") {
-	  btnMoreText.innerHTML = "Visa mer";
+	  btnMoreText.firstChild.src = "ikoner/cheveron-down.svg";
 	  moreText.style.display = "none";
 	} else {
-	  btnMoreText.innerHTML = "Visa mindre";
+	  btnMoreText.firstChild.src = "ikoner/cheveron-up.svg";
 	  moreText.style.display = "inline";
 	}
   }

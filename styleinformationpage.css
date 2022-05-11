@@ -123,6 +123,19 @@ section {
     display: none;  
 }
 
+#visaMer {
+    width: 100%;
+    border: none;
+    margin-top: 20px;
+    background-color: #FCFCFC;
+    font-weight: 500;
+   
+}
+
+#visaMer img {
+    width: 30px;
+}
+
 .bigscreen-cover{
     display: flex;
     justify-content: space-evenly;
@@ -144,7 +157,7 @@ section {
 
 .faciliteter {
     grid-area: faciliteter;
-    padding: 45px 25px 0 25px;
+    padding: 45px 25px 0 20px;
     background-color: #FCFCFC;
 }
 
