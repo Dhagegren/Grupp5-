@@ -70,7 +70,8 @@ function requestCamping() {
 
 		theResponse = searchFilters(theResponse);
 
-		// console.log(theResponse);
+		console.log("Filtered: ");
+		console.log(theResponse);
 		
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
@@ -92,93 +93,74 @@ function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
 }
 
+// Filter funkar typ, blir det noll campingar som matchar alla filter går allt åt skogen tho
+// Lägg till fler filter
 function searchFilters(resp) {
 	let ixList = [];
-	let ixDubble = false;
 
 	let smaland = document.getElementById("smaland");
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
-	
-	for (let i = 0; i < resp.length; i++) {	// index listan kommer innehålla alla index som nämns, inte gemensamma, detta kommer inte funka
-		if (smaland.checked == true) {
+
+	if (smaland.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].province == "Småland") {
-				for (let j = 0; j < ixList.length; j++) {
-					if (ixList[j] == i) {
-						ixDubble = true;
-					}
-				}
-
-				if (ixDubble == false) {
-					ixList.push(i);
-				}
-				ixDubble = false;
-				console.log("Småland");
+				ixList.push(i);
+				console.log("Småland"); //----------------------------###
 			}
 		}
-
-		if (oland.checked == true) {
-			if (resp[i].province == "Öland") {
-				for (let j = 0; j < ixList.length; j++) {
-					if (ixList[j] == i) {
-						ixDubble = true;
-					}
-				}
-
-				if (ixDubble == false) {
-					ixList.push(i);
-				}
-				ixDubble = false;
-				console.log("Öland");
-			}
-		}
-
-		if (strand.checked == true) {
-			if (resp[i].text.includes("strand")) {
-				for (let j = 0; j < ixList.length; j++) {
-					if (ixList[j] == i) {
-						ixDubble = true;
-					}
-				}
-
-				if (ixDubble == false) {
-					ixList.push(i);
-				}
-				ixDubble = false;
-				console.log("Strand");
-			}
-		}
-
-		if (natur.checked == true) {
-			if (resp[i].text.includes("natur")) {
-				for (let j = 0; j < ixList.length; j++) {
-					if (ixList[j] == i) {
-						ixDubble = true;
-					}
-				}
-				
-				if (ixDubble == false) {
-					ixList.push(i);
-				}
-				ixDubble = false;
-				console.log("Natur");
-			}
-		}
+		resp = removeNonIndexed(resp, ixList);
+		ixList = [];
 	}
-	
+
+	if (oland.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].province == "Öland") {
+				ixList.push(i);
+				console.log("Öland"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);
+		ixList = [];
+	}
+
+	if (strand.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].text.includes("strand")) {
+				ixList.push(i);
+				console.log("Strand"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);
+		ixList = [];
+	}
+
+	if (natur.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].text.includes("natur")) {
+				ixList.push(i);
+				console.log("Natur"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	return resp;
+}
+
+function removeNonIndexed(resp, ixList) {
 	if (ixList.length != 0) {
 		let newResp = [];
-		console.log(ixList);
 		
 		for (let i = 0; i < ixList.length; i++) {
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
 		}
-		
-		resp = newResp;
-		console.log("Filtered");
-	}
 
+		return newResp;
+	}
+	
 	return resp;
 }
