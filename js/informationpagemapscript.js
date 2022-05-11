@@ -15,9 +15,10 @@ var getCamp = window.location.search;
 var campId ="";
 var latCamp;
 var lngCamp;
+//ny kod för att ta fram matställen
+var matRef;
 var moreText; 
 var btnMoreText;
-
 
 function init(){
 	getCamp = new URLSearchParams(getCamp);
@@ -42,6 +43,13 @@ function init(){
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
+
+
+	//ny kod för att ta fram matställen
+	
+	matRef=document.getElementsByClassName("bra")
+	matRef = matRef[0];
+	
 	btnMoreText.addEventListener("click", visaMerText);
 }
 
@@ -75,7 +83,9 @@ function checkCamp(response){
 	beskrivning.children[1].innerHTML = text2;
 	latCamp = theResponse.lat;
 	lngCamp = theResponse.lng;
-	
+
+	requestActivity();
+
 }
 
 function visaMerText() {
@@ -142,6 +152,7 @@ function showActive(){
 		svgMat.src = "ikoner/restaurantSvart.svg";
 		knappAktiviteter.classList.add("active");
 		svgAktiviteter.src = "ikoner/aktiviteterVit.svg"
+		requestActivity();
 		
 	}
 	else {
@@ -155,9 +166,59 @@ function showFood(){
 		svgAktiviteter.src = "ikoner/aktiviteterSvart.svg";
 		knappMat.classList.add("active");
 		svgMat.src = "ikoner/restaurantVit.svg"
+		requestMat();
 		
 	}
 	else {
 		return;
 	}
 }
+
+ function requestMat(){
+ 	let request = new XMLHttpRequest();
+ 	request.open("GET", SMAPI +"&controller=food&method=getfromlatlng&lat="+latCamp+"&lng="+lngCamp+"&radius=30&format=json&nojsoncallback=1", true );
+ 	request.send(null);
+ 	request.onreadystatechange=function(){
+ 		if (request.readyState==4)
+ 			if( request.status==200) checkFood(request.responseText);
+ 			else console.log("hittas inte")
+			
+ 	}
+ 	function checkFood(response){
+ 		let foodResponse = JSON.parse(response);
+ 		let tempFood = "";
+ 		foodResponse = foodResponse.payload
+ 		for (let i=0; i<foodResponse.length; i++){
+ 			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div>" ;
+ 			matRef.innerHTML=tempFood;
+			
+		}
+
+	}
+ }
+
+function requestActivity(){
+	let request = new XMLHttpRequest();
+	request.open("GET", SMAPI +"&controller=activity&method=getfromlatlng&lat="+latCamp+"&lng="+lngCamp+"&radius=30&format=json&nojsoncallback=1", true );
+	request.send(null);
+	request.onreadystatechange=function(){
+		if (request.readyState==4)
+			if( request.status==200) checkActivity(request.responseText);
+			else console.log("hittas inte")
+			
+	}
+	function checkActivity(response){
+		let activityResponse = JSON.parse(response);
+		let tempActivity = "";
+		activityResponse = activityResponse.payload
+		for (let i=0; i<activityResponse.length; i++){
+			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div>" ;
+			matRef.innerHTML=tempActivity;
+			
+		}
+
+	}
+}
+
+
+
