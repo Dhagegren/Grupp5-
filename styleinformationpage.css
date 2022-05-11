@@ -163,7 +163,7 @@ section {
     height: 25px;
     color: rgb(0, 0, 0);
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: .9em;
 }
 
 .webb-bigscreen img, .karta-bigscreen img {
@@ -434,6 +434,8 @@ footer {
     .p-cover {
         display: grid;
         place-items: center;
+        width: 125px;
+        
     }
 
      .kartalista{
