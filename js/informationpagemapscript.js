@@ -70,6 +70,7 @@ function checkCamp(response){
 	beskrivning.children[0].innerHTML = theResponse.text;
 	latCamp = theResponse.lat;
 	lngCamp = theResponse.lng;
+	requestActivity();
 }
 
 function initMap1() {
