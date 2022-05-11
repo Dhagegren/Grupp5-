@@ -19,6 +19,9 @@ var lngCamp;
 var matRef;
 var moreText; 
 var btnMoreText;
+var phoneDiv;
+var websiteDiv;
+
 
 function init(){
 	getCamp = new URLSearchParams(getCamp);
@@ -43,6 +46,8 @@ function init(){
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
+	websiteDiv = document.getElementById("websiteDiv");
+	phoneDiv = document.getElementById("phoneDiv");
 
 
 	//ny kod för att ta fram matställen
@@ -83,6 +88,10 @@ function checkCamp(response){
 	beskrivning.children[1].innerHTML = text2;
 	latCamp = theResponse.lat;
 	lngCamp = theResponse.lng;
+	let phoneNum = theResponse.phone_number;
+	let webSite = theResponse.website;
+	websiteDiv.href = webSite;
+	phoneDiv.innerHTML = phoneNum;
 
 	requestActivity();
 
