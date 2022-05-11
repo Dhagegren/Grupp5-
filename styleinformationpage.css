@@ -108,16 +108,29 @@ section {
 }
 
 .beskrivning {
-    
-    padding: 25px 25px 0 25px;
+    color: #242424;
+    padding: 25px 30px 0 30px;
     font-size: 0.8em;
     font-weight: 500;
     line-height: 1.5em;
-    max-width: 500px;
-    
+    max-width: 700px;
     
     
 }
+
+.beskrivning::-webkit-scrollbar {
+    width: 4px;
+}
+
+.beskrivning::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  .beskrivning::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
 
 #more {
     display: none;  
@@ -142,13 +155,15 @@ section {
     padding: 20px;
     background-color: #ffffff;
     
+    
 }
 
 .webb-bigscreen, .karta-bigscreen {
     display: flex;
-    height: 30px;
+    height: 25px;
     color: rgb(0, 0, 0);
     font-weight: 500;
+    font-size: 1.1em;
 }
 
 .webb-bigscreen img, .karta-bigscreen img {
@@ -157,7 +172,7 @@ section {
 
 .faciliteter {
     grid-area: faciliteter;
-    padding: 45px 25px 0 20px;
+    padding: 25px 25px 0 25px;
     background-color: #FCFCFC;
 }
 
@@ -401,8 +416,8 @@ footer {
       
       grid-template-areas: 
     "picture beskrivning"
-
-    "faciliteter faciliteter "
+    ". ."
+    "faciliteter faciliteter"
     "recensioner recensioner"
     "upptäck ."
     "listakarta listakarta";
@@ -412,6 +427,8 @@ footer {
     .beskrivning{
         font-size: .9em;
         font-weight: 400;
+        max-height: 400px;
+        overflow-y: scroll;
     }
 
     .p-cover {
@@ -472,6 +489,14 @@ footer {
     
     .recensionerobjekt h3, .listobjekt h3 {
         font-size: 20px
+    }
+
+    #visaMer {
+        display: none;
+    }
+
+    #more {
+        display: inline !important;  
     }
 
   }
