@@ -15,6 +15,9 @@ var getCamp = window.location.search;
 var campId ="";
 var latCamp;
 var lngCamp;
+var moreText; 
+var btnMoreText;
+
 
 function init(){
 	getCamp = new URLSearchParams(getCamp);
@@ -22,6 +25,8 @@ function init(){
 	console.log(campId);
 	requestCamp();
     initMap1();
+	moreText = document.getElementById("more");
+	btnMoreText = document.getElementById("visaMer");
 	knappKarta = document.getElementById("knappKarta");
 	knappLista = document.getElementById("knappLista");
 	knappAktiviteter = document.getElementById("aktivitetsknapp");
@@ -37,6 +42,7 @@ function init(){
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
+	btnMoreText.addEventListener("click", visaMerText);
 }
 
 window.addEventListener("load", init);
@@ -59,10 +65,28 @@ function checkCamp(response){
 	picture.children[3].innerHTML = parseFloat(theResponse.rating) + "/5";
 	picture.children[4].innerHTML = theResponse.address;
 	let beskrivning = document.getElementsByClassName("beskrivning")[0];
-	beskrivning.children[0].innerHTML = theResponse.text;
+	let text = theResponse.text;
+	let words = text.split(" ");
+	let part1 = words.splice(0,120);
+	let part2 = words.splice(0);
+	let text1 = part1.join(" ");
+	let text2 = part2.join(" ");
+	beskrivning.children[0].innerHTML = text1;
+	beskrivning.children[1].innerHTML = text2;
 	latCamp = theResponse.lat;
 	lngCamp = theResponse.lng;
+	
 }
+
+function visaMerText() {
+	if (more.style.display === "inline") {
+	  btnMoreText.firstChild.src = "ikoner/cheveron-down.svg";
+	  moreText.style.display = "none";
+	} else {
+	  btnMoreText.firstChild.src = "ikoner/cheveron-up.svg";
+	  moreText.style.display = "inline";
+	}
+  }
 
 function initMap1() {
 	myMap = new google.maps.Map(
