@@ -15,6 +15,8 @@ var getCamp = window.location.search;
 var campId ="";
 var latCamp;
 var lngCamp;
+//ny kod för att ta fram matställen
+var matRef;
 
 function init(){
 	getCamp = new URLSearchParams(getCamp);
@@ -37,6 +39,13 @@ function init(){
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
+
+	//ny kod för att ta fram matställen
+	requestActivity();
+	requestMat();
+	matRef = document.getElementsByClassName("listobjekt");
+	matRef = matRef[0];
+	
 }
 
 window.addEventListener("load", init);
@@ -137,3 +146,52 @@ function showFood(){
 		return;
 	}
 }
+
+ function requestMat(){
+ 	let request = new XMLHttpRequest();
+ 	request.open("GET", SMAPI +"&controller=food&method=getall&format=json&nojsoncallback=1", true );
+ 	request.send(null);
+ 	request.onreadystatechange=function(){
+ 		if (request.readyState==4)
+ 			if( request.status==200) checkFood(request.responseText);
+ 			else console.log("hittas inte")
+			
+ 	}
+ 	function checkFood(response){
+ 		let foodResponse = JSON.parse(response);
+ 		let tempFood = "";
+ 		foodResponse = foodResponse.payload
+ 		for (let i=0; i<foodResponse.length; i++){
+ 			tempFood += "<div class=kartalista> <div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div></div>" ;
+ 			matRef.innerHTML=tempFood;
+			
+		}
+
+	}
+ }
+
+function requestActivity(){
+	let request = new XMLHttpRequest();
+	request.open("GET", SMAPI +"&controller=activity&method=getall&format=json&nojsoncallback=1", true );
+	request.send(null);
+	request.onreadystatechange=function(){
+		if (request.readyState==4)
+			if( request.status==200) checkActivity(request.responseText);
+			else console.log("hittas inte")
+			
+	}
+	function checkActivity(response){
+		let activityResponse = JSON.parse(response);
+		let tempActivity = "";
+		activityResponse = activityResponse.payload
+		for (let i=0; i<activityResponse.length; i++){
+			tempActivity += "<div class=kartalista> <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div></div>" ;
+			matRef.innerHTML=tempActivity;
+			
+		}
+
+	}
+}
+
+
+
