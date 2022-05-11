@@ -72,6 +72,10 @@ header h1 {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.search div{
+    background-color: #fcfcfc;
+}
+
 .search input {
     border: none;
     height: 40px;
@@ -86,7 +90,7 @@ header h1 {
 .search button {
     background-color: #0e110f;
     border: none;
-    color: white;
+    color: #FCFCFC;
     border-radius: 0px 0px 10px 10px;
     height: 50px;
     font-size: 1.6em;
