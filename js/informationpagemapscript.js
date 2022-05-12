@@ -290,7 +290,9 @@ function addMarker(){
 
 function removeMarker(){
 	console.log(myMarkers);
-	for (let i = 1; i < myMarkers.length-1; i++) {
+	console.log(myMarkers.length);
+	for (let i = 1; i < myMarkers.length; i++) {
+		console.log(i);
 		myMarkers[i].setMap(null);
 	}
 }
