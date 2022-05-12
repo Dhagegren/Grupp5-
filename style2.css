@@ -16,6 +16,9 @@ header h1 {
 
 main{
     padding: 0 15px 0 15px;
+    max-width: 1400px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #filterDiv {
@@ -33,11 +36,15 @@ main{
     padding: 5px;
 }
 
+
+
 .search {
     margin: 10px 0 20px 0;
     display: flex;
     justify-content: center;
     width: 100%;
+    border-radius: 1rem;
+    background-color: #efecec;
 }
 
 .search input {
@@ -49,8 +56,12 @@ main{
     border: none;
 }
 
-#campingDiv {
-    margin: 0%;
+#webDiv{
+    display: none;
+}
+
+.campingDivs {
+    width: 100%;
 }
 
 .itemDiv {
@@ -202,9 +213,7 @@ hr {
     cursor: pointer;
 }
 
-#webDiv {
-    display: none;
-}
+
 
 #map{
      height: 300px;
@@ -231,56 +240,54 @@ hr {
         display: none;
     }
 
-    .campingDiv {
-        margin: 0%;
-        float: left;
-        width: 70%;
+    
+    .campingDivs {
+        width: 65%;
+        margin-right: 30px;
     }
+    
+
 
     #webDiv {
-        border-radius: 2%;
-        margin-top: 2%;
         display: inline;
-        float: right;
-        background-color: #efecec;
-        position: absolute;
-        height: 50%;
+        
+        border-radius: 2%;
+        height: 400px;
         width: 35%;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+        
     }
 
-    #wrapper {
+    #webDiv h3 {
+      margin: 40px 0 10px 50px;
+    }
+
+    .inputDiv {
+        margin:15px 0 0 50px;
+    }
+
+    .inputDiv label {
+        font-weight: 500;
+        font-size: 1em;
+    }
+    
+    #resultCover {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+    }
+    
+    .itemDiv img {
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        margin-right: 10px;
+        width: 150px;
+        height: 120px;
     }
 
-
-    h3 {
-        margin-top: 2%;
-        margin-left: 5%;
+    .textDiv h2 {
+        font-weight: 500;
+        font-size: 1.2em;
+        padding: 5px 0 15px 0;
     }
-
-    #webDiv {
-        border: 1px solid grey;
-        border-radius: 2%;
-        margin-top: 2%;
-        display: inline;
-        float: right;
-        position: absolute;
-        height: 50%;
-        width: 25%;
-    }
-
-    #wrapper {
-        display: flex;
-        flex-direction: column;
-
-    }
-
-    #marginDiv {
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
-
 
 }
