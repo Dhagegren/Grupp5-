@@ -21,6 +21,9 @@ var moreText;
 var btnMoreText;
 var phoneDiv;
 var websiteDiv;
+var places;
+var myMarkers;
+const infoWindow = new google.maps.InfoWindow();
 
 
 function init(){
@@ -28,7 +31,6 @@ function init(){
 	campId = getCamp.get("value");
 	console.log(campId);
 	requestCamp();
-    initMap1();
 	moreText = document.getElementById("more");
 	btnMoreText = document.getElementById("visaMer");
 	knappKarta = document.getElementById("knappKarta");
@@ -54,7 +56,7 @@ function init(){
 	
 	matRef=document.getElementsByClassName("bra")
 	matRef = matRef[0];
-	
+	getReviews();
 	btnMoreText.addEventListener("click", visaMerText);
 }
 
@@ -92,6 +94,7 @@ function checkCamp(response){
 	let webSite = theResponse.website;
 	websiteDiv.href = webSite;
 	phoneDiv.innerHTML = phoneNum;
+	initMap1();
 
 	requestActivity();
 
@@ -111,7 +114,7 @@ function initMap1() {
 	myMap = new google.maps.Map(
 			document.getElementById('map'),
 			{
-				center: {lat:56.13708498823629, lng:15.584851190648239},
+				center: {lat:+latCamp, lng:+lngCamp},
 				zoom: 11,
 				styles: [
 					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
@@ -119,7 +122,28 @@ function initMap1() {
 				]
 			}
 		);
+		let tempVar ={lat:+latCamp, lng:+ lngCamp};
+		console.log(tempVar);
+		var marker = new google.maps.Marker({
+			position: tempVar,
+			myMap,
+			title: "Campingen",
+		});
+		console.log(marker);
+		myMarkers = [marker];
+		marker.setAnimation(google.maps.Animation.BOUNCE);
+
+		marker.setMap(myMap);
+		marker.addListener("click", toggleBounce);
 } // End initMap
+
+function toggleBounce() {
+	if (myMarkers[0].getAnimation() !== null) {
+		myMarkers[0].setAnimation(null);
+	} else {
+		myMarkers[0].setAnimation(google.maps.Animation.BOUNCE);
+	}
+  }
 
 function showMap(){
 	if (mapElem.classList.contains("hidden")){
@@ -196,12 +220,23 @@ function showFood(){
  	function checkFood(response){
  		let foodResponse = JSON.parse(response);
  		let tempFood = "";
- 		foodResponse = foodResponse.payload
+ 		foodResponse = foodResponse.payload;
+		removeMarker();
  		for (let i=0; i<foodResponse.length; i++){
  			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div>" ;
  			matRef.innerHTML=tempFood;
-			
+			 let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};
+			let tempDesc =foodResponse[i].name;
+			var marker = new google.maps.Marker({
+			position: tempVar,
+				myMap,
+				title:tempDesc,
+			});
+			myMarkers.push(marker);
+
+			marker.setMap(myMap);
 		}
+		addMarker();
 
 	}
  }
@@ -216,18 +251,79 @@ function requestActivity(){
 			else console.log("hittas inte")
 			
 	}
+
 	function checkActivity(response){
+		removeMarker();
 		let activityResponse = JSON.parse(response);
 		let tempActivity = "";
-		activityResponse = activityResponse.payload
+		activityResponse = activityResponse.payload;
 		for (let i=0; i<activityResponse.length; i++){
 			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
-			
+			console.log(activityResponse[i].lat); 
+			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};
+			let tempDesc =activityResponse[i].name;
+			var marker = new google.maps.Marker({
+			position: tempVar,
+				myMap,
+				title: tempDesc,
+			}	
+		);
+		console.log(marker.getTitle());
+		myMarkers.push(marker);
+		marker.setMap(myMap)
 		}
-
+		addMarker();
 	}
 }
 
+function addMarker(){
+	for (let i = 0; i < myMarkers.length; i++) {
+		myMarkers[i].addListener("click", () => {
+			infoWindow.close();
+			infoWindow.setContent(myMarkers[i].getTitle());
+			infoWindow.open(myMarkers[i].getMap(), myMarkers[i]);
+		  });
+		
+	}
+}
+
+function removeMarker(){
+	console.log(myMarkers);
+	for (let i = 1; i < myMarkers.length-1; i++) {
+		myMarkers[i].setMap(null);
+	}
+}
+
+function getReviews(){
+	let request = new XMLHttpRequest();
+	request.open("GET", SMAPI +"&controller=establishment&method=getreviews&id="+ campId +"&format=json&nojsoncallback=1", true );
+	request.send(null);
+	request.onreadystatechange=function(){
+		if (request.readyState==4)
+			if( request.status==200) checkReviews(request.responseText);
+			else console.log("hittas inte")
+}
+}
+
+function checkReviews(response){
+	let reviewResponse = JSON.parse(response).payload;
+	console.log(reviewResponse);
+	reviewRef = document.getElementById("recensioner");
+	console.log(reviewRef);
+	tempText = "";
+	if(reviewResponse.length >0){
+		for (let i = 0; i < reviewResponse.length; i++) {
+			tempText += "<div class=recensionerobjekt> <h3>"+ reviewResponse[i].name + "</h3> <p> "+ reviewResponse[i].comment + "</p></div>"
+		}
+		
+
+	}
+	else{
+		tempText += "<div class=recensionerobjekt> <h3> Ingen kommentar</h3> <p>Tyvärr finns de igen kommentaren om denna camping för tillfället</p></div>"
+
+	}
+	reviewRef.innerHTML = tempText;
+}
 
 

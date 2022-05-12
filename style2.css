@@ -18,7 +18,10 @@ header h1 {
     display: inline;
     align-items: center;
 }
-
+.hemKnapp{
+    color: #ffffff;
+    text-decoration: none;
+}
 #filterList {
     display: flex;
     list-style-type: none;

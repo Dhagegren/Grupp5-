@@ -66,6 +66,11 @@ header {
     left: 0;
 }
 
+.hemKnapp{
+    color: #ffffff;
+    text-decoration: none;
+}
+
 .map {
     top: 0;
     right: 0;
