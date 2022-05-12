@@ -111,9 +111,9 @@ function requestCamping() {
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
             if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search+" län") {
-				tempCamping += "<div class='campingDiv'><div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
-				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p> Visa på karta </p> <p>" +parseFloat(theResponse[i].rating) + "/5</p>"+
-				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div></div>';
+				tempCamping += "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
+				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" +parseFloat(theResponse[i].rating) + "<span>/5</span></p>"+
+				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div>';
 				campingRef.innerHTML = tempCamping;
             }
         }
