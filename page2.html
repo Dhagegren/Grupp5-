@@ -20,7 +20,7 @@
     </header>
 
     <div id="filterDiv">
-        <ul id="filterList">
+        <div id="filterList">
             <button class="myBtn" id="sortBtn">
                 <img src="img/sort.svg" alt="sorterings ikon">
                 Sortera
@@ -35,63 +35,81 @@
                 <img src="img/LocMarker.svg" alt="ikon för karta">
                 Karta
             </button>
-        </ul>
+        </div>
     </div>
 
     <hr>
-
+<main>
     <div id="marginDiv">
         <div class="search">
             <input type="text" id="searchBar" placeholder="Sök på camping">
         </div>
-
-    
-  
-    
-
-<div class="campingDivs">
-    <div class="campingDiv">
-        <div class="itemDiv">
-            <img src="img/camp2.jpg" alt="bild på camping">
-
-            <div id="textDiv">
-                <h2> Lasses Camping</h2>
-                <p> 5km från växjö</p>
-                <p> Visa på karta</p>
-                <p> 4.4/5</p>
+        <div class="campingDivs">
+            <div class="campingDiv">
+                <div class="itemDiv">
+                    <img src="img/camp2.jpg" alt="bild på camping">
+                    <div class="textDiv">
+                        <h2> Lasses Camping</h2>
+                        <p> 5km från växjö</p>
+                        <p class="showMap"> Visa på karta</p>
+                        <p class="betyg">4.4<span>/5</span></p>
+                    </div>
+                    <button id="infoBtn"> Info</button>
+                </div>
+                <div class="itemDiv">
+                    <img src="img/camp2.jpg" alt="bild på camping">
+                    <div id="textDiv">
+                        <h2> Lasses Camping</h2>
+                        <p> 5km från växjö</p>
+                        <p id="showMap"> Visa på karta</p>
+                        <p id="betyg">4.4<span>/5</span></p>
+                    </div>
+                    <button id="infoBtn"> Info</button>
+                </div>
+                <div class="itemDiv">
+                    <img src="img/camp2.jpg" alt="bild på camping">
+                    <div id="textDiv">
+                        <h2> Lasses Camping</h2>
+                        <p> 5km från växjö</p>
+                        <p id="showMap"> Visa på karta</p>
+                        <p id="betyg">4.4<span>/5</span></p>
+                    </div>
+                    <button id="infoBtn"> Info</button>
+                </div>
+                <div class="itemDiv">
+                    <img src="img/camp2.jpg" alt="bild på camping">
+                    <div id="textDiv">
+                        <h2> Lasses Camping</h2>
+                        <p> 5km från växjö</p>
+                        <p id="showMap"> Visa på karta</p>
+                        <p id="betyg">4.4<span>/5</span></p>
+                    </div>
+                    <button id="infoBtn"> Info</button>
+                </div>
             </div>
-
-            <button id="infoBtn"> Info</button>
         </div>
     </div>
-</div>
-
     <div id="webDiv">
-
-            <div id="wrapper">
-                <h3> Filter </h3>
-                <div class="inputDiv">
-                    <input type="checkbox" class="modalCheck" name="natur">
-                    <label for="natur"> Campingar nära naturen</label>
-                </div>
-
-
-                <div class="inputDiv">
-                    <input type="checkbox" class="modalCheck" name="småland">
-                    <label for="småland"> Campingar i småland</label>
-                </div>
-                <div class="inputDiv">
-                    <input type="checkbox" class="modalCheck" name="strand">
-                    <label for="strand"> Campingar nära stranden</label>
-                </div>
-
-                <div class="inputDiv">
-                    <input type="checkbox" class="modalCheck" name="öland">
-                    <label for="öland"> Campingar på Öland </label>
-                </div>
-
-                <h3> Sortera efter</h3>
+        <div id="wrapper">
+            <h3> Filter </h3>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="natur">
+                <label for="natur"> Campingar nära naturen</label>
             </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="småland">
+                <label for="småland"> Campingar i småland</label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="strand">
+                <label for="strand"> Campingar nära stranden</label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="öland">
+                <label for="öland"> Campingar på Öland </label>
+            </div>
+                <h3> Sortera efter</h3>
+            
         </div>
 
     </div>
@@ -119,15 +137,11 @@
             <button> Sortera </button>
         </div>
     </div>
-
     <div id="filterModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-
             <h2> Filter </h2>
-
             <input type="checkbox" class="modalCheck" name="natur">
             <label for="natur"> Campingar nära naturen</label>
             <input type="checkbox" class="modalCheck" name="småland">
@@ -136,26 +150,16 @@
             <label for="strand"> Campinar nära stranden</label>
             <input type="checkbox" class="modalCheck" name="öland">
             <label for="öland"> Campingar på Öland </label>
-
             <button> Applicera filter </button>
         </div>
     </div>
-
     <div id="mapModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-
             <div id="map"></div>
-
-
-
         </div>
     </div>
-   
-
-  
+</main>    
 </body>
-
 </html>
