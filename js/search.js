@@ -1,9 +1,11 @@
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
+var oland =document.getElementsByClassName("indexgridsection");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
 function init(){
     searchBtn = searchBtn[0].children[1];
+    oland[0].addEventListener("click", getOland);
     searchBtn.addEventListener("click", requestCamping);
     var input = document.getElementById("searchBar");
     input.addEventListener("keypress", function(event){
@@ -14,6 +16,10 @@ function init(){
         }
     });
     popularCamping();
+}
+
+function getOland(){
+    window.open("page2.html?value=Öland", "_self");
 }
 
 
