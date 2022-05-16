@@ -70,8 +70,8 @@ function requestCamping() {
 
 		theResponse = searchFilters(theResponse);
 
-		console.log("Filtered: ");
-		console.log(theResponse);
+		console.log("Filtered: "); //----------------------------###
+		console.log(theResponse); //----------------------------###
 		
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
@@ -95,13 +95,14 @@ function openNext() {
 
 // Filter funkar typ, blir det noll campingar som matchar alla filter går allt åt skogen tho
 // Lägg till fler filter
-function searchFilters(resp) {
+function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall vilket och sorterar därefter
 	let ixList = [];
 
 	let smaland = document.getElementById("smaland");
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
+	let wifi = document.getElementById("wifi");
 
 	if (smaland.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
@@ -147,10 +148,23 @@ function searchFilters(resp) {
 		ixList = [];
 	}
 
+	if (wifi.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			let aResp = accommodationfilter(resp[i].id, []);
+			console.log(aResp.wifi);
+			if (aResp.wifi == "Y") {
+				ixList.push(i);
+				console.log("Wifi"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
 	return resp;
 }
 
-function removeNonIndexed(resp, ixList) {
+function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte indexerats ur listan
 	if (ixList.length != 0) {
 		let newResp = [];
 		
@@ -163,4 +177,31 @@ function removeNonIndexed(resp, ixList) {
 	}
 	
 	return resp;
+}
+
+function accommodationfilter(id, accResp) { // Kollar om accResp är tom, isåfall gör anrop, annars hämta värdet vi letar efter
+	if (accResp.length == 0) {
+		accommodationData(id);
+	}
+
+	else {
+		console.log(id);
+
+		for (let i = 0; i < accResp.length; i++) {
+			if (accResp[i].id == id) {
+				return accResp[i];
+			}
+		}
+	}
+}
+// id kommer inte in i funktionen, men behöver skickas med på något vis right?
+function accommodationData(id) { // ajax-anrop för att kunna hämta data listat under accommodations i SMAPI
+	let request = new XMLHttpRequest();
+	request.open("GET", SMAPI + "&controller=accommodation&method=getall&descriptions=camping&debug=true", true);
+	request.send(null);
+	request.onreadystatechange = function (id) {
+		if (request.readyState == 4)
+		if (request.status == 200) accommodationfilter(id, request.responseText);
+		else console.log("very many wrong, yes")
+    };
 }
