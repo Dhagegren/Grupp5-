@@ -74,11 +74,14 @@ function requestCamp(){
 }
 
 function checkCamp(response){
+	let ingenBeskrivning = document.getElementById("ingenBeskrivning");
+	let close = document.getElementById("close");
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
 	let picture = document.getElementsByClassName("picture")[0];
 	picture.children[2].innerHTML = theResponse.name;
 	picture.children[3].innerHTML = parseFloat(theResponse.rating) + "/5";
 	picture.children[4].innerHTML = theResponse.address;
+	close.children[0].innerHTML = "Nära " + theResponse.name;
 	let beskrivning = document.getElementsByClassName("beskrivning")[0];
 	let text = theResponse.text;
 	let words = text.split(" ");
@@ -86,6 +89,13 @@ function checkCamp(response){
 	let part2 = words.splice(0);
 	let text1 = part1.join(" ");
 	let text2 = part2.join(" ");
+	
+	if (text1.length < 1){
+		ingenBeskrivning.style.display = "inline";
+	}
+	if (text2.length < 1) {
+		btnMoreText.firstChild.style.display = "none";
+	}
 	beskrivning.children[0].innerHTML = text1;
 	beskrivning.children[1].innerHTML = text2;
 	latCamp = theResponse.lat;
@@ -101,7 +111,7 @@ function checkCamp(response){
 }
 
 function visaMerText() {
-	if (more.style.display === "inline") {
+	if (moreText.style.display === "inline") {
 	  btnMoreText.firstChild.src = "ikoner/cheveron-down.svg";
 	  moreText.style.display = "none";
 	} else {
@@ -312,6 +322,7 @@ function checkReviews(response){
 	let reviewResponse = JSON.parse(response).payload;
 	console.log(reviewResponse);
 	reviewRef = document.getElementById("recensioner");
+
 	console.log(reviewRef);
 	tempText = "";
 	if(reviewResponse.length >0){
@@ -322,7 +333,8 @@ function checkReviews(response){
 
 	}
 	else{
-		tempText += "<div class=recensionerobjekt> <h3> Ingen kommentar</h3> <p>Tyvärr finns de igen kommentaren om denna camping för tillfället</p></div>"
+		let ingaReview = document.getElementById("ingarecensioner");
+		ingaReview.style.display = "inline";
 
 	}
 	reviewRef.innerHTML = tempText;

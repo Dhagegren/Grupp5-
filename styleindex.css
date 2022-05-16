@@ -183,6 +183,7 @@ div.swiper-button-prev::after, div.swiper-button-next::after {
 .indexgridsection{
     border-radius: 10px;
     position: relative;
+    cursor: pointer;
 }
 
 .indexgridsection h1 {
