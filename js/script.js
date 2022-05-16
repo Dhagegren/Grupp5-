@@ -10,7 +10,7 @@ var skipPage = document.getElementsByClassName("nextPage");
 var perPage = 5;
 
 function init() {
-
+	skipPage = skipPage[0];
 	initMap();
 	console.log(campingRef);
 	campingRef = campingRef[0];
@@ -118,40 +118,54 @@ function requestCamping() {
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
             if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search+" län") {
-				campings[i] = "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
+				campings.push("<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
 				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" +parseFloat(theResponse[i].rating) + "<span>/5</span></p>"+
-				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div>';
-				campingRef.innerHTML ="";
+				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div>');
+
             }
 
 
         }
-		print(0);
+		print();
 
-		let campingBtn = document.getElementsByClassName("infoBtn");
-		for (let i = 0; i < campingBtn.length; i++) {
-			campingBtn[i].addEventListener("click", openNext);
-	
-		}
+
 
 
     }
 }
 
-function print(start){
-	start=parseInt(activeSide);
+function print(){
+	let start=parseInt(activeSide);
+	campingRef.innerHTML ="";
 	for (let i = start; i < start+5; i++) {
 		if (activeSide+i-start+1 <= campings.length) {
 			campingRef.innerHTML += campings[i];
 		}
 	}
+	let campingBtn = document.getElementsByClassName("infoBtn");
+	for (let i = 0; i < campingBtn.length; i++) {
+		campingBtn[i].addEventListener("click", openNext);
+
+	}
+
+	if (campings.length > activeSide+5){
+		skipPage.innerHTML="<p id='"+perPage+"'>></p>";
+	}
+	else skipPage.innerHTML="";
 	if (activeSide > 0) {
-		skipPage[0].innerHTML ="<a href='page2.html?value="+srcValue+"&side="+parseInt(activeSide-perPage)+"'><</a>";
+		skipPage.innerHTML+="<p id='"+-perPage+"'><</p>";
 		
 	}
-	if (campings.length > activeSide+5){
-		skipPage[0].innerHTML+="<a href='page2.html?value="+srcValue+"&side="+parseInt(activeSide+perPage)+"'>></a>";
+	for (let i = 0; i < skipPage.children.length; i++) {
+		skipPage.children[i].addEventListener("click", changePage)
 	}
+
+}
+
+function changePage() {
+	let	num = this.id;
+	activeSide = activeSide+parseInt(num);
+	print();
 }
 
 function openNext() {
