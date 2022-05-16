@@ -16,6 +16,8 @@ function init(){
     popularCamping();
 }
 
+
+
 function popularCamping(){
     let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET", SMAPI + "&controller=establishment&method=getall&descriptions=camping&sort_in=desc&order_by=rating&per_page=8&debug=true&format=json&nojsoncallback=1",true);
