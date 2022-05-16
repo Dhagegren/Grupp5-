@@ -4,7 +4,10 @@ var campingRef = document.getElementsByClassName("campingDivs");
 var searchValue = window.location.search;
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var srcValue =""; 
-
+var campings = [];
+var activeSide =0;
+var skipPage = document.getElementsByClassName("nextPage");
+var perPage = 5;
 
 function init() {
 
@@ -13,6 +16,10 @@ function init() {
 	campingRef = campingRef[0];
     searchValue = new URLSearchParams(searchValue);
     srcValue = searchValue.get("value");
+	if (searchValue.has("side")) {
+		activeSide=parseInt(searchValue.get("side"));
+		console.log(activeSide);
+	}
     requestCamping();
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
 	let span = document.getElementsByClassName("close");//Reference to span element
@@ -111,19 +118,40 @@ function requestCamping() {
 		search = search.toLowerCase();
         for (let i = 0; i < theResponse.length; i++) {
             if (theResponse[i].city.toLowerCase() == search || theResponse[i].municipality.toLowerCase() == search + " kommun" || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase() == search+" län") {
-				tempCamping += "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
+				campings[i] = "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
 				theResponse[i].name + "</h2> <p>5km från "+ theResponse[i].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" +parseFloat(theResponse[i].rating) + "<span>/5</span></p>"+
 				'</div> <button class="infoBtn" id='+theResponse[i].id+'> Info</button></div>';
-				campingRef.innerHTML = tempCamping;
+				campingRef.innerHTML ="";
             }
+
+
         }
+		print(0);
+
 		let campingBtn = document.getElementsByClassName("infoBtn");
 		for (let i = 0; i < campingBtn.length; i++) {
 			campingBtn[i].addEventListener("click", openNext);
+	
 		}
 
 
     }
+}
+
+function print(start){
+	start=parseInt(activeSide);
+	for (let i = start; i < start+5; i++) {
+		if (activeSide+i-start+1 <= campings.length) {
+			campingRef.innerHTML += campings[i];
+		}
+	}
+	if (activeSide > 0) {
+		skipPage[0].innerHTML ="<a href='page2.html?value="+srcValue+"&side="+parseInt(activeSide-perPage)+"'><</a>";
+		
+	}
+	if (campings.length > activeSide+5){
+		skipPage[0].innerHTML+="<a href='page2.html?value="+srcValue+"&side="+parseInt(activeSide+perPage)+"'>></a>";
+	}
 }
 
 function openNext() {
