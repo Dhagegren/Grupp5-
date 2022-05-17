@@ -17,13 +17,20 @@ var latCamp;
 var lngCamp;
 //ny kod för att ta fram matställen
 var matRef;
+var moreText; 
+var btnMoreText;
+var phoneDiv;
+var websiteDiv;
+var places;
+var myMarkers;
+const infoWindow = new google.maps.InfoWindow();
+
 
 function init(){
 	getCamp = new URLSearchParams(getCamp);
 	campId = getCamp.get("value");
 	console.log(campId);
 	requestCamp();
-    initMap1();
 	moreText = document.getElementById("more");
 	btnMoreText = document.getElementById("visaMer");
 	knappKarta = document.getElementById("knappKarta");
@@ -41,13 +48,16 @@ function init(){
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
+	websiteDiv = document.getElementById("websiteDiv");
+	phoneDiv = document.getElementById("phoneDiv");
+
 
 	//ny kod för att ta fram matställen
-	requestActivity();
-	requestMat();
-	matRef = document.getElementsByClassName("listobjekt");
-	matRef = matRef[0];
 	
+	matRef=document.getElementsByClassName("bra")
+	matRef = matRef[0];
+	getReviews();
+	btnMoreText.addEventListener("click", visaMerText);
 }
 
 window.addEventListener("load", init);
@@ -64,11 +74,14 @@ function requestCamp(){
 }
 
 function checkCamp(response){
+	let ingenBeskrivning = document.getElementById("ingenBeskrivning");
+	let close = document.getElementById("close");
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
 	let picture = document.getElementsByClassName("picture")[0];
 	picture.children[2].innerHTML = theResponse.name;
 	picture.children[3].innerHTML = parseFloat(theResponse.rating) + "/5";
 	picture.children[4].innerHTML = theResponse.address;
+	close.children[0].innerHTML = "Nära " + theResponse.name;
 	let beskrivning = document.getElementsByClassName("beskrivning")[0];
 	let text = theResponse.text;
 	let words = text.split(" ");
@@ -76,15 +89,29 @@ function checkCamp(response){
 	let part2 = words.splice(0);
 	let text1 = part1.join(" ");
 	let text2 = part2.join(" ");
+	
+	if (text1.length < 1){
+		ingenBeskrivning.style.display = "inline";
+	}
+	if (text2.length < 1) {
+		btnMoreText.firstChild.style.display = "none";
+	}
 	beskrivning.children[0].innerHTML = text1;
 	beskrivning.children[1].innerHTML = text2;
 	latCamp = theResponse.lat;
 	lngCamp = theResponse.lng;
-	
+	let phoneNum = theResponse.phone_number;
+	let webSite = theResponse.website;
+	websiteDiv.href = webSite;
+	phoneDiv.innerHTML = phoneNum;
+	initMap1();
+
+	requestActivity();
+
 }
 
 function visaMerText() {
-	if (more.style.display === "inline") {
+	if (moreText.style.display === "inline") {
 	  btnMoreText.firstChild.src = "ikoner/cheveron-down.svg";
 	  moreText.style.display = "none";
 	} else {
@@ -97,7 +124,7 @@ function initMap1() {
 	myMap = new google.maps.Map(
 			document.getElementById('map'),
 			{
-				center: {lat:56.13708498823629, lng:15.584851190648239},
+				center: {lat:+latCamp, lng:+lngCamp},
 				zoom: 11,
 				styles: [
 					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
@@ -105,7 +132,28 @@ function initMap1() {
 				]
 			}
 		);
+		let tempVar ={lat:+latCamp, lng:+ lngCamp};
+		console.log(tempVar);
+		var marker = new google.maps.Marker({
+			position: tempVar,
+			myMap,
+			title: "Campingen",
+		});
+		console.log(marker);
+		myMarkers = [marker];
+		marker.setAnimation(google.maps.Animation.BOUNCE);
+
+		marker.setMap(myMap);
+		marker.addListener("click", toggleBounce);
 } // End initMap
+
+function toggleBounce() {
+	if (myMarkers[0].getAnimation() !== null) {
+		myMarkers[0].setAnimation(null);
+	} else {
+		myMarkers[0].setAnimation(google.maps.Animation.BOUNCE);
+	}
+  }
 
 function showMap(){
 	if (mapElem.classList.contains("hidden")){
@@ -147,6 +195,7 @@ function showActive(){
 		svgMat.src = "ikoner/restaurantSvart.svg";
 		knappAktiviteter.classList.add("active");
 		svgAktiviteter.src = "ikoner/aktiviteterVit.svg"
+		requestActivity();
 		
 	}
 	else {
@@ -160,6 +209,7 @@ function showFood(){
 		svgAktiviteter.src = "ikoner/aktiviteterSvart.svg";
 		knappMat.classList.add("active");
 		svgMat.src = "ikoner/restaurantVit.svg"
+		requestMat();
 		
 	}
 	else {
@@ -169,7 +219,7 @@ function showFood(){
 
  function requestMat(){
  	let request = new XMLHttpRequest();
- 	request.open("GET", SMAPI +"&controller=food&method=getall&format=json&nojsoncallback=1", true );
+ 	request.open("GET", SMAPI +"&controller=food&method=getfromlatlng&lat="+latCamp+"&lng="+lngCamp+"&radius=30&format=json&nojsoncallback=1", true );
  	request.send(null);
  	request.onreadystatechange=function(){
  		if (request.readyState==4)
@@ -180,19 +230,30 @@ function showFood(){
  	function checkFood(response){
  		let foodResponse = JSON.parse(response);
  		let tempFood = "";
- 		foodResponse = foodResponse.payload
+ 		foodResponse = foodResponse.payload;
+		removeMarker();
  		for (let i=0; i<foodResponse.length; i++){
- 			tempFood += "<div class=kartalista> <div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div></div>" ;
+ 			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div>" ;
  			matRef.innerHTML=tempFood;
-			
+			 let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};
+			let tempDesc =foodResponse[i].name;
+			var marker = new google.maps.Marker({
+			position: tempVar,
+				myMap,
+				title:tempDesc,
+			});
+			myMarkers.push(marker);
+
+			marker.setMap(myMap);
 		}
+		addMarker();
 
 	}
  }
 
 function requestActivity(){
 	let request = new XMLHttpRequest();
-	request.open("GET", SMAPI +"&controller=activity&method=getall&format=json&nojsoncallback=1", true );
+	request.open("GET", SMAPI +"&controller=activity&method=getfromlatlng&lat="+latCamp+"&lng="+lngCamp+"&radius=30&format=json&nojsoncallback=1", true );
 	request.send(null);
 	request.onreadystatechange=function(){
 		if (request.readyState==4)
@@ -200,18 +261,83 @@ function requestActivity(){
 			else console.log("hittas inte")
 			
 	}
+
 	function checkActivity(response){
+		removeMarker();
 		let activityResponse = JSON.parse(response);
 		let tempActivity = "";
-		activityResponse = activityResponse.payload
+		activityResponse = activityResponse.payload;
 		for (let i=0; i<activityResponse.length; i++){
-			tempActivity += "<div class=kartalista> <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div></div>" ;
+			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
-			
+			console.log(activityResponse[i].lat); 
+			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};
+			let tempDesc =activityResponse[i].name;
+			var marker = new google.maps.Marker({
+			position: tempVar,
+				myMap,
+				title: tempDesc,
+			}	
+		);
+		console.log(marker.getTitle());
+		myMarkers.push(marker);
+		marker.setMap(myMap)
 		}
-
+		addMarker();
 	}
 }
 
+function addMarker(){
+	for (let i = 0; i < myMarkers.length; i++) {
+		myMarkers[i].addListener("click", () => {
+			infoWindow.close();
+			infoWindow.setContent(myMarkers[i].getTitle());
+			infoWindow.open(myMarkers[i].getMap(), myMarkers[i]);
+		  });
+		
+	}
+}
+
+function removeMarker(){
+	console.log(myMarkers);
+	console.log(myMarkers.length);
+	for (let i = 1; i < myMarkers.length; i++) {
+		console.log(i);
+		myMarkers[i].setMap(null);
+	}
+}
+
+function getReviews(){
+	let request = new XMLHttpRequest();
+	request.open("GET", SMAPI +"&controller=establishment&method=getreviews&id="+ campId +"&format=json&nojsoncallback=1", true );
+	request.send(null);
+	request.onreadystatechange=function(){
+		if (request.readyState==4)
+			if( request.status==200) checkReviews(request.responseText);
+			else console.log("hittas inte")
+}
+}
+
+function checkReviews(response){
+	let reviewResponse = JSON.parse(response).payload;
+	console.log(reviewResponse);
+	reviewRef = document.getElementById("recensioner");
+
+	console.log(reviewRef);
+	tempText = "";
+	if(reviewResponse.length >0){
+		for (let i = 0; i < reviewResponse.length; i++) {
+			tempText += "<div class=recensionerobjekt> <h3>"+ reviewResponse[i].name + "</h3> <p> "+ reviewResponse[i].comment + "</p></div>"
+		}
+		
+
+	}
+	else{
+		let ingaReview = document.getElementById("ingarecensioner");
+		ingaReview.style.display = "inline";
+
+	}
+	reviewRef.innerHTML = tempText;
+}
 
 

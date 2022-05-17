@@ -12,7 +12,7 @@
 </head>
 <body>
     <header>
-        <h1>Logo</h1>
+        <a href="index.html" class="hemKnapp"><h1>Logo</h1></a>
     </header>
 <main>
 
@@ -23,8 +23,8 @@
             <p>Webbplats</p>
         </div></a>
         <div class="map" id="map2">
-            <img src="ikoner/kartaSvart.svg" alt="Karta">
-            <p>Karta</p>
+            <img src="ikoner/phone.svg" alt="tele">
+            <p>Telefon</p>
         </div>
         <h1>
             Lasses camping
@@ -35,34 +35,40 @@
         <p>
             stallvägen 45
         </p>
+        
     </div>    
         <section>
-            <div class="bigscreen-cover">
-                <a href="">
-                <div class="webb-bigscreen">
-                        <img src="ikoner/kartaSvart.svg" alt="mer">
-                        <div class="p-cover">
-                            <p>Till webbplatsen</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="karta-bigscreen">
-                        <img src="ikoner/kartaSvart.svg" alt="mindre">
-                        <div class="p-cover">
-                            <p>Karta</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            
             <div class="beskrivning">
                 <span></span>
 
                 <span id="more"></span><br>
                 <button id="visaMer"><img src="ikoner/cheveron-down.svg" alt=""></button>
             </div>
+            <div id="ingenBeskrivning">
+                <p>Ingen beskrivning</p>
+            </div>
         </section>    
+        <div class="bigscreen-cover">
+            <a target="_blank" href="" id="websiteDiv">
+            <div class="webb-bigscreen">
+                    <img src="ikoner/wikis.svg" alt="webb">
+                    <div class="p-cover" >
+                        <p>Till webbplatsen</p>
+                    </div>
+                </div>
+            </a>
+            <a href="">
+                <div class="karta-bigscreen">
+                    <img src="ikoner/phone.svg" alt="tele">
+                    <div class="p-cover" id="phoneDiv">
+                        <p>+46733311755</p>
+                    </div>
+                </div>
+            </a>
+        </div>
             <div class="faciliteter">
+                
                 <h3>Faciliteter</h3>
                 <div class="ikoner">
                     <div class="ikon">
@@ -145,11 +151,11 @@
                     </div>
                     
                 </div>
-                <div class="ingarecensioner">
+                <div id="ingarecensioner">
                     <p>Inga recensioner</p>
                 </div>
             </div>
-            <div class="close">
+            <div id="close">
                 <h3>Nära Lasses camping</h3>
                 <div class="filter">
                     <div class="knappar">
@@ -164,7 +170,7 @@
                
             </div> 
             <div class="kartalista">
-                <div id="listan" class="hidden">
+                <div id="listan" class="bra hidden">
                     <div class="listobjekt">
                         <div class="title">
                             <h3>Martins pizzeria</h3>
@@ -180,7 +186,6 @@
                             <li>Pizza</li>
                         </ul>
                     </div>
-                    
                 </div>
                 <div id="map"></div>    
             </div>     
