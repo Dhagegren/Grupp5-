@@ -11,8 +11,15 @@ var campings = [{name:"",
 var activeSide =0;
 var skipPage = document.getElementsByClassName("nextPage");
 var perPage = 5;
+var sorter;
 		// name, city, rating, id
 function init() {
+	sorter = document.getElementById("sorter");
+	for (let i = 0; i < sorter.length; i++) {
+		sorter[i].addEventListener("click", sortCampings);
+		
+	}
+	//sorter.addEventListener("change", sortCampings);
 	skipPage = skipPage[0];
 	initMap();
 	console.log(campingRef);
@@ -116,7 +123,6 @@ function requestCamping() {
     function checkCity(response){
         let theResponse = JSON.parse(response);//Konverterar json svaret
         let search = srcValue;
-		let tempCamping = "";
         theResponse = theResponse.payload;
 		search = search.toLowerCase();
 
@@ -135,16 +141,58 @@ function requestCamping() {
 		let campingsRem = campings.shift();
 	
 		campings.sort(function(a, b){
-			console.log(a);
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
 			if (x < y) {return -1;}
 			if (x > y) {return 1;}
 			return 0;
-		})
-		console.log(campings);
+		});
 		print();
     }
+}
+
+function sortCampings(){
+	console.log(this);
+	let sorting = this.value;
+	console.log(sorting)
+	if (sorting == "nameAsc") {
+		campings.sort(function(a, b){
+			let x = a[0].name.toLowerCase();
+			let y = b[0].name.toLowerCase();
+			if (x < y) {return -1;}
+			if (x > y) {return 1;}
+			return 0;
+		});
+	}
+	else if (sorting == "nameDesc") {
+		campings.sort(function(a, b){
+			let x = a[0].name.toLowerCase();
+			let y = b[0].name.toLowerCase();
+			if (x < y) {return 1;}
+			if (x > y) {return -1;}
+			return 0;
+		});
+	}
+	else if (sorting == "ratingAsc"){
+		campings.sort(function(a, b){
+			let x = a[0].rating;
+			let y = b[0].rating;
+			if (x < y) {return 1;}
+			if (x > y) {return -1;}
+			return 0;
+		});
+	}
+	else if (sorting == "ratingDesc") {
+		campings.sort(function(a, b){
+			let x = a[0].rating;
+			let y = b[0].rating;
+			if (x < y) {return -1;}
+			if (x > y) {return 1;}
+			return 0;
+		});
+	}
+	activeSide = 0;
+	print();
 }
 
 function print(){

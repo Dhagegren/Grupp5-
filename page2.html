@@ -81,19 +81,19 @@
                     <button id="infoBtn"> Info</button>
                 </div>
         </div>
-        <div class="nextPage">
-            
-        </div>
+
     
     
 </div>
-    
-
-  
-
-
-  
-
+<div class="nextPage">
+   
+</div>
+<select name="Sortering" id="sorter">
+    <option value="nameAsc">Namn A-Ö</option>
+    <option value="nameDesc">Namn Ö-A</option>
+    <option value="ratingAsc">Högsta Betyg</option>
+    <option value="ratingDesc">Lägsta Betyg</option>
+</select>   
     <div id="sortModal" class="modal">
 
         <!-- Modal content -->
@@ -101,14 +101,16 @@
             <span class="close sort-close">&times;</span>
 
             <h2> Sortera efter </h2>
-
+            
             <input type="checkbox" class="modalCheck" name="betyg">
             <label for="betyg"> Betyg</label>
             <input type="checkbox" class="modalCheck" name="avstånd">
             <label for="avstånd"> Avstånd </label>
+            
 
             <button> Sortera </button>
         </div>
+        
     </div>
     <div id="filterModal" class="modal">
         <!-- Modal content -->
