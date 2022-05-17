@@ -31,6 +31,7 @@ function init(){
 	campId = getCamp.get("value");
 	console.log(campId);
 	requestCamp();
+	requestFac();
 	moreText = document.getElementById("more");
 	btnMoreText = document.getElementById("visaMer");
 	knappKarta = document.getElementById("knappKarta");
@@ -110,6 +111,34 @@ function checkCamp(response){
 
 }
 
+function requestFac(){
+	console.log("dd")
+	let request = new XMLHttpRequest(); // Object för Ajax-anropet
+	request.open("GET", SMAPI + "&controller=accommodation&method=getall&descriptions=Camping&ids="+ campId + "&debug=true&format=json&nojsoncallback=1",true);
+	request.send(null); // Skicka begäran till servern
+	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
+		if (request.readyState == 4)
+			if (request.status == 200) checkFac(request.responseText);
+			else console.log("yes very many");
+	}
+}
+
+function checkFac(response){
+	const faciliteter = ["breakfast", "free_parking", "restaurant", "conference", "laundry_service", "wifi", "spa", "gym", "bar", "pet_friendly"];
+	const faciliteterSvenska = ["Frukost", "Gratis parkering", "Restaurang", "Konferans", "Tvätt", "Wifi", "Spa", "Gym", "Bar", "Djurvänligt"];
+	let ikoner = document.getElementById("ikoner");
+	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
+	let responseArray = Object.values(theResponse);
+	let x = responseArray.splice(5,10);
+	let temp = ""
+	for (let i = 0; i < x.length; i++){
+		if (x[i] == "Y"){
+			temp += "<div class=ikon> <img src=ikoner/" + faciliteter[i] + ".svg  alt=" + faciliteterSvenska[i] + "> <p>" + faciliteterSvenska[i] + "</p> </div>";
+		}
+	}
+	ikoner.innerHTML = temp;
+}
+
 function visaMerText() {
 	if (moreText.style.display === "inline") {
 	  btnMoreText.firstChild.src = "ikoner/cheveron-down.svg";
@@ -133,13 +162,13 @@ function initMap1() {
 			}
 		);
 		let tempVar ={lat:+latCamp, lng:+ lngCamp};
-		console.log(tempVar);
+		
 		var marker = new google.maps.Marker({
 			position: tempVar,
 			myMap,
 			title: "Campingen",
 		});
-		console.log(marker);
+		
 		myMarkers = [marker];
 		marker.setAnimation(google.maps.Animation.BOUNCE);
 
@@ -270,7 +299,7 @@ function requestActivity(){
 		for (let i=0; i<activityResponse.length; i++){
 			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
-			console.log(activityResponse[i].lat); 
+			
 			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};
 			let tempDesc =activityResponse[i].name;
 			var marker = new google.maps.Marker({
@@ -279,7 +308,7 @@ function requestActivity(){
 				title: tempDesc,
 			}	
 		);
-		console.log(marker.getTitle());
+		
 		myMarkers.push(marker);
 		marker.setMap(myMap)
 		}
@@ -299,8 +328,7 @@ function addMarker(){
 }
 
 function removeMarker(){
-	console.log(myMarkers);
-	console.log(myMarkers.length);
+	
 	for (let i = 1; i < myMarkers.length; i++) {
 		console.log(i);
 		myMarkers[i].setMap(null);
@@ -320,7 +348,7 @@ function getReviews(){
 
 function checkReviews(response){
 	let reviewResponse = JSON.parse(response).payload;
-	console.log(reviewResponse);
+	
 	reviewRef = document.getElementById("recensioner");
 
 	console.log(reviewRef);
