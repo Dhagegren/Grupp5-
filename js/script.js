@@ -12,12 +12,13 @@ var activeSide =0;
 var skipPage = document.getElementsByClassName("nextPage");
 var perPage = 5;
 var sorter;
+var theResponse;
 		// name, city, rating, id
 function init() {
 	sorter = document.getElementById("sorter");
 	for (let i = 0; i < sorter.length; i++) {
+		console.log(sorter[i]);
 		sorter[i].addEventListener("click", sortCampings);
-		
 	}
 	//sorter.addEventListener("change", sortCampings);
 	skipPage = skipPage[0];
@@ -42,10 +43,17 @@ function init() {
 		});
 	}
 	var input = document.getElementById("searchBar");
+	input.addEventListener("input", function(event) {
+		console.log("hej");
+		console.log(input.value);
+		srcValue = input.value;
+		getCamping();
+	})
 	input.addEventListener("keypress", function(event){
         if (event.key ==="Enter") 
         {
             event.preventDefault();
+			console.log(input.value);
 			let search = input.value;
 			window.open("page2.html?value="+ search, "_self");
             searchBtn.click();
@@ -121,38 +129,46 @@ function requestCamping() {
 			else console.log("yes very many")
     };
     function checkCity(response){
-        let theResponse = JSON.parse(response);//Konverterar json svaret
-        let search = srcValue;
-        theResponse = theResponse.payload;
-		search = search.toLowerCase();
+		console.log(srcValue);
+		
+        theResponse = JSON.parse(response);//Konverterar json svaret
+		theResponse = theResponse.payload;
+		getCamping();
+        
+}
+}
+function getCamping(){
+	let search = srcValue;
+	campings = [{name:"",
+	city:"",
+	rating:"",
+	id:""}];
+	search = search.toLowerCase();
+	for (let i = 0; i < theResponse.length; i++) {
+		if (theResponse[i].city.toLowerCase().includes(search)|| theResponse[i].municipality.toLowerCase().includes(search) || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase().includes(search) || theResponse[i].county.toLowerCase().includes(search)) {
+			let tempCamping = [{name:theResponse[i].name,
+			city:theResponse[i].city,
+			rating:parseFloat(theResponse[i].rating),
+			id:theResponse[i].id}];
+			campings.push(tempCamping)
+		}
+	}
+	console.log(campings);
+	let campingsRem = campings.shift();
 
-        for (let i = 0; i < theResponse.length; i++) {
-            if (theResponse[i].city.toLowerCase().includes(search)|| theResponse[i].municipality.toLowerCase().includes(search) || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase() == search || theResponse[i].county.toLowerCase().includes(search)) {
-				let tempCamping = [{name:theResponse[i].name,
-				city:theResponse[i].city,
-				rating:parseFloat(theResponse[i].rating),
-				id:theResponse[i].id}];
-				campings.push(tempCamping)
-
-            }
-
-
-        }
-		let campingsRem = campings.shift();
-	
-		campings.sort(function(a, b){
-			let x = a[0].name.toLowerCase();
-			let y = b[0].name.toLowerCase();
-			if (x < y) {return -1;}
-			if (x > y) {return 1;}
-			return 0;
-		});
-		print();
-    }
+	campings.sort(function(a, b){
+		let x = a[0].name.toLowerCase();
+		let y = b[0].name.toLowerCase();
+		if (x < y) {return -1;}
+		if (x > y) {return 1;}
+		return 0;
+	});
+	print();
 }
 
 function sortCampings(){
 	console.log(this);
+	this.preventDefault();
 	let sorting = this.value;
 	console.log(sorting)
 	if (sorting == "nameAsc") {
@@ -198,7 +214,6 @@ function sortCampings(){
 function print(){
 	let start=parseInt(activeSide);
 	campingRef.innerHTML ="";
-	console.log(campings.length);
 	for (let i = start; i < start+5; i++) {
 		console.log(i)
 		if (i+1 <= campings.length) {
