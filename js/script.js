@@ -267,7 +267,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
-	let wifi = document.getElementById("wifi");
 
 	if (smaland.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
@@ -315,19 +314,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 
 	}
 
-	if (wifi.checked == true) {
-		for (let i = 0; i < resp.length; i++) {
-			let aResp = accommodationfilter(resp[i].id, []);
-			console.log(aResp); //----------------------------###
-			if (aResp.wifi == "Y") {
-				ixList.push(i);
-				console.log("Wifi"); //----------------------------###
-			}
-		}
-		resp = removeNonIndexed(resp, ixList);
-		ixList = [];
-	}
-
 	return resp;
 }
 
@@ -339,7 +325,6 @@ function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte in
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
 		}
-		console.log("dum jävel")
 		return newResp;
 	}
 
