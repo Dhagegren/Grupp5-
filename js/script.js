@@ -171,7 +171,6 @@ function getCamping() {
 
 function sortCampings(){
 	console.log(this);
-	this.preventDefault();
 	let sorting = this.value;
 	console.log(sorting)
 	if (sorting == "nameAsc") {
