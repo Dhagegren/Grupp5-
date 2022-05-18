@@ -4,6 +4,10 @@
     font-family: 'Inter', sans-serif;
 }
 
+body{
+    background-color:#FCFCFC; 
+}
+
 header {
     background-color: black;
     height: 50px;
@@ -14,94 +18,147 @@ header h1 {
     color: white
 }
 
+main{
+    padding: 0 15px 0 15px;
+    max-width: 1400px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #FCFCFC;
+}
+
 #filterDiv {
     display: inline;
     align-items: center;
 }
-
+.hemKnapp{
+    color: #ffffff;
+    text-decoration: none;
+}
 #filterList {
     display: flex;
     list-style-type: none;
     justify-content: space-evenly;
     padding: 5px;
+    background-color: #fcfcfc;
 }
 
+
+
 .search {
-    margin-top: 10px;
+    padding: 20px 0 50px 0;
     display: flex;
     justify-content: center;
     width: 100%;
+    border-radius: 1rem;
+    background-color: #FCFCFC;
+    
 }
 
 .search input {
     padding: 6px;
-    width: 90%;
-    height: 30px;
-    border-radius: 1.625rem;
-    background-color: #efecec;
+    width: 100%;
+    height: 40px;
+    border-radius: 1rem;
+    background-color: #ffffff;
     border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
 }
 
-#campingDiv {
-    margin: 20px;
+#webDiv{
+    display: none;
+}
+
+.campingDivs {
+    width: 100%;
 }
 
 .itemDiv {
+    margin: 0 0 10px 0;
     position: relative;
     display: flex;
     justify-content: flex-start;
-    border-radius: 1.625rem;
-    height: 100px;
-    background-color: #efecec;
+    border-radius: 1rem;
+    height: 120px;
+    background-color: #f7f7f7;
 }
 
-#textDiv {
+.textDiv {
     display: flex;
     flex-direction: column;
-    font-size: 0.8rem;
-    gap: 10px;
+}
+
+.textDiv h2 {
+    font-weight: 500;
+    font-size: 1em;
+    padding: 5px 0 15px 0;
+}
+
+.textDiv p {
+    font-size: .7em;
+    font-weight: 400;
+}
+
+.showMap {
+    color: rgb(0, 0, 228);
+    text-decoration: underline;
+    padding: 0 0 20px 0;
+}
+
+.betyg {
+    position: absolute;
+    bottom: 5px;
+    font-size: 1.3em !important;
+}
+
+.betyg > span {
+    font-size: .6em !important;
+    color: #aaa;
 }
 
 .itemDiv img {
-    border-top-left-radius: 1.625rem;
-    border-bottom-left-radius: 1.625rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     margin-right: 10px;
-    width: 120px;
-    height: 100px;
+    width: 100px;
+    height: 120px;
 }
 
 .infoBtn {
     position: absolute;
-    right: 25px;
-    bottom: 5px;
-    width: 70px;
-    height: 40px;
-    background-color: #4BF466;
+    right: 10px;
+    bottom: 10px;
+    width: 75px;
+    height: 35px;
+    background-color: #18b331;
     border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
 }
 
 #infoBtn {
     position: absolute;
-    right: 25px;
-    bottom: 5px;
-    width: 70px;
-    height: 40px;
-    background-color: #4BF466;
+    right: 10px;
+    bottom: 10px;
+    width: 75px;
+    height: 35px;
+    background-color: #18b331;
     border-radius: 8px;
+    border: none;
+    color: white;
+    font-weight: 600;
 }
 
 .myBtn {
-    display: flex;
-    flex-direction: column;
+    
     width: 40px;
     height: 40px;
     border: none;
-    background-color: white;
+    background-color: #fcfcfc;
+    cursor: pointer;
 }
 
-.myBtn:active {
-    background-color: #4BF466;
-}
+
 
 .myBtn img {
     width: 30px;
@@ -135,6 +192,7 @@ hr {
     /* Black w/ opacity */
 }
 
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
@@ -147,12 +205,45 @@ hr {
 }
 
 /* The Close Button */
+.sort{
+    position: relative;
+}
+
+.filter{
+    position: relative;
+}
+
+.map{
+    padding: 0;
+    position: relative;
+    height: 500px;
+}
+
+.sort-close{
+    right: 10px;
+    top: 0;
+}
+
+.filter-close{
+    right: 10px;
+    top: 0;
+}
+
+.map-close{
+    z-index: 10;
+    left: 10px;
+}
+
 .close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    position: absolute;
+    
 }
+
+
 
 .close:hover,
 .close:focus {
@@ -161,20 +252,31 @@ hr {
     cursor: pointer;
 }
 
-#webDiv {
-    display: none;
+
+
+#map{
+     height: 500px;
 }
 
 @media (min-width: 700px) {
 
+    body{
+        background-color:#ececec ; 
+    }
+
     input {
         margin-right: 5px;
+    }
+
+    main {
+        padding: 0 20px 0 20px;
     }
 
     .inputDiv {
         display: flex;
         flex-direction: row;
         margin: 5px;
+        margin-left: 15px;
     }
 
     #filterDiv {
@@ -185,36 +287,55 @@ hr {
         display: none;
     }
 
-    .campingDiv {
-        margin: 2%;
-        float: left;
-        width: 60%;
+    
+    .campingDivs {
+        width: 70%;
+        margin-right: 30px;
     }
+    
+
 
     #webDiv {
-        border-radius: 2%;
-        margin-top: 2%;
+        margin-right: 20px;
         display: inline;
-        float: right;
-        background-color: #efecec;
-        position: absolute;
-        height: 50%;
+        background-color: white;
+        border-radius: 2%;
+        height: 400px;
         width: 35%;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+        
     }
 
-    #wrapper {
+    #webDiv h3 {
+      margin: 40px 0 10px 50px;
+    }
+
+    .inputDiv {
+        margin:15px 0 0 50px;
+    }
+
+    .inputDiv label {
+        font-weight: 500;
+        font-size: 1em;
+    }
+    
+    #resultCover {
         display: flex;
-        flex-direction: column;
-
+        flex-direction: row;
+    }
+    
+    .itemDiv img {
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        margin-right: 10px;
+        width: 150px;
+        height: 120px;
     }
 
-
-
-
-
-
-
-
-
+    .textDiv h2 {
+        font-weight: 500;
+        font-size: 1.2em;
+        padding: 5px 0 15px 0;
+    }
 
 }
