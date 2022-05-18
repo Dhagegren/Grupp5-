@@ -65,9 +65,14 @@
             <label for="öland"> Campingar på Öland </label>
         </div>
             <h3> Sortera efter</h3>
-        
-    
 
+            <select name="Sortering" id="sorter">
+                <option value="nameAsc">Namn A-Ö</option>
+                <option value="nameDesc">Namn Ö-A</option>
+                <option value="ratingAsc">Högsta Betyg</option>
+                <option value="ratingDesc">Lägsta Betyg</option>
+            </select> 
+           
 </div>
         <div class="campingDivs">
                 <div class="itemDiv">
@@ -88,12 +93,7 @@
 <div class="nextPage">
    
 </div>
-<select name="Sortering" id="sorter">
-    <option value="nameAsc">Namn A-Ö</option>
-    <option value="nameDesc">Namn Ö-A</option>
-    <option value="ratingAsc">Högsta Betyg</option>
-    <option value="ratingDesc">Lägsta Betyg</option>
-</select>   
+  
     <div id="sortModal" class="modal">
 
         <!-- Modal content -->

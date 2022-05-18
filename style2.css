@@ -18,6 +18,16 @@ header h1 {
     color: white
 }
 
+#sorter{
+    width: 200px;
+    border-radius: 0px;
+    border: none;
+    height: 40px;
+    margin: 0 0 0 50px;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
 main{
     padding: 0 15px 0 15px;
     max-width: 1400px;
