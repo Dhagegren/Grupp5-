@@ -26,7 +26,7 @@ var myMarkers;
 const infoWindow = new google.maps.InfoWindow();
 
 
-function init(){
+function init() {
 	getCamp = new URLSearchParams(getCamp);
 	campId = getCamp.get("value");
 	console.log(campId);
@@ -60,10 +60,9 @@ function init(){
 	getReviews();
 	btnMoreText.addEventListener("click", visaMerText);
 }
-
 window.addEventListener("load", init);
 
-function requestCamp(){
+function requestCamp() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET", SMAPI + "&controller=establishment&method=getall&ids="+ campId + "&debug=true&format=json&nojsoncallback=1",true);
 	request.send(null); // Skicka begäran till servern
@@ -77,6 +76,7 @@ function requestCamp(){
 function checkCamp(response){
 	let ingenBeskrivning = document.getElementById("ingenBeskrivning");
 	let close = document.getElementById("close");
+
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
 	let picture = document.getElementsByClassName("picture")[0];
 	picture.children[2].innerHTML = theResponse.name;
@@ -196,12 +196,11 @@ function showMap(){
 		svgKarta.src = "ikoner/kartaVit.svg"
 	}
 	else {
-		
 		return;
 	}
 }
 
-function showList(){
+function showList() {
 	if (listElem.classList.contains("hidden")){
 		mapElem.classList.add("hidden");
 		listElem.classList.remove("hidden");
@@ -213,12 +212,11 @@ function showList(){
 		svgLista.src = "ikoner/menuVit.svg"
 	}
 	else {
-		
 		return;
 	}
 }
 
-function showActive(){
+function showActive() {
 	if (knappMat.classList.contains("active")){
 		knappMat.classList.remove("active");
 		svgMat.src = "ikoner/restaurantSvart.svg";
@@ -232,7 +230,7 @@ function showActive(){
 	}
 }
 
-function showFood(){
+function showFood() {
 	if (knappAktiviteter.classList.contains("active")){
 		knappAktiviteter.classList.remove("active");
 		svgAktiviteter.src = "ikoner/aktiviteterSvart.svg";
@@ -262,7 +260,7 @@ function showFood(){
  		foodResponse = foodResponse.payload;
 		removeMarker();
  		for (let i=0; i<foodResponse.length; i++){
- 			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div>" ;
+			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> <li> Betyg: " +parseFloat (foodResponse[i].rating) + "/5 </li> </ul> </div>" ;
  			matRef.innerHTML=tempFood;
 			 let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};
 			let tempDesc =foodResponse[i].name;
@@ -276,6 +274,11 @@ function showFood(){
 			marker.setMap(myMap);
 		}
 		addMarker();
+		let listElements = document.getElementsByClassName("listobjekt");
+		for (i=0; i<listElements.length; i++){
+			
+			listElements[i].addEventListener("click", activeList);
+		}
 
 	}
  }
@@ -297,7 +300,7 @@ function requestActivity(){
 		let tempActivity = "";
 		activityResponse = activityResponse.payload;
 		for (let i=0; i<activityResponse.length; i++){
-			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div>" ;
+			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> <li> Betyg: " + parseFloat(activityResponse[i].rating)+ "/5 </li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
 			
 			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};
@@ -313,6 +316,11 @@ function requestActivity(){
 		marker.setMap(myMap)
 		}
 		addMarker();
+		let listElements = document.getElementsByClassName("listobjekt");
+		for (i=0; i<listElements.length; i++){
+			
+			listElements[i].addEventListener("click", activeList);
+		}
 	}
 }
 
@@ -367,5 +375,20 @@ function checkReviews(response){
 	}
 	reviewRef.innerHTML = tempText;
 }
+
+function activeList(){
+	console.log("hej");
+	let className = document.getElementsByClassName("listobjekt");
+	for(i=0; i<className.length;i++){
+		className[i].classList.remove("changeColor");
+		
+	}
+
+	this.classList.add("changeColor");
+}
+
+
+
+
 
 
