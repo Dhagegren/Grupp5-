@@ -135,16 +135,13 @@ function requestCamping() {
     function checkCity(response){
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
-		
 		console.log(srcValue);
-		
-		theResponse = searchFilters(theResponse);
-
 		getCamping();  
 }
 }
 function getCamping() {
 	let search = srcValue;
+	theResponse = searchFilters(theResponse);
 	campings = [{name:"",
 	city:"",
 	rating:"",
@@ -288,6 +285,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		}
 		resp = removeNonIndexed(resp, ixList);
 		ixList = [];
+		console.log(ixList);
 	}
 
 	if (strand.checked == true) {
@@ -310,6 +308,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		}
 		resp = removeNonIndexed(resp, ixList);	
 		ixList = [];
+		
 	}
 
 	if (wifi.checked == true) {
@@ -336,11 +335,11 @@ function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte in
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
 		}
-
+		console.log("dum jävel")
 		return newResp;
 	}
 	
-	return null;
+	return "";
 }
 
 function accommodationfilter(campId, accResp) { // Kollar om accResp är tom, isåfall gör anrop, annars hämta värdet vi letar efter
