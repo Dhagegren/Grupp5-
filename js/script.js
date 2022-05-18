@@ -3,17 +3,19 @@ var modal = document.getElementsByClassName("modal");//Reference to modal
 var campingRef = document.getElementsByClassName("campingDivs");
 var searchValue = window.location.search;
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
-var srcValue =""; 
-var campings = [{name:"",
-				city:"",
-				rating:"",
-				id:""}];
-var activeSide =0;
+var srcValue = "";
+var campings = [{
+	name: "",
+	city: "",
+	rating: "",
+	id: ""
+}];
+var activeSide = 0;
 var skipPage = document.getElementsByClassName("nextPage");
 var perPage = 5;
 var sorter;
 var theResponse;
-		// name, city, rating, id
+// name, city, rating, id
 function init() {
 	sorter = document.getElementById("sorter");
 	for (let i = 0; i < sorter.length; i++) {
@@ -25,13 +27,13 @@ function init() {
 	initMap();
 	console.log(campingRef);
 	campingRef = campingRef[0];
-    searchValue = new URLSearchParams(searchValue);
-    srcValue = searchValue.get("value");
+	searchValue = new URLSearchParams(searchValue);
+	srcValue = searchValue.get("value");
 	if (searchValue.has("side")) {
-		activeSide=parseInt(searchValue.get("side"));
+		activeSide = parseInt(searchValue.get("side"));
 		console.log(activeSide);
 	}
-    requestCamping();
+	requestCamping();
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
 	let span = document.getElementsByClassName("close");//Reference to span element
 	//Make all buttons clickable
@@ -40,31 +42,30 @@ function init() {
 	for (let i = 0; i < checkboxes.length; i++) {
 		checkboxes[i].addEventListener("click", requestCamping);
 	}
-	
+
 	for (let i = 0; i < btn.length; i++) {
-		btn[i].addEventListener("click", function(){
+		btn[i].addEventListener("click", function () {
 			showModal(this.id)
 		});
 	}
 	var input = document.getElementById("searchBar");
-	input.addEventListener("input", function(event) {
+	input.addEventListener("input", function (event) {
 		console.log("hej");
 		console.log(input.value);
 		srcValue = input.value;
 		getCamping();
 	})
-	input.addEventListener("keypress", function(event){
-        if (event.key ==="Enter") 
-        {
-            event.preventDefault();
+	input.addEventListener("keypress", function (event) {
+		if (event.key === "Enter") {
+			event.preventDefault();
 			console.log(input.value);
 			let search = input.value;
-			window.open("page2.html?value="+ search, "_self");
-            searchBtn.click();
-        }
-    });
+			window.open("page2.html?value=" + search, "_self");
+			searchBtn.click();
+		}
+	});
 
-	for(let i = 0; i < span.length; i++){
+	for (let i = 0; i < span.length; i++) {
 		span[i].addEventListener("click", hideModal);
 	}
 
@@ -103,7 +104,7 @@ function hideModal() {
 }
 
 //Click outside modal to close
-window.onclick = function(event) {
+window.onclick = function (event) {
 	if (event.target == activeModal) {
 		hideModal();
 	}
@@ -111,16 +112,16 @@ window.onclick = function(event) {
 
 function initMap() {
 	myMap = new google.maps.Map(
-			document.getElementById('map'),
-			{
-				center: {lat:56.13708498823629, lng:15.584851190648239},
-				zoom: 12,
-				styles: [
-					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
-					{featureType:"transit.station",stylers:[{visibility:"off"}]}  // No bus stations, etc.
-				]
-			}
-		);		
+		document.getElementById('map'),
+		{
+			center: { lat: 56.13708498823629, lng: 15.584851190648239 },
+			zoom: 12,
+			styles: [
+				{ featureType: "poi", stylers: [{ visibility: "off" }] },  // No points of interest.
+				{ featureType: "transit.station", stylers: [{ visibility: "off" }] }  // No bus stations, etc.
+			]
+		}
+	);
 } // End initMap
 
 function requestCamping() {
@@ -131,81 +132,85 @@ function requestCamping() {
 		if (request.readyState == 4)
 			if (request.status == 200) checkCity(request.responseText);
 			else console.log("yes very many")
-    };
-    function checkCity(response){
+	};
+	function checkCity(response) {
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
 		console.log(srcValue);
-		getCamping();  
-}
+		getCamping();
+	}
 }
 function getCamping() {
 	let search = srcValue;
 	theResponse = searchFilters(theResponse);
-	campings = [{name:"",
-	city:"",
-	rating:"",
-	id:""}];
+	campings = [{
+		name: "",
+		city: "",
+		rating: "",
+		id: ""
+	}];
 	search = search.toLowerCase();
 	for (let i = 0; i < theResponse.length; i++) {
-		if (theResponse[i].city.toLowerCase().includes(search)|| theResponse[i].municipality.toLowerCase().includes(search) || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase().includes(search) || theResponse[i].county.toLowerCase().includes(search)) {
-			let tempCamping = [{name:theResponse[i].name,
-			city:theResponse[i].city,
-			rating:parseFloat(theResponse[i].rating),
-			id:theResponse[i].id}];
+		if (theResponse[i].city.toLowerCase().includes(search) || theResponse[i].municipality.toLowerCase().includes(search) || theResponse[i].name.toLowerCase().includes(search) || theResponse[i].province.toLowerCase().includes(search) || theResponse[i].county.toLowerCase().includes(search)) {
+			let tempCamping = [{
+				name: theResponse[i].name,
+				city: theResponse[i].city,
+				rating: parseFloat(theResponse[i].rating),
+				id: theResponse[i].id
+			}];
 			campings.push(tempCamping)
 		}
 	}
 	console.log(campings);
 	let campingsRem = campings.shift();
 
-	campings.sort(function(a, b){
+	campings.sort(function (a, b) {
 		let x = a[0].name.toLowerCase();
 		let y = b[0].name.toLowerCase();
-		if (x < y) {return -1;}
-		if (x > y) {return 1;}
+		if (x < y) { return -1; }
+		if (x > y) { return 1; }
 		return 0;
 	});
 	print();
 }
 
-function sortCampings(){
+function sortCampings() {
 	console.log(this);
 	let sorting = this.value;
 	console.log(sorting)
 	if (sorting == "nameAsc") {
-		campings.sort(function(a, b){
+		campings.sort(function (a, b) {
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
-			if (x < y) {return -1;}
-			if (x > y) {return 1;}
+			if (x < y) { return -1; }
+			if (x > y) { return 1; }
 			return 0;
 		});
 	}
 	else if (sorting == "nameDesc") {
-		campings.sort(function(a, b){
+		campings.sort(function (a, b) {
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
-			if (x < y) {return 1;}
-			if (x > y) {return -1;}
+			if (x < y) { return 1; }
+			if (x > y) { return -1; }
 			return 0;
 		});
 	}
-	else if (sorting == "ratingAsc"){
-		campings.sort(function(a, b){
+	else if (sorting == "ratingAsc") {
+		campings.sort(function (a, b) {
 			let x = a[0].rating;
 			let y = b[0].rating;
-			if (x < y) {return 1;}
-			if (x > y) {return -1;}
+			if (x < y) { return 1; }
+			if (x > y) { return -1; }
 			return 0;
 		});
 	}
 	else if (sorting == "ratingDesc") {
-		campings.sort(function(a, b){
+		campings.sort(function (a, b) {
 			let x = a[0].rating;
 			let y = b[0].rating;
-			if (x < y) {return -1;}
-			if (x > y) {return 1;}
+			if (x < y) { return -1; }
+			if (x > y) { return 1; }
 			return 0;
 		});
 	}
@@ -213,16 +218,16 @@ function sortCampings(){
 	print();
 }
 
-function print(){
-	let start=parseInt(activeSide);
-	campingRef.innerHTML ="";
-	for (let i = start; i < start+5; i++) {
+function print() {
+	let start = parseInt(activeSide);
+	campingRef.innerHTML = "";
+	for (let i = start; i < start + 5; i++) {
 		console.log(i)
-		if (i+1 <= campings.length) {
+		if (i + 1 <= campings.length) {
 			let tempCamping = campings[i];
-			campingRef.innerHTML += "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
-			tempCamping[0].name + "</h2> <p>5km från "+ tempCamping[0].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" +tempCamping[0].rating + "<span>/5</span></p>"+
-			'</div> <button class="infoBtn" id='+tempCamping[0].id+'> Info</button></div>';
+			campingRef.innerHTML += "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>" +
+				tempCamping[0].name + "</h2> <p>5km från " + tempCamping[0].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" + tempCamping[0].rating + "<span>/5</span></p>" +
+				'</div> <button class="infoBtn" id=' + tempCamping[0].id + '> Info</button></div>';
 		}
 	}
 	let campingBtn = document.getElementsByClassName("infoBtn");
@@ -231,13 +236,13 @@ function print(){
 
 	}
 	console.log(activeSide)
-	if (campings.length > activeSide+5){
-		skipPage.innerHTML="<p id='"+perPage+"'>></p>";
+	if (campings.length > activeSide + 5) {
+		skipPage.innerHTML = "<p id='" + perPage + "'>></p>";
 	}
-	else skipPage.innerHTML="";
+	else skipPage.innerHTML = "";
 	if (activeSide > 0) {
-		skipPage.innerHTML+="<p id='"+-perPage+"'><</p>";
-		
+		skipPage.innerHTML += "<p id='" + -perPage + "'><</p>";
+
 	}
 	for (let i = 0; i < skipPage.children.length; i++) {
 		skipPage.children[i].addEventListener("click", changePage)
@@ -246,13 +251,13 @@ function print(){
 }
 
 function changePage() {
-	let	num = this.id;
-	activeSide = activeSide+parseInt(num);
+	let num = this.id;
+	activeSide = activeSide + parseInt(num);
 	print();
 }
 
 function openNext() {
-	window.open("informationpage.html?value="+ this.id, "_self");
+	window.open("informationpage.html?value=" + this.id, "_self");
 }
 
 function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall vilket och sorterar därefter
@@ -305,9 +310,9 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 				console.log("Natur"); //----------------------------###
 			}
 		}
-		resp = removeNonIndexed(resp, ixList);	
+		resp = removeNonIndexed(resp, ixList);
 		ixList = [];
-		
+
 	}
 
 	if (wifi.checked == true) {
@@ -319,7 +324,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 				console.log("Wifi"); //----------------------------###
 			}
 		}
-		resp = removeNonIndexed(resp, ixList);	
+		resp = removeNonIndexed(resp, ixList);
 		ixList = [];
 	}
 
@@ -329,7 +334,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte indexerats ur listan
 	if (ixList.length != 0) {
 		let newResp = [];
-		
+
 		for (let i = 0; i < ixList.length; i++) {
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
@@ -337,7 +342,7 @@ function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte in
 		console.log("dum jävel")
 		return newResp;
 	}
-	
+
 	return "";
 }
 
@@ -369,5 +374,5 @@ function accommodationData(id) { // ajax-anrop för att kunna hämta data listat
 			}
 			else console.log("Someting very many wrong D:")
 		}
-    };
+	};
 }

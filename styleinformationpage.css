@@ -1,24 +1,24 @@
-*{
+* {
     padding: 0;
     margin: 0;
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
 body {
-   background-color:#ececec ; 
+    background-color: #ececec;
 }
 
-main{
+main {
     background-color: #000000;
-   max-width: 1400px;
-   margin-left: auto;
-   margin-right: auto;
-   
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 header {
@@ -34,14 +34,15 @@ header {
     width: 100%;
     position: relative;
     height: 400px;
-    background: linear-gradient(to top, 
-    rgba(0, 0, 0, 1) 10%, 
-    rgba(0,0,0,.7) 20%, 
-    rgba(0,0,0,.4) 40%, 
-    rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center fixed;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 1) 10%,
+            rgba(0, 0, 0, .7) 20%,
+            rgba(0, 0, 0, .4) 40%,
+            rgba(0, 0, 0, 0) 50%), url(img/camp3.jpg) no-repeat center fixed;
 }
 
-.webbpage, .map {
+.webbpage,
+.map {
     background-color: white;
     position: absolute;
     width: 60px;
@@ -51,12 +52,14 @@ header {
     align-items: center;
 }
 
-.webbpage img, .map img {
+.webbpage img,
+.map img {
     width: 30px;
     padding: 5px 0 0 0;
 }
 
-.webbpage p, .map p {
+.webbpage p,
+.map p {
     font-size: .7em;
     padding: 5px 0 0 0;
 }
@@ -66,7 +69,7 @@ header {
     left: 0;
 }
 
-.hemKnapp{
+.hemKnapp {
     color: #ffffff;
     text-decoration: none;
 }
@@ -76,7 +79,7 @@ header {
     right: 0;
 }
 
-.picture h1{
+.picture h1 {
     position: absolute;
     top: 300px;
     left: 25px;
@@ -86,17 +89,17 @@ header {
     max-width: 350px;
 }
 
-.picture h2{
+.picture h2 {
     position: absolute;
     top: 350px;
     right: 25px;
     color: white;
     font-weight: 500;
     font-size: 1.5em;
-    
+
 }
 
-.picture > p{
+.picture>p {
     position: absolute;
     top: 360px;
     left: 25px;
@@ -106,10 +109,10 @@ header {
 
 
 section {
-   color: black;
-   grid-area: beskrivning;
-   background-color: #FCFCFC;
-   border-radius: 20px 20px 0 0;
+    color: black;
+    grid-area: beskrivning;
+    background-color: #FCFCFC;
+    border-radius: 20px 20px 0 0;
 }
 
 .beskrivning {
@@ -119,8 +122,8 @@ section {
     font-weight: 500;
     line-height: 1.5em;
     max-width: 700px;
-    
-    
+
+
 }
 
 
@@ -128,7 +131,7 @@ section {
 
 
 #more {
-    display: none;  
+    display: none;
 }
 
 #visaMer {
@@ -137,24 +140,25 @@ section {
     margin-top: 20px;
     background-color: #FCFCFC;
     font-weight: 500;
-   
+
 }
 
 #visaMer img {
     width: 30px;
 }
 
-.bigscreen-cover{
+.bigscreen-cover {
     display: flex;
     justify-content: space-evenly;
     padding: 20px;
     background-color: #ffffff;
-    
-    
+
+
 }
 
 
-.webb-bigscreen, .karta-bigscreen {
+.webb-bigscreen,
+.karta-bigscreen {
     display: flex;
     height: 25px;
     color: rgb(0, 0, 0);
@@ -162,7 +166,8 @@ section {
     font-size: .9em;
 }
 
-.webb-bigscreen img, .karta-bigscreen img {
+.webb-bigscreen img,
+.karta-bigscreen img {
     padding-right: 10px;
 }
 
@@ -172,7 +177,7 @@ section {
     background-color: #FCFCFC;
 }
 
-#ikoner{
+#ikoner {
     padding-left: 5px;
     margin-top: 15px;
     display: grid;
@@ -180,12 +185,13 @@ section {
     gap: .5em;
 }
 
-.ikon, .ikon2 {
+.ikon,
+.ikon2 {
     width: 30px;
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    
+    align-items: center;
+
 }
 
 .ikon img {
@@ -203,20 +209,22 @@ section {
 
 .recensionercover {
     padding: 45px 25px 0 25px;
-    
-    grid-area: recensioner; 
+
+    grid-area: recensioner;
     background-color: #FCFCFC;
 }
 
-#ingarecensioner, #ingenBeskrivning {
+#ingarecensioner,
+#ingenBeskrivning {
     display: none;
 }
 
-#ingarecensioner p, #ingenBeskrivning p {
+#ingarecensioner p,
+#ingenBeskrivning p {
     text-align: center;
     padding: 70px 40px 40px 40px;
     color: #bcbcbc;
-    
+
 }
 
 #recensioner {
@@ -224,15 +232,19 @@ section {
     padding: 10px 0 0 0;
     display: flex;
     overflow-x: scroll;
-    
+
 }
 
 #recensioner {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
 }
-#recensioner::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+
+#recensioner::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
 }
 
 .recensionerobjekt {
@@ -259,7 +271,7 @@ section {
 
 .knappar {
     padding: 10px 0 10px 0;
-    
+
 }
 
 .knappar button {
@@ -268,7 +280,7 @@ section {
     border-radius: 50px;
     font-size: .8em;
     font-weight: 500;
-    border: none ;
+    border: none;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
     padding: 7px 7px 7px 30px;
     position: relative;
@@ -282,14 +294,14 @@ section {
     left: 7px;
 }
 
-.filter{
+.filter {
     display: flex;
     justify-content: space-between;
-    
+
 }
 
-.ikon2{
-   padding: 10px 0 0 0; 
+.ikon2 {
+    padding: 10px 0 0 0;
 }
 
 .ikon2 img {
@@ -302,7 +314,7 @@ section {
     font-size: .8em;
 }
 
-.knappar .active{
+.knappar .active {
     color: white;
     background-color: #290cad;
 }
@@ -313,7 +325,7 @@ section {
 
 #map {
     height: 400px;
-   
+
 }
 
 
@@ -333,26 +345,26 @@ section {
 
 
 .listobjekt {
-   background-color: #FCFCFC;
-   box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
-   border-radius: 29px; 
-   margin: 10px 20px 15px 20px;
-   padding: 20px 0 0 20px;
-   max-width: 400px;
+    background-color: #FCFCFC;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+    border-radius: 29px;
+    margin: 10px 20px 15px 20px;
+    padding: 20px 0 0 20px;
+    max-width: 400px;
 }
 
 
-.changeColor{
+.changeColor {
     background-color: #6387db;
     color: #ffffff;
 }
 
-.listobjekt li{
+.listobjekt li {
     list-style: none;
 }
 
 .title {
-    display:flex;
+    display: flex;
 
 }
 
@@ -382,13 +394,13 @@ section {
     width: 50%;
     background-color: rgb(255, 255, 255);
     border: none;
-    
+
     padding: 10px;
     font-size: .7em;
     cursor: pointer;
 }
 
-#maporlist button div{
+#maporlist button div {
     display: flex;
     flex-direction: column;
 }
@@ -396,7 +408,7 @@ section {
 #maporlist .active {
     color: white;
     background-color: #290cad;
-} 
+}
 
 #maporlist button img {
     height: 20px;
@@ -411,32 +423,32 @@ footer {
 /* media queries*/
 
 @media screen and (max-width: 700px) {
-    .bigscreen-cover{
+    .bigscreen-cover {
         display: none;
     }
 }
 
 @media screen and (min-width: 700px) {
-    
-      
+
+
     main {
         box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
         background-color: #FCFCFC;
-      display: grid;
-      grid-template-columns: repeat(2, 50%); 
-      grid-template-rows:auto;
-      
-      grid-template-areas: 
-    "picture beskrivning"
-    ". ."
-    "faciliteter faciliteter"
-    "recensioner recensioner"
-    "upptäck ."
-    "listakarta listakarta";
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "picture beskrivning"
+            ". ."
+            "faciliteter faciliteter"
+            "recensioner recensioner"
+            "upptäck ."
+            "listakarta listakarta";
     }
 
 
-    .beskrivning{
+    .beskrivning {
         font-size: .9em;
         font-weight: 400;
         max-height: 400px;
@@ -447,54 +459,56 @@ footer {
         display: grid;
         place-items: center;
         width: 125px;
-        
+
     }
 
-     .kartalista{
-         display: flex;
-         flex-direction: row;
+    .kartalista {
+        display: flex;
+        flex-direction: row;
     }
 
-    .kartalista .hidden{
+    .kartalista .hidden {
         display: block;
-       
-  
+
+
     }
 
-    #listan{
+    #listan {
         width: 50%;
     }
 
     #map {
         width: 50%;
-        
+
     }
 
-    #maporlist, .webbpage, .map  {
+    #maporlist,
+    .webbpage,
+    .map {
         display: none;
     }
 
     .picture {
-        
+
         width: 100%;
-        
+
         height: 400px;
-        background: linear-gradient(to top, 
-        rgba(0, 0, 0, 1) 10%, 
-        rgba(0,0,0,.7) 20%, 
-        rgba(0,0,0,.4) 40%, 
-        rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center ;
+        background: linear-gradient(to top,
+                rgba(0, 0, 0, 1) 10%,
+                rgba(0, 0, 0, .7) 20%,
+                rgba(0, 0, 0, .4) 40%,
+                rgba(0, 0, 0, 0) 50%), url(img/camp3.jpg) no-repeat center;
     }
 
     .close {
         margin-top: 40px;
-        
+
     }
 
-    #ikoner{
+    #ikoner {
         gap: 1em;
     }
- 
+
     .ikon p {
         font-size: 0.7em;
         color: #444444;
@@ -504,8 +518,9 @@ footer {
     h3 {
         font-size: 30px;
     }
-    
-    .recensionerobjekt h3, .listobjekt h3 {
+
+    .recensionerobjekt h3,
+    .listobjekt h3 {
         font-size: 20px
     }
 
@@ -514,13 +529,13 @@ footer {
     }
 
     #more {
-        display: inline !important;  
+        display: inline !important;
     }
 
-  }
+}
 
-  @media screen and (min-width: 1400px) {
-    header{
+@media screen and (min-width: 1400px) {
+    header {
         height: 60px;
         margin-bottom: 20px;
     }
@@ -528,6 +543,4 @@ footer {
     footer {
         margin: 20px 0 0 0;
     }
-  }
-
-  
+}
