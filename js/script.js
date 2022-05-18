@@ -93,8 +93,6 @@ function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
 }
 
-// Filter funkar typ, blir det noll campingar som matchar alla filter går allt åt skogen tho
-// Lägg till fler filter
 function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall vilket och sorterar därefter
 	let ixList = [];
 
@@ -151,7 +149,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 	if (wifi.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
 			let aResp = accommodationfilter(resp[i].id, []);
-			console.log(aResp.wifi);
+			console.log(aResp);
 			if (aResp.wifi == "Y") {
 				ixList.push(i);
 				console.log("Wifi"); //----------------------------###
@@ -176,32 +174,36 @@ function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte in
 		return newResp;
 	}
 	
-	return resp;
+	return null;
 }
 
-function accommodationfilter(id, accResp) { // Kollar om accResp är tom, isåfall gör anrop, annars hämta värdet vi letar efter
+function accommodationfilter(campId, accResp) { // Kollar om accResp är tom, isåfall gör anrop, annars hämta värdet vi letar efter
 	if (accResp.length == 0) {
-		accommodationData(id);
+		accommodationData(campId);
 	}
 
 	else {
-		console.log(id);
-
 		for (let i = 0; i < accResp.length; i++) {
-			if (accResp[i].id == id) {
+			if (accResp[i].id == campId) {
+				console.log(accResp[i]);
 				return accResp[i];
 			}
 		}
 	}
 }
-// id kommer inte in i funktionen, men behöver skickas med på något vis right?
+
 function accommodationData(id) { // ajax-anrop för att kunna hämta data listat under accommodations i SMAPI
+	let campId = id;
 	let request = new XMLHttpRequest();
 	request.open("GET", SMAPI + "&controller=accommodation&method=getall&descriptions=camping&debug=true", true);
-	request.send(null);
-	request.onreadystatechange = function (id) {
-		if (request.readyState == 4)
-		if (request.status == 200) accommodationfilter(id, request.responseText);
-		else console.log("very many wrong, yes")
+	request.send();
+	request.onreadystatechange = function () {
+		if (request.readyState == 4) {
+			if (request.status == 200) {
+				let aResp = JSON.parse(request.responseText).payload;
+				accommodationfilter(campId, aResp);
+			}
+			else console.log("Someting very many wrong D:")
+		}
     };
 }
