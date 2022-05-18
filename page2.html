@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="style2.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx44xtf58fau8qDMi7x2ZiNW2xj6LoDCw"></script>
     <script type="text/javascript" src="js/script.js"></script>
-   
-	
-    
 </head>
 
 <body>
@@ -37,16 +34,16 @@
             </button>
         </div>
     </div>
-
     <hr>
 <main>
-        <div class="search">
-            <input type="text" id="searchBar" placeholder="Sök på camping">
-        </div>
-<div id="resultCover">
-    <div id="webDiv">
-        <h3> Filter </h3>
-        <div class="inputDiv">
+    <div class="search">
+        <input type="text" id="searchBar" placeholder="Sök på camping">
+    </div>
+
+    <div id="resultCover">
+        <div id="webDiv">
+            <h3> Filter </h3>
+            <div class="inputDiv">
                 <input type="checkbox" class="modalCheck" name="småland" id="smaland">
                 <label for="småland"> Campingar i Småland </label>
             </div>
@@ -62,37 +59,34 @@
                 <input type="checkbox" class="modalCheck" name="natur" id="natur">
                 <label for="natur"> Naturcampingar </label>
             </div>
-            <h3> Sortera efter</h3>
 
+            <h3> Sortera efter</h3>
             <select name="Sortering" id="sorter">
                 <option value="nameAsc">Namn A-Ö</option>
                 <option value="nameDesc">Namn Ö-A</option>
                 <option value="ratingAsc">Högsta Betyg</option>
                 <option value="ratingDesc">Lägsta Betyg</option>
             </select> 
-           
-</div>
+            
+        </div>
         <div class="campingDivs">
-                <div class="itemDiv">
-                    <img src="img/camp2.jpg" alt="bild på camping">
-                    <div class="textDiv">
-                        <h2> Lasses Camping</h2>
-                        <p> 5km från växjö</p>
-                        <p class="showMap"> Visa på karta</p>
-                        <p class="betyg">4.4<span>/5</span></p>
-                    </div>
-                    <button id="infoBtn"> Info</button>
+            <div class="itemDiv">
+                <img src="img/camp2.jpg" alt="bild på camping">
+                <div class="textDiv">
+                    <h2> Lasses Camping</h2>
+                    <p> 5km från växjö</p>
+                    <p class="showMap"> Visa på karta</p>
+                    <p class="betyg">4.4<span>/5</span></p>
                 </div>
+                <button id="infoBtn"> Info</button>
+            </div>
+            
         </div>
     </div>
-</div>
 
-<div class="nextPage">
-   
-</div>
+    <div class="nextPage"></div>
   
     <div id="sortModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content sort">
             <span class="close sort-close">&times;</span>
@@ -104,11 +98,10 @@
             <input type="checkbox" class="modalCheck" name="avstånd">
             <label for="avstånd"> Avstånd </label>
             
-
             <button> Sortera </button>
         </div>
-        
     </div>
+    
     <div id="filterModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content filter">
@@ -125,6 +118,7 @@
             <button> Applicera filter </button>
         </div>
     </div>
+
     <div id="mapModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content map">
