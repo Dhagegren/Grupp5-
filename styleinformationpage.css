@@ -153,6 +153,7 @@ section {
     
 }
 
+
 .webb-bigscreen, .karta-bigscreen {
     display: flex;
     height: 25px;
@@ -338,6 +339,15 @@ section {
    margin: 10px 20px 15px 20px;
    padding: 20px 0 0 20px;
    max-width: 400px;
+}
+
+
+.changeColor{
+    background-color: #6387db;
+}
+
+.listobjekt li{
+    list-style: none;
 }
 
 .title {

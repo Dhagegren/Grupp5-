@@ -262,7 +262,7 @@ function showFood(){
  		foodResponse = foodResponse.payload;
 		removeMarker();
  		for (let i=0; i<foodResponse.length; i++){
- 			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> </ul> </div>" ;
+			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> <li> Betyg: " +parseFloat (foodResponse[i].rating) + "/5 </li> </ul> </div>" ;
  			matRef.innerHTML=tempFood;
 			 let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};
 			let tempDesc =foodResponse[i].name;
@@ -276,6 +276,11 @@ function showFood(){
 			marker.setMap(myMap);
 		}
 		addMarker();
+		let listElements = document.getElementsByClassName("listobjekt");
+		for (i=0; i<listElements.length; i++){
+			
+			listElements[i].addEventListener("click", activeList);
+		}
 
 	}
  }
@@ -297,7 +302,7 @@ function requestActivity(){
 		let tempActivity = "";
 		activityResponse = activityResponse.payload;
 		for (let i=0; i<activityResponse.length; i++){
-			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> </ul> </div>" ;
+			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> <li> Betyg: " + parseFloat(activityResponse[i].rating)+ "/5 </li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
 			
 			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};
@@ -313,6 +318,11 @@ function requestActivity(){
 		marker.setMap(myMap)
 		}
 		addMarker();
+		let listElements = document.getElementsByClassName("listobjekt");
+		for (i=0; i<listElements.length; i++){
+			
+			listElements[i].addEventListener("click", activeList);
+		}
 	}
 }
 
@@ -367,5 +377,20 @@ function checkReviews(response){
 	}
 	reviewRef.innerHTML = tempText;
 }
+
+function activeList(){
+	console.log("hej");
+	let className = document.getElementsByClassName("listobjekt");
+	for(i=0; i<className.length;i++){
+		className[i].classList.remove("changeColor");
+		
+	}
+
+	this.classList.add("changeColor");
+}
+
+
+
+
 
 
