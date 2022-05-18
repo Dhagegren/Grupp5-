@@ -133,16 +133,17 @@ function requestCamping() {
 			else console.log("yes very many")
     };
     function checkCity(response){
+		theResponse = JSON.parse(response);//Konverterar json svaret
+		theResponse = theResponse.payload;
+		
+		console.log(srcValue);
+		
 		theResponse = searchFilters(theResponse);
 
-		console.log(srcValue);
-
-        theResponse = JSON.parse(response);//Konverterar json svaret
-		theResponse = theResponse.payload;
 		getCamping();  
 }
 }
-function getCamping(){
+function getCamping() {
 	let search = srcValue;
 	campings = [{name:"",
 	city:"",
