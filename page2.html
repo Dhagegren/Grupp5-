@@ -47,37 +47,46 @@
     <div id="webDiv">
         <h3> Filter </h3>
         <div class="inputDiv">
-            <input type="checkbox" class="modalCheck" name="småland" id="smaland">
-            <label for="småland"> Campingar i Småland </label>
-        </div>
-        <div class="inputDiv">
-            <input type="checkbox" class="modalCheck" name="öland" id="oland">
-            <label for="öland"> Campingar på Öland </label>
-        </div>
-        <div class="inputDiv">
-            <input type="checkbox" class="modalCheck" name="strand" id="strand">
-            <label for="strand"> Campinar nära stranden </label>
-        </div>
-        <div class="inputDiv">
-            <input type="checkbox" class="modalCheck" name="natur" id="natur">
-            <label for="natur"> Naturcampingar </label>
-        </div>
-        <div class="inputDiv">
-            <input type="checkbox" class="modalCheck" name="wifi" id="wifi">
-            <label for="wifi"> Campingar med Wi-Fi </label>
-        </div>
-        <h3> Sortera efter</h3>
-    </div>
-    <div class="campingDivs">
-        <div class="itemDiv">
-            <img src="img/camp2.jpg" alt="bild på camping">
-            <div class="textDiv">
-                <h2> Lasses Camping</h2>
-                <p> 5km från växjö</p>
-                <p class="showMap"> Visa på karta</p>
-                <p class="betyg">4.4<span>/5</span></p>
+                <input type="checkbox" class="modalCheck" name="småland" id="smaland">
+                <label for="småland"> Campingar i Småland </label>
             </div>
-            <button id="infoBtn"> Info</button>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="öland" id="oland">
+                <label for="öland"> Campingar på Öland </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="strand" id="strand">
+                <label for="strand"> Campingar nära stranden </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="natur" id="natur">
+                <label for="natur"> Naturcampingar </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="wifi" id="wifi">
+                <label for="wifi"> Campingar med Wi-Fi </label>
+            </div>
+            <h3> Sortera efter</h3>
+
+            <select name="Sortering" id="sorter">
+                <option value="nameAsc">Namn A-Ö</option>
+                <option value="nameDesc">Namn Ö-A</option>
+                <option value="ratingAsc">Högsta Betyg</option>
+                <option value="ratingDesc">Lägsta Betyg</option>
+            </select> 
+           
+</div>
+        <div class="campingDivs">
+                <div class="itemDiv">
+                    <img src="img/camp2.jpg" alt="bild på camping">
+                    <div class="textDiv">
+                        <h2> Lasses Camping</h2>
+                        <p> 5km från växjö</p>
+                        <p class="showMap"> Visa på karta</p>
+                        <p class="betyg">4.4<span>/5</span></p>
+                    </div>
+                    <button id="infoBtn"> Info</button>
+                </div>
         </div>
     </div>
 </div>
@@ -85,13 +94,7 @@
 <div class="nextPage">
    
 </div>
-
-<select name="Sortering" id="sorter">
-    <option value="nameAsc">Namn A-Ö</option>
-    <option value="nameDesc">Namn Ö-A</option>
-    <option value="ratingAsc">Högsta Betyg</option>
-    <option value="ratingDesc">Lägsta Betyg</option>
-</select>   
+  
     <div id="sortModal" class="modal">
 
         <!-- Modal content -->
