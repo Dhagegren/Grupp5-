@@ -41,7 +41,7 @@ header {
     rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center fixed;
 }
 
-.webbpage, .map {
+.webbpage, .tele {
     background-color: white;
     position: absolute;
     width: 60px;
@@ -51,12 +51,12 @@ header {
     align-items: center;
 }
 
-.webbpage img, .map img {
+.webbpage img, .tele img {
     width: 30px;
     padding: 5px 0 0 0;
 }
 
-.webbpage p, .map p {
+.webbpage p, .tele p {
     font-size: .7em;
     padding: 5px 0 0 0;
 }
@@ -71,7 +71,7 @@ header {
     text-decoration: none;
 }
 
-.map {
+.tele {
     top: 0;
     right: 0;
 }
@@ -470,7 +470,7 @@ footer {
         
     }
 
-    #maporlist, .webbpage, .map  {
+    #maporlist, .webbpage, .tele  {
         display: none;
     }
 
