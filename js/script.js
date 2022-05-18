@@ -262,7 +262,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
-	let wifi = document.getElementById("wifi");
 
 	if (smaland.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
@@ -310,19 +309,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		
 	}
 
-	if (wifi.checked == true) {
-		for (let i = 0; i < resp.length; i++) {
-			let aResp = accommodationfilter(resp[i].id, []);
-			console.log(aResp); //----------------------------###
-			if (aResp.wifi == "Y") {
-				ixList.push(i);
-				console.log("Wifi"); //----------------------------###
-			}
-		}
-		resp = removeNonIndexed(resp, ixList);	
-		ixList = [];
-	}
-
 	return resp;
 }
 
@@ -334,40 +320,8 @@ function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte in
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
 		}
-		console.log("dum jävel")
 		return newResp;
 	}
 	
 	return "";
-}
-
-function accommodationfilter(campId, accResp) { // Kollar om accResp är tom, isåfall gör anrop, annars hämta värdet vi letar efter
-	if (accResp.length == 0) {
-		accommodationData(campId);
-	}
-
-	else {
-		for (let i = 0; i < accResp.length; i++) {
-			if (accResp[i].id == campId) {
-				console.log(accResp[i]); //----------------------------###
-				return accResp[i];
-			}
-		}
-	}
-}
-
-function accommodationData(id) { // ajax-anrop för att kunna hämta data listat under accommodations i SMAPI
-	let campId = id;
-	let request = new XMLHttpRequest();
-	request.open("GET", SMAPI + "&controller=accommodation&method=getall&descriptions=camping&debug=true", true);
-	request.send();
-	request.onreadystatechange = function () {
-		if (request.readyState == 4) {
-			if (request.status == 200) {
-				let aResp = JSON.parse(request.responseText).payload;
-				accommodationfilter(campId, aResp);
-			}
-			else console.log("Someting very many wrong D:")
-		}
-    };
 }
