@@ -3,14 +3,13 @@ var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
 var oland =document.getElementsByClassName("indexgridsection");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
-function init(){
+function init() {
     searchBtn = searchBtn[0].children[1];
     oland[0].addEventListener("click", getOland);
     searchBtn.addEventListener("click", requestCamping);
     var input = document.getElementById("searchBar");
     input.addEventListener("keypress", function(event){
-        if (event.key ==="Enter") 
-        {
+        if (event.key ==="Enter") {
             event.preventDefault();
             searchBtn.click();   
         }
@@ -21,8 +20,6 @@ function init(){
 function getOland(){
     window.open("page2.html?value=Öland", "_self");
 }
-
-
 
 function popularCamping(){
     let request = new XMLHttpRequest(); // Object för Ajax-anropet
@@ -61,7 +58,7 @@ function requestCamping() {
 	};
 } // End requestNewImgs
 
-function checkCity(response){
+function checkCity(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
     let searchBar = document.querySelector(".searchBar");
     let search = searchBar.value;
