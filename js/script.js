@@ -133,16 +133,17 @@ function requestCamping() {
 			else console.log("yes very many")
     };
     function checkCity(response){
-
+		theResponse = JSON.parse(response);//Konverterar json svaret
+		theResponse = theResponse.payload;
+		
 		console.log(srcValue);
 		
-        theResponse = JSON.parse(response);//Konverterar json svaret
-		theResponse = theResponse.payload;
-		getCamping();
-        
+		theResponse = searchFilters(theResponse);
+
+		getCamping();  
 }
 }
-function getCamping(){
+function getCamping() {
 	let search = srcValue;
 	campings = [{name:"",
 	city:"",
@@ -314,7 +315,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 	if (wifi.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
 			let aResp = accommodationfilter(resp[i].id, []);
-			console.log(aResp);
+			console.log(aResp); //----------------------------###
 			if (aResp.wifi == "Y") {
 				ixList.push(i);
 				console.log("Wifi"); //----------------------------###
@@ -350,7 +351,7 @@ function accommodationfilter(campId, accResp) { // Kollar om accResp är tom, is
 	else {
 		for (let i = 0; i < accResp.length; i++) {
 			if (accResp[i].id == campId) {
-				console.log(accResp[i]);
+				console.log(accResp[i]); //----------------------------###
 				return accResp[i];
 			}
 		}
