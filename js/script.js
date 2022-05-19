@@ -262,6 +262,10 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
+	let price1 = document.getElementById("price1");
+	let price2 = document.getElementById("price2");
+	let price3 = document.getElementById("price3");
+	let price4 = document.getElementById("price4");
 
 	if (smaland.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
@@ -306,7 +310,52 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		}
 		resp = removeNonIndexed(resp, ixList);	
 		ixList = [];
-		
+	}
+
+
+
+	if (price1.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("0-25") && resp[i].price_range.includes("100-250") == false) {
+				ixList.push(i);
+				console.log("0-25"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	else if (price2.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("100-250")) {
+				ixList.push(i);
+				console.log("100-250"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	else if (price3.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("250-500")) {
+				ixList.push(i);
+				console.log("250-500"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	else if (price4.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("500-1250")) {
+				ixList.push(i);
+				console.log("500-1250"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
 	}
 
 	return resp;
