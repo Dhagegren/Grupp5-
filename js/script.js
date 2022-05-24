@@ -15,6 +15,12 @@ var sorter;
 var theResponse;
 		// name, city, rating, id
 function init() {
+	let filterCall = sessionStorage.getItem("filterChecked");
+
+	if (filterCall != null) {
+		autoFilter();
+	}
+	
 	sorter = document.getElementById("sorter");
 	for (let i = 0; i < sorter.length; i++) {
 		console.log(sorter[i]);
@@ -40,7 +46,7 @@ function init() {
 	for (let i = 0; i < checkboxes.length; i++) {
 		checkboxes[i].addEventListener("click", requestCamping);
 	}
-	
+
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", function(){
 			showModal(this.id)
@@ -253,6 +259,25 @@ function changePage() {
 
 function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
+}
+
+function autoFilter() {
+	let filterCall = sessionStorage.getItem("filterChecked");
+	let oland = document.getElementById("oland");
+	let strand = document.getElementById("strand");
+	let natur = document.getElementById("natur");
+
+	if (filterCall == "oland") {
+		oland.checked = true;
+	}
+
+	else if (filterCall == "strand") {
+		strand.checked = true;
+	}
+
+	else if (filterCall == "natur") {
+		natur.checked = true;
+	}
 }
 
 function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall vilket och sorterar därefter
