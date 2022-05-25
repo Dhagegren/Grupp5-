@@ -22,14 +22,11 @@ main {
 }
 
 header {
-    background-color: #1a492e;
-    height: 100px;
+    display: flex;
+    justify-content: center;
 }
 
-header h1 {
-    color: white;
-    font-size: 3em;
-}
+
 
 .search-cover {
     background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) ), url('img/campinghead.jpeg');
@@ -42,6 +39,13 @@ header h1 {
     margin-right: auto;
     
     
+}
+
+#logo {
+    width: 300px;
+  padding: 50px;
+  
+  
 }
 
 .search-cover h1 {
@@ -294,7 +298,12 @@ footer {
     }
 
    
-
+    #logo {
+        width: 200px;
+        padding: 25px;
+      
+      
+    }
     
     
 }

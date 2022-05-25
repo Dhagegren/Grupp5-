@@ -13,9 +13,8 @@
 
 <body>
     <header>
-        <a href="index.html" class="hemKnapp"><h1>Logo</h1></a>
-    </header>
-
+        <a href="index.html"><img id="logo" src="ikoner/logoBlack.svg" alt=""></a>
+        </header>
     <div id="filterDiv">
         <div id="filterList">
             <button class="myBtn" id="sortBtn">
@@ -60,10 +59,10 @@
                 <input type="checkbox" class="modalCheck" name="natur" id="natur">
                 <label for="natur"> Naturcampingar </label>
             </div>
-            <h3>Price range</h3>
+            <h3>Prisklass</h3>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRange" id="price0" checked>
-                <label for="priceRange"> Show all </label>
+                <label for="priceRange"> Visa alla</label>
             </div>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRange" id="price1">
@@ -106,7 +105,8 @@
         </div>
     </div>
 
-    <div class="nextPage"></div>
+    <div class="nextPage">
+    </div>
   
     <div id="sortModal" class="modal">
         <!-- Modal content -->
@@ -137,7 +137,7 @@
             <label for="strand"> Campingar nära stranden </label>
             <input type="checkbox" class="modalCheck" name="natur" id="natur">
             <label for="natur"> Naturcampingar </label>
-            <h3>Price range</h3>
+            <h3>Prisklass</h3>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRangeM" id="price0" checked>
                 <label for="priceRangeM"> Show all </label>
@@ -169,6 +169,7 @@
             <div id="map"></div>
         </div>
     </div>
-</main>    
+</main>
+<footer></footer>    
 </body>
 </html>
