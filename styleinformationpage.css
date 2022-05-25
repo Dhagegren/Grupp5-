@@ -10,7 +10,7 @@ a{
 }
 
 body {
-   background-color:#ececec ; 
+   background-color:#ffffff ; 
 }
 
 main{
@@ -22,11 +22,16 @@ main{
 }
 
 header {
-    width: 100%;
-    background-color: #1b1a1d;
-    height: 50px;
-    text-align: center;
-    color: white;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+#logo {
+    width: 300px;
+  padding: 50px;
+  
+  
 }
 
 .picture {
@@ -41,7 +46,7 @@ header {
     rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center fixed;
 }
 
-.webbpage, .map {
+.webbpage, .phone {
     background-color: white;
     position: absolute;
     width: 60px;
@@ -51,12 +56,12 @@ header {
     align-items: center;
 }
 
-.webbpage img, .map img {
+.webbpage img, .phone img {
     width: 30px;
     padding: 5px 0 0 0;
 }
 
-.webbpage p, .map p {
+.webbpage p, .phone p {
     font-size: .7em;
     padding: 5px 0 0 0;
 }
@@ -71,9 +76,17 @@ header {
     text-decoration: none;
 }
 
-.map {
+.phone {
     top: 0;
     right: 0;
+    overflow: hidden;
+}
+
+.phone > p {
+    
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .picture h1{
@@ -411,6 +424,12 @@ footer {
 /* media queries*/
 
 @media screen and (max-width: 700px) {
+    #logo {
+        width: 200px;
+        padding: 25px;
+      
+      
+    }
     .bigscreen-cover{
         display: none;
     }
@@ -420,7 +439,7 @@ footer {
     
       
     main {
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+        
         background-color: #FCFCFC;
       display: grid;
       grid-template-columns: repeat(2, 50%); 
@@ -470,7 +489,7 @@ footer {
         
     }
 
-    #maporlist, .webbpage, .map  {
+    #maporlist, .webbpage, .phone  {
         display: none;
     }
 
@@ -520,10 +539,7 @@ footer {
   }
 
   @media screen and (min-width: 1400px) {
-    header{
-        height: 60px;
-        margin-bottom: 20px;
-    }
+    
 
     footer {
         margin: 20px 0 0 0;

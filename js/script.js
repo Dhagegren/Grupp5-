@@ -238,11 +238,11 @@ function print(){
 	}
 	console.log(activeSide)
 	if (campings.length > activeSide+5){
-		skipPage.innerHTML="<p id='"+perPage+"'>></p>";
+		skipPage.innerHTML="<button id='"+perPage+"'>></button>";
 	}
 	else skipPage.innerHTML="";
 	if (activeSide > 0) {
-		skipPage.innerHTML+="<p id='"+-perPage+"'><</p>";
+		skipPage.innerHTML+="<button id='"+-perPage+"'><</button>";
 		
 	}
 	for (let i = 0; i < skipPage.children.length; i++) {

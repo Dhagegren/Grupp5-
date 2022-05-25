@@ -49,9 +49,8 @@ function init() {
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
-	websiteDiv = document.getElementById("websiteDiv");
-	phoneDiv = document.getElementById("phoneDiv");
-
+	websiteDiv = document.getElementsByClassName("webbLink");
+	phoneDiv = document.getElementsByClassName("phoneLink");
 
 	//ny kod för att ta fram matställen
 	
@@ -103,8 +102,10 @@ function checkCamp(response){
 	lngCamp = theResponse.lng;
 	let phoneNum = theResponse.phone_number;
 	let webSite = theResponse.website;
-	websiteDiv.href = webSite;
-	phoneDiv.innerHTML = phoneNum;
+	websiteDiv[0].href = webSite;
+	websiteDiv[1].href = webSite;
+	phoneDiv[0].alt = phoneNum;
+	phoneDiv[1].innerHTML = phoneNum;
 	initMap1();
 
 	requestActivity();
