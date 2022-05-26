@@ -23,6 +23,7 @@ var phoneDiv;
 var websiteDiv;
 var places;
 var myMarkers;
+var copyPhone;
 const infoWindow = new google.maps.InfoWindow();
 
 
@@ -39,19 +40,20 @@ function init() {
 	knappAktiviteter = document.getElementById("aktivitetsknapp");
 	knappMat = document.getElementById("matknapp");
 	mapElem = document.getElementById("map");
+	copyPhone = document.getElementById("map2")
 	listElem = document.getElementById("listan")
 	svgKarta = document.getElementById("bildkarta");
 	svgLista = document.getElementById("bildlista");
 	svgAktiviteter = knappAktiviteter.firstChild;
 	svgMat = knappMat.firstChild;
+	websiteDiv = document.getElementsByClassName("webbLink");
+	phoneDiv = document.getElementsByClassName("phoneLink");
 	// eventListeners
 	knappKarta.addEventListener("click", showMap);
 	knappLista.addEventListener("click", showList);
 	knappAktiviteter.addEventListener("click", showActive);
 	knappMat.addEventListener("click", showFood);
-	websiteDiv = document.getElementsByClassName("webbLink");
-	phoneDiv = document.getElementsByClassName("phoneLink");
-
+	copyPhone.addEventListener("click", copyTele);
 	//ny kod för att ta fram matställen
 	
 	matRef=document.getElementsByClassName("bra")
@@ -60,6 +62,8 @@ function init() {
 	btnMoreText.addEventListener("click", visaMerText);
 }
 window.addEventListener("load", init);
+
+
 
 function requestCamp() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
@@ -109,6 +113,13 @@ function checkCamp(response){
 	initMap1();
 
 	requestActivity();
+
+}
+
+function copyTele(){
+	let copyText = phoneDiv[0].alt;
+	navigator.clipboard.writeText(copyText);
+	alert("Kopierad till urklipp")
 
 }
 
