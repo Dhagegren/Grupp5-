@@ -1,19 +1,40 @@
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
+var filterShortcut = document.getElementsByClassName("indexgridsection");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
-function init(){
+function init() {
     searchBtn = searchBtn[0].children[1];
+    filterShortcut[0].addEventListener("click", filterOland);
+    filterShortcut[1].addEventListener("click", filterStrand);
+    filterShortcut[2].addEventListener("click", filterNatur);
     searchBtn.addEventListener("click", requestCamping);
     var input = document.getElementById("searchBar");
     input.addEventListener("keypress", function(event){
-        if (event.key ==="Enter") 
-        {
+        if (event.key ==="Enter") {
             event.preventDefault();
             searchBtn.click();   
         }
     });
     popularCamping();
+}
+
+function filterOland() {
+    let filter = "oland";
+    sessionStorage.setItem("filterChecked", filter);
+    window.open("page2.html?value=", "_self");
+}
+
+function filterStrand() {
+    let filter = "strand";
+    sessionStorage.setItem("filterChecked", filter);
+    window.open("page2.html?value=", "_self");
+}
+
+function filterNatur() {
+    let filter = "natur";
+    sessionStorage.setItem("filterChecked", filter);
+    window.open("page2.html?value=", "_self");
 }
 
 function popularCamping(){
@@ -53,7 +74,7 @@ function requestCamping() {
 	};
 } // End requestNewImgs
 
-function checkCity(response){
+function checkCity(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
     let searchBar = document.querySelector(".searchBar");
     let search = searchBar.value;

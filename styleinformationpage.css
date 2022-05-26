@@ -10,7 +10,7 @@ a{
 }
 
 body {
-   background-color:#ececec ; 
+   background-color:#ffffff ; 
 }
 
 main{
@@ -22,11 +22,16 @@ main{
 }
 
 header {
-    width: 100%;
-    background-color: #1b1a1d;
-    height: 50px;
-    text-align: center;
-    color: white;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+}
+
+#logo {
+    width: 300px;
+  padding: 50px;
+  
+  
 }
 
 .picture {
@@ -41,7 +46,7 @@ header {
     rgba(0,0,0,0) 50%), url(img/camp3.jpg) no-repeat center fixed;
 }
 
-.webbpage, .map {
+.webbpage, .phone {
     background-color: white;
     position: absolute;
     width: 60px;
@@ -51,12 +56,12 @@ header {
     align-items: center;
 }
 
-.webbpage img, .map img {
+.webbpage img, .phone img {
     width: 30px;
     padding: 5px 0 0 0;
 }
 
-.webbpage p, .map p {
+.webbpage p, .phone p {
     font-size: .7em;
     padding: 5px 0 0 0;
 }
@@ -66,9 +71,22 @@ header {
     left: 0;
 }
 
-.map {
+.hemKnapp{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.phone {
     top: 0;
     right: 0;
+    overflow: hidden;
+}
+
+.phone > p {
+    
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .picture h1{
@@ -77,21 +95,23 @@ header {
     left: 25px;
     color: white;
     font-weight: 550;
-    font-size: 1.7em;
+    font-size: 1.3em;
+    max-width: 350px;
 }
 
 .picture h2{
     position: absolute;
-    top: 305px;
+    top: 350px;
     right: 25px;
     color: white;
     font-weight: 500;
     font-size: 1.5em;
+    
 }
 
 .picture > p{
     position: absolute;
-    top: 340px;
+    top: 360px;
     left: 25px;
     color: white;
     font-size: 0.8em;
@@ -106,13 +126,35 @@ section {
 }
 
 .beskrivning {
-    
-    padding: 25px 25px 0 25px;
+    color: #242424;
+    padding: 25px 30px 0 30px;
     font-size: 0.8em;
     font-weight: 500;
     line-height: 1.5em;
-    max-width: 500px;
+    max-width: 700px;
     
+    
+}
+
+
+
+
+
+#more {
+    display: none;  
+}
+
+#visaMer {
+    width: 100%;
+    border: none;
+    margin-top: 20px;
+    background-color: #FCFCFC;
+    font-weight: 500;
+   
+}
+
+#visaMer img {
+    width: 30px;
 }
 
 .bigscreen-cover{
@@ -121,13 +163,16 @@ section {
     padding: 20px;
     background-color: #ffffff;
     
+    
 }
+
 
 .webb-bigscreen, .karta-bigscreen {
     display: flex;
-    height: 30px;
+    height: 25px;
     color: rgb(0, 0, 0);
     font-weight: 500;
+    font-size: .9em;
 }
 
 .webb-bigscreen img, .karta-bigscreen img {
@@ -136,11 +181,11 @@ section {
 
 .faciliteter {
     grid-area: faciliteter;
-    padding: 45px 25px 0 25px;
+    padding: 25px 25px 0 25px;
     background-color: #FCFCFC;
 }
 
-.ikoner{
+#ikoner{
     padding-left: 5px;
     margin-top: 15px;
     display: grid;
@@ -153,6 +198,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center; 
+    
 }
 
 .ikon img {
@@ -165,6 +211,7 @@ section {
     font-size: 0.6em;
     color: #444444;
     padding: 5px 0 0 0;
+    text-align: center;
 }
 
 .recensionercover {
@@ -174,11 +221,15 @@ section {
     background-color: #FCFCFC;
 }
 
-.ingarecensioner p {
+#ingarecensioner, #ingenBeskrivning {
+    display: none;
+}
+
+#ingarecensioner p, #ingenBeskrivning p {
     text-align: center;
     padding: 70px 40px 40px 40px;
     color: #bcbcbc;
-    display: none;
+    
 }
 
 #recensioner {
@@ -213,7 +264,7 @@ section {
     font-size: .75em;
 }
 
-.close {
+#close {
     grid-area: upptäck;
     padding: 35px 25px 10px 25px;
     background-color: #FCFCFC;
@@ -287,7 +338,7 @@ section {
 }
 
 .kartalista .hidden {
-    display:none;
+    display: none;
 }
 
 
@@ -301,6 +352,16 @@ section {
    margin: 10px 20px 15px 20px;
    padding: 20px 0 0 20px;
    max-width: 400px;
+}
+
+
+.changeColor{
+    background-color: #6387db;
+    color: #ffffff;
+}
+
+.listobjekt li{
+    list-style: none;
 }
 
 .title {
@@ -335,13 +396,12 @@ section {
     background-color: rgb(255, 255, 255);
     border: none;
     
-    padding:0px;
+    padding: 10px;
     font-size: .7em;
     cursor: pointer;
-    
 }
 
-#maporlist button div {
+#maporlist button div{
     display: flex;
     flex-direction: column;
 }
@@ -364,6 +424,12 @@ footer {
 /* media queries*/
 
 @media screen and (max-width: 700px) {
+    #logo {
+        width: 200px;
+        padding: 25px;
+      
+      
+    }
     .bigscreen-cover{
         display: none;
     }
@@ -373,7 +439,7 @@ footer {
     
       
     main {
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 0px 4px 0px;
+        
         background-color: #FCFCFC;
       display: grid;
       grid-template-columns: repeat(2, 50%); 
@@ -381,8 +447,8 @@ footer {
       
       grid-template-areas: 
     "picture beskrivning"
-
-    "faciliteter faciliteter "
+    ". ."
+    "faciliteter faciliteter"
     "recensioner recensioner"
     "upptäck ."
     "listakarta listakarta";
@@ -392,11 +458,15 @@ footer {
     .beskrivning{
         font-size: .9em;
         font-weight: 400;
+        max-height: 400px;
+        overflow-y: scroll;
     }
 
     .p-cover {
         display: grid;
         place-items: center;
+        width: 125px;
+        
     }
 
      .kartalista{
@@ -419,7 +489,7 @@ footer {
         
     }
 
-    #maporlist, .webbpage, .map  {
+    #maporlist, .webbpage, .phone  {
         display: none;
     }
 
@@ -439,6 +509,10 @@ footer {
         margin-top: 40px;
         
     }
+
+    #ikoner{
+        gap: 1em;
+    }
  
     .ikon p {
         font-size: 0.7em;
@@ -454,13 +528,18 @@ footer {
         font-size: 20px
     }
 
+    #visaMer {
+        display: none;
+    }
+
+    #more {
+        display: inline !important;  
+    }
+
   }
 
   @media screen and (min-width: 1400px) {
-    header{
-        height: 60px;
-        margin-bottom: 20px;
-    }
+    
 
     footer {
         margin: 20px 0 0 0;
