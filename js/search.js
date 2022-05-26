@@ -1,11 +1,13 @@
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
 var linkBoxes = document.getElementsByClassName("linkbox");
 var searchBtn = document.getElementsByClassName("search");
-var oland =document.getElementsByClassName("indexgridsection");
+var filterShortcut = document.getElementsByClassName("indexgridsection");
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
 function init() {
     searchBtn = searchBtn[0].children[1];
-    oland[0].addEventListener("click", getOland);
+    filterShortcut[0].addEventListener("click", filterOland);
+    filterShortcut[1].addEventListener("click", filterStrand);
+    filterShortcut[2].addEventListener("click", filterNatur);
     searchBtn.addEventListener("click", requestCamping);
     var input = document.getElementById("searchBar");
     input.addEventListener("keypress", function(event){
@@ -17,8 +19,22 @@ function init() {
     popularCamping();
 }
 
-function getOland(){
-    window.open("page2.html?value=Öland", "_self");
+function filterOland() {
+    let filter = "oland";
+    sessionStorage.setItem("filterChecked", filter);
+    window.open("page2.html?value=", "_self");
+}
+
+function filterStrand() {
+    let filter = "strand";
+    sessionStorage.setItem("filterChecked", filter);
+    window.open("page2.html?value=", "_self");
+}
+
+function filterNatur() {
+    let filter = "natur";
+    sessionStorage.setItem("filterChecked", filter);
+    window.open("page2.html?value=", "_self");
 }
 
 function popularCamping(){

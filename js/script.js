@@ -15,6 +15,12 @@ var sorter;
 var theResponse;
 		// name, city, rating, id
 function init() {
+	let filterCall = sessionStorage.getItem("filterChecked");
+
+	if (filterCall != null) {
+		autoFilter();
+	}
+	
 	sorter = document.getElementById("sorter");
 	for (let i = 0; i < sorter.length; i++) {
 		console.log(sorter[i]);
@@ -40,7 +46,7 @@ function init() {
 	for (let i = 0; i < checkboxes.length; i++) {
 		checkboxes[i].addEventListener("click", requestCamping);
 	}
-	
+
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", function(){
 			showModal(this.id)
@@ -135,16 +141,13 @@ function requestCamping() {
     function checkCity(response){
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
-		
 		console.log(srcValue);
-		
-		theResponse = searchFilters(theResponse);
-
 		getCamping();  
 }
 }
 function getCamping() {
 	let search = srcValue;
+	theResponse = searchFilters(theResponse);
 	campings = [{name:"",
 	city:"",
 	rating:"",
@@ -174,7 +177,6 @@ function getCamping() {
 
 function sortCampings(){
 	console.log(this);
-	this.preventDefault();
 	let sorting = this.value;
 	console.log(sorting)
 	if (sorting == "nameAsc") {
@@ -236,11 +238,11 @@ function print(){
 	}
 	console.log(activeSide)
 	if (campings.length > activeSide+5){
-		skipPage.innerHTML="<p id='"+perPage+"'>></p>";
+		skipPage.innerHTML="<button id='"+perPage+"'>></button>";
 	}
 	else skipPage.innerHTML="";
 	if (activeSide > 0) {
-		skipPage.innerHTML+="<p id='"+-perPage+"'><</p>";
+		skipPage.innerHTML+="<button id='"+-perPage+"'><</button>";
 		
 	}
 	for (let i = 0; i < skipPage.children.length; i++) {
@@ -259,6 +261,25 @@ function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
 }
 
+function autoFilter() {
+	let filterCall = sessionStorage.getItem("filterChecked");
+	let oland = document.getElementById("oland");
+	let strand = document.getElementById("strand");
+	let natur = document.getElementById("natur");
+
+	if (filterCall == "oland") {
+		oland.checked = true;
+	}
+
+	else if (filterCall == "strand") {
+		strand.checked = true;
+	}
+
+	else if (filterCall == "natur") {
+		natur.checked = true;
+	}
+}
+
 function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall vilket och sorterar därefter
 	let ixList = [];
 
@@ -266,7 +287,10 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 	let oland = document.getElementById("oland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
-	let wifi = document.getElementById("wifi");
+	let price1 = document.getElementById("price1");
+	let price2 = document.getElementById("price2");
+	let price3 = document.getElementById("price3");
+	let price4 = document.getElementById("price4");
 
 	if (smaland.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
@@ -288,6 +312,7 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		}
 		resp = removeNonIndexed(resp, ixList);
 		ixList = [];
+		console.log(ixList);
 	}
 
 	if (strand.checked == true) {
@@ -312,13 +337,46 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		ixList = [];
 	}
 
-	if (wifi.checked == true) {
+
+
+	if (price1.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
-			let aResp = accommodationfilter(resp[i].id, []);
-			console.log(aResp); //----------------------------###
-			if (aResp.wifi == "Y") {
+			if (resp[i].price_range.includes("0-25") && resp[i].price_range.includes("100-250") == false) {
 				ixList.push(i);
-				console.log("Wifi"); //----------------------------###
+				console.log("0-25"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	else if (price2.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("100-250")) {
+				ixList.push(i);
+				console.log("100-250"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	else if (price3.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("250-500")) {
+				ixList.push(i);
+				console.log("250-500"); //----------------------------###
+			}
+		}
+		resp = removeNonIndexed(resp, ixList);	
+		ixList = [];
+	}
+
+	else if (price4.checked == true) {
+		for (let i = 0; i < resp.length; i++) {
+			if (resp[i].price_range.includes("500-1250")) {
+				ixList.push(i);
+				console.log("500-1250"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);	
@@ -336,40 +394,8 @@ function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte in
 			let ix = ixList[i];
 			newResp.push(resp[ix]);
 		}
-
 		return newResp;
 	}
 	
-	return null;
-}
-
-function accommodationfilter(campId, accResp) { // Kollar om accResp är tom, isåfall gör anrop, annars hämta värdet vi letar efter
-	if (accResp.length == 0) {
-		accommodationData(campId);
-	}
-
-	else {
-		for (let i = 0; i < accResp.length; i++) {
-			if (accResp[i].id == campId) {
-				console.log(accResp[i]); //----------------------------###
-				return accResp[i];
-			}
-		}
-	}
-}
-
-function accommodationData(id) { // ajax-anrop för att kunna hämta data listat under accommodations i SMAPI
-	let campId = id;
-	let request = new XMLHttpRequest();
-	request.open("GET", SMAPI + "&controller=accommodation&method=getall&descriptions=camping&debug=true", true);
-	request.send();
-	request.onreadystatechange = function () {
-		if (request.readyState == 4) {
-			if (request.status == 200) {
-				let aResp = JSON.parse(request.responseText).payload;
-				accommodationfilter(campId, aResp);
-			}
-			else console.log("Someting very many wrong D:")
-		}
-    };
+	return "";
 }
