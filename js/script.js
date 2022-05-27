@@ -292,9 +292,9 @@ function openNext() {
 
 function autoFilter() {
 	let filterCall = sessionStorage.getItem("filterChecked");
-	let oland = document.getElementById("öland");
-	let strand = document.getElementById("strand");
-	let natur = document.getElementById("natur");
+	let oland = document.getElementById("ölandM");
+	let strand = document.getElementById("strandM");
+	let natur = document.getElementById("naturM");
 
 	if (filterCall == "oland") {
 		oland.checked = true;
