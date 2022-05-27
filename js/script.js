@@ -226,7 +226,7 @@ function print(){
 		console.log(i)
 		if (i+1 <= campings.length) {
 			let tempCamping = campings[i];
-			campingRef.innerHTML += "<div class = itemDiv> <img src='img/camp2.jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
+			campingRef.innerHTML += "<div class = itemDiv> <img src='campingImg/" + tempCamping[0].id + ".jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
 			tempCamping[0].name + "</h2> <p>5km från "+ tempCamping[0].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" +tempCamping[0].rating + "<span>/5</span></p>"+
 			'</div> <button class="infoBtn" id='+tempCamping[0].id+'> Info</button></div>';
 		}
