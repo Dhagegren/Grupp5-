@@ -23,6 +23,7 @@ var phoneDiv;
 var websiteDiv;
 var places;
 var myMarkers;
+var myMarkers2; //array för markörerna förutom campingen, tömmer den för att kunna markera 
 var copyPhone;
 const infoWindow = new google.maps.InfoWindow();
 
@@ -270,20 +271,26 @@ function showFood() {
  		let foodResponse = JSON.parse(response);
  		let tempFood = "";
  		foodResponse = foodResponse.payload;
+		myMarkers2=[]; //tömmer arrayen
 		removeMarker();
  		for (let i=0; i<foodResponse.length; i++){
-			tempFood += "<div class=listobjekt> <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> <li> Betyg: " +parseFloat (foodResponse[i].rating) + "/5 </li> </ul> </div>" ;
+			  
+			tempFood += "<div class=listobjekt > <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> <li> Betyg: " +parseFloat (foodResponse[i].rating) + "/5 </li> </ul> </div>" ;
  			matRef.innerHTML=tempFood;
+			
 			 let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};
 			let tempDesc =foodResponse[i].name;
+			
 			var marker = new google.maps.Marker({
 			position: tempVar,
 				myMap,
 				title:tempDesc,
 			});
 			myMarkers.push(marker);
-
+			myMarkers2.push(marker); //pushar in i den andra markörarrayen
 			marker.setMap(myMap);
+			
+			
 		}
 		addMarker();
 		let listElements = document.getElementsByClassName("listobjekt");
@@ -291,6 +298,7 @@ function showFood() {
 			
 			listElements[i].addEventListener("click", activeList);
 		}
+		
 
 	}
  }
@@ -311,6 +319,7 @@ function requestActivity(){
 		let activityResponse = JSON.parse(response);
 		let tempActivity = "";
 		activityResponse = activityResponse.payload;
+		myMarkers2=[];
 		for (let i=0; i<activityResponse.length; i++){
 			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> <li> Betyg: " + parseFloat(activityResponse[i].rating)+ "/5 </li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
@@ -323,16 +332,19 @@ function requestActivity(){
 				title: tempDesc,
 			}	
 		);
-		
 		myMarkers.push(marker);
+		myMarkers2.push(marker);//pushar in i den andra markör arrayen
 		marker.setMap(myMap)
 		}
 		addMarker();
-		let listElements = document.getElementsByClassName("listobjekt");
+		
+		var listElements = document.getElementsByClassName("listobjekt");
 		for (i=0; i<listElements.length; i++){
 			
 			listElements[i].addEventListener("click", activeList);
+			
 		}
+		
 	}
 }
 
@@ -350,7 +362,6 @@ function addMarker(){
 function removeMarker(){
 	
 	for (let i = 1; i < myMarkers.length; i++) {
-		console.log(i);
 		myMarkers[i].setMap(null);
 	}
 }
@@ -389,14 +400,18 @@ function checkReviews(response){
 }
 
 function activeList(){
-	console.log("hej");
 	let className = document.getElementsByClassName("listobjekt");
 	for(i=0; i<className.length;i++){
-		className[i].classList.remove("changeColor");
-		
+		className[i].classList.remove("changeColor");	
 	}
 
-	this.classList.add("changeColor");
+		this.classList.add("changeColor");
+	for(y=0; y<myMarkers2.length;y++){
+		className[y].setAttribute("id", y);
+	  infoWindow.close();
+	  	infoWindow.setContent(myMarkers2[this.id].getTitle());
+	   	infoWindow.open(myMarkers2[this.id].getMap(), myMarkers2[this.id]);
+	}
 }
 
 
