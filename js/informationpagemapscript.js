@@ -82,6 +82,9 @@ function checkCamp(response){
 
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
 	let picture = document.getElementsByClassName("picture")[0];
+	picture.style.background = "linear-gradient(to top, rgba(0, 0, 0, 1) 10%, rgba(0,0,0,.7) 20%, rgba(0,0,0,.4) 40%, rgba(0,0,0,0) 50%), url(campingImg/" + theResponse.id + ".jpg) no-repeat center";
+
+	picture.style.backgroundSize = "cover"
 	picture.children[2].innerHTML = theResponse.name;
 	picture.children[3].innerHTML = parseFloat(theResponse.rating) + "/5";
 	picture.children[4].innerHTML = theResponse.address;

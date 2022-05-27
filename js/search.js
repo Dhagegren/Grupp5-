@@ -52,6 +52,8 @@ function popCamping(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
     theResponse = theResponse.payload;
     for (let i = 0; i < theResponse.length; i++) {
+        linkBoxes[i].childNodes[1].style.background = "url(campingImg/" + theResponse[i].id + ".jpg) center";
+        linkBoxes[i].childNodes[1].style.backgroundSize = "cover";
         linkBoxes[i].childNodes[3].innerHTML = theResponse[i].name;
         linkBoxes[i].childNodes[3].setAttribute('id',theResponse[i].id);
         linkBoxes[i].childNodes[5].innerHTML = parseFloat(theResponse[i].rating) + "/5";
