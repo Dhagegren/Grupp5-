@@ -44,11 +44,11 @@
         <div id="webDiv">
             <h3> Filter </h3>
             <div class="inputDiv">
-                <input type="checkbox" class="modalCheck" name="småland" id="smaland">
+                <input type="checkbox" class="modalCheck" name="småland" id="småland">
                 <label for="småland"> Campingar i Småland </label>
             </div>
             <div class="inputDiv">
-                <input type="checkbox" class="modalCheck" name="öland" id="oland">
+                <input type="checkbox" class="modalCheck" name="öland" id="öland">
                 <label for="öland"> Campingar på Öland </label>
             </div>
             <div class="inputDiv">
@@ -62,24 +62,21 @@
             <h3>Prisklass</h3>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRange" id="price0" checked>
-                <label for="priceRange"> Visa alla</label>
+                <label for="price0"> Visa alla</label>
             </div>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRange" id="price1">
-                <label for="priceRange"> 0-25 kr </label>
+                <label for="price1"> 0-250 kr </label>
             </div>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRange" id="price2">
-                <label for="priceRange"> 100-250 kr </label>
+                <label for="price2"> 250-500 kr </label>
             </div>
             <div class="inputDiv">
                 <input type="radio" class="modalCheck" name="priceRange" id="price3">
-                <label for="priceRange"> 250-500 kr </label>
+                <label for="price3"> 500-1250 kr </label>
             </div>
-            <div class="inputDiv">
-                <input type="radio" class="modalCheck" name="priceRange" id="price4">
-                <label for="priceRange"> 500-1250 kr </label>
-            </div>
+
 
             <h3> Sortera efter</h3>
             <select name="Sortering" id="sorter">
@@ -128,37 +125,43 @@
         <!-- Modal content -->
         <div class="modal-content filter">
             <span class="close filter-close">&times;</span>
-            <h2> Filter </h2>
-            <input type="checkbox" class="modalCheck" name="småland" id="smaland">
-            <label for="småland"> Campingar i Småland </label>
-            <input type="checkbox" class="modalCheck" name="öland" id="oland">
-            <label for="öland"> Campingar på Öland </label>
-            <input type="checkbox" class="modalCheck" name="strand" id="strand">
-            <label for="strand"> Campingar nära stranden </label>
-            <input type="checkbox" class="modalCheck" name="natur" id="natur">
-            <label for="natur"> Naturcampingar </label>
+            <h3> Filter </h3>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="småland" id="smålandM">
+                <label for="smålandM"> Campingar i Småland </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="öland" id="ölandM">
+                <label for="ölandM"> Campingar på Öland </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="strand" id="strandM">
+                <label for="strandM"> Campingar nära stranden </label>
+            </div>
+            <div class="inputDiv">
+                <input type="checkbox" class="modalCheck" name="natur" id="naturM">
+                <label for="naturM"> Naturcampingar </label>
+            </div>
+            <br>
             <h3>Prisklass</h3>
             <div class="inputDiv">
-                <input type="radio" class="modalCheck" name="priceRangeM" id="price0" checked>
-                <label for="priceRangeM"> Show all </label>
+                <input type="radio" class="modalCheck" name="priceRange1" id="price0M" checked>
+                <label for="price0M"> Visa alla</label>
             </div>
             <div class="inputDiv">
-                <input type="radio" class="modalCheck" name="priceRangeM" id="price1">
-                <label for="priceRangeM"> 0-25 kr </label>
+                <input type="radio" class="modalCheck" name="priceRange1" id="price1M">
+                <label for="price1M"> 0-250 kr </label>
             </div>
             <div class="inputDiv">
-                <input type="radio" class="modalCheck" name="priceRangeM" id="price2">
-                <label for="priceRangeM"> 100-250 kr </label>
+                <input type="radio" class="modalCheck" name="priceRange1" id="price2M">
+                <label for="price2M"> 250-500 kr </label>
             </div>
             <div class="inputDiv">
-                <input type="radio" class="modalCheck" name="priceRangeM" id="price3">
-                <label for="priceRangeM"> 250-500 kr </label>
+                <input type="radio" class="modalCheck" name="priceRange1" id="price3M">
+                <label for="price3M"> 500-1250 kr </label>
             </div>
-            <div class="inputDiv">
-                <input type="radio" class="modalCheck" name="priceRangeM" id="price4">
-                <label for="priceRangeM"> 500-1250 kr </label>
-            </div>
-            <button> Applicera filter </button>
+            <br>
+            <button id="aplyFilter"> Applicera filter </button>
         </div>
     </div>
 
