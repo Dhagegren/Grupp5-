@@ -318,7 +318,7 @@ section {
 
 .knappar .active{
     color: white;
-    background-color: #290cad;
+    background-color: #0d7313;
 }
 
 .kartalista {
@@ -357,7 +357,7 @@ section {
 
 
 .changeColor{
-    background-color: #6387db;
+    background-color: #30ca3b;
     color: #ffffff;
 }
 
@@ -409,7 +409,7 @@ section {
 
 #maporlist .active {
     color: white;
-    background-color: #290cad;
+    background-color: #0d7313;
 } 
 
 #maporlist button img {
