@@ -79,12 +79,22 @@
 
 
             <h3> Sortera efter</h3>
-            <select name="Sortering" id="sorter">
-                <option value="nameAsc">Namn A-Ö</option>
-                <option value="nameDesc">Namn Ö-A</option>
-                <option value="ratingAsc">Högsta Betyg</option>
-                <option value="ratingDesc">Lägsta Betyg</option>
-            </select> 
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="Sortering" id="nameAsc" checked>
+                <label for="nameAsc">Namn A-Ö</label>
+            </div>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="Sortering" id="nameDesc">
+                <label for="nameDesc">Namn Ö-A</label>
+            </div>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="Sortering" id="ratingAsc">
+                <label for="ratingAsc">Högsta Betyg</label>
+            </div>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="Sortering" id="ratingDesc">
+                <label for="ratingDesc">Lägsta Betyg</label>
+            </div>
         </div>
 
         <div class="campingDivs">
@@ -110,14 +120,23 @@
         <div class="modal-content sort">
             <span class="close sort-close">&times;</span>
 
-            <h2> Sortera efter </h2>
-            
-            <select name="Sortering" id="sorterM">
-                <option value="nameAsc">Namn A-Ö</option>
-                <option value="nameDesc">Namn Ö-A</option>
-                <option value="ratingAsc">Högsta Betyg</option>
-                <option value="ratingDesc">Lägsta Betyg</option>
-            </select> 
+            <h3> Sortera efter</h3>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="SorteringM" id="nameAscM" checked>
+                <label for="nameAscM">Namn A-Ö</label>
+            </div>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="SorteringM" id="nameDescM">
+                <label for="nameDescM">Namn Ö-A</label>
+            </div>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="SorteringM" id="ratingAscM">
+                <label for="ratingAscM">Högsta Betyg</label>
+            </div>
+            <div class="inputDiv">
+                <input type="radio" class="sorter" name="SorteringM" id="ratingDescM">
+                <label for="ratingDescM">Lägsta Betyg</label>
+            </div>
             <br>
         </div>
     </div>

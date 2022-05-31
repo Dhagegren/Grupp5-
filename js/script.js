@@ -8,7 +8,8 @@ var campings = [{name:"",
 				city:"",
 				rating:"",
 				id:""}];
-var activeSide =0;
+var activeSide = 0;
+var activeModal;
 var skipPage = document.getElementsByClassName("nextPage");
 var perPage = 5;
 var sorter;
@@ -21,27 +22,19 @@ function init() {
 		autoFilter();
 	}
 	
-	sorter = document.getElementById("sorter");
+	sorter = document.getElementsByClassName("sorter");
 	for (let i = 0; i < sorter.length; i++) {
 		console.log(sorter[i]);
 		sorter[i].addEventListener("click", sortCampings);
 	}
 
-	sorterM = document.getElementById("sorterM");
-	for (let i = 0; i < sorterM.length; i++) {
-		sorterM[i].addEventListener("click", sortCampings);
-	}
-
-	//sorter.addEventListener("change", sortCampings);
 	skipPage = skipPage[0];
 	initMap();
-	console.log(campingRef);
 	campingRef = campingRef[0];
     searchValue = new URLSearchParams(searchValue);
     srcValue = searchValue.get("value");
 	if (searchValue.has("side")) {
 		activeSide=parseInt(searchValue.get("side"));
-		console.log(activeSide);
 	}
     requestCamping();
 	let btn = document.getElementsByClassName("myBtn");//Reference to button
@@ -80,22 +73,18 @@ function init() {
 
 	
 	for (let i = 0; i < btn.length; i++) {
-		btn[i].addEventListener("click", function(){
+		btn[i].addEventListener("click", function() {
 			showModal(this.id)
 		});
 	}
 	var input = document.getElementById("searchBar");
 	input.addEventListener("input", function(event) {
-		console.log("hej");
-		console.log(input.value);
 		srcValue = input.value;
 		getCamping();
 	})
 	input.addEventListener("keypress", function(event){
-        if (event.key ==="Enter") 
-        {
+        if (event.key ==="Enter") {
             event.preventDefault();
-			console.log(input.value);
 			let search = input.value;
 			window.open("page2.html?value="+ search, "_self");
             searchBtn.click();
@@ -172,7 +161,6 @@ function requestCamping() {
     function checkCity(response){
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
-		console.log(srcValue);
 		getCamping();  
 }
 }
@@ -193,7 +181,6 @@ function getCamping() {
 			campings.push(tempCamping)
 		}
 	}
-	console.log(campings);
 	let campingsRem = campings.shift();
 
 	campings.sort(function(a, b){
@@ -207,10 +194,9 @@ function getCamping() {
 }
 
 function sortCampings(){
-	console.log(this);
-	let sorting = this.value;
-	console.log(sorting)
-	if (sorting == "nameAsc") {
+	let sorting = this.id;
+
+	if (sorting == "nameAsc" || sorting == "nameAscM") {
 		campings.sort(function(a, b){
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
@@ -219,7 +205,7 @@ function sortCampings(){
 			return 0;
 		});
 	}
-	else if (sorting == "nameDesc") {
+	else if (sorting == "nameDesc" || sorting == "nameDescM") {
 		campings.sort(function(a, b){
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
@@ -228,7 +214,7 @@ function sortCampings(){
 			return 0;
 		});
 	}
-	else if (sorting == "ratingAsc"){
+	else if (sorting == "ratingAsc" || sorting == "ratingAscM"){
 		campings.sort(function(a, b){
 			let x = a[0].rating;
 			let y = b[0].rating;
@@ -237,7 +223,7 @@ function sortCampings(){
 			return 0;
 		});
 	}
-	else if (sorting == "ratingDesc") {
+	else if (sorting == "ratingDesc" || sorting == "ratingDescM") {
 		campings.sort(function(a, b){
 			let x = a[0].rating;
 			let y = b[0].rating;
@@ -254,7 +240,6 @@ function print(){
 	let start=parseInt(activeSide);
 	campingRef.innerHTML ="";
 	for (let i = start; i < start+5; i++) {
-		console.log(i)
 		if (i+1 <= campings.length) {
 			let tempCamping = campings[i];
 			campingRef.innerHTML += "<div class = itemDiv> <img src='campingImg/" + tempCamping[0].id + ".jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
@@ -267,15 +252,19 @@ function print(){
 		campingBtn[i].addEventListener("click", openNext);
 
 	}
-	console.log(activeSide)
-	if (campings.length > activeSide+5){
+
+	if (campings.length > activeSide+5) {
 		skipPage.innerHTML="<button id='"+perPage+"'>></button>";
 	}
+
 	else skipPage.innerHTML="";
+
+
 	if (activeSide > 0) {
 		skipPage.innerHTML+="<button id='"+-perPage+"'><</button>";
 		
 	}
+
 	for (let i = 0; i < skipPage.children.length; i++) {
 		skipPage.children[i].addEventListener("click", changePage)
 	}
