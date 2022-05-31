@@ -31,7 +31,7 @@ function init() {
 	for (let i = 0; i < sorterM.length; i++) {
 		sorterM[i].addEventListener("click", sortCampings);
 	}
-	
+
 	//sorter.addEventListener("change", sortCampings);
 	skipPage = skipPage[0];
 	initMap();
@@ -78,11 +78,7 @@ function init() {
 	let modalPrice3 = document.getElementById("price3M");
 	modalPrice3.addEventListener("change", priceSync);
 
-
-	let aplyFilter = document.getElementById("aplyFilter");
-	aplyFilter.addEventListener("click", requestCamping);
-
-
+	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", function(){
 			showModal(this.id)
