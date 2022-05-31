@@ -302,19 +302,7 @@ section {
     
 }
 
-.ikon2{
-   padding: 10px 0 0 0; 
-}
 
-.ikon2 img {
-    height: 25px;
-    width: 25px;
-
-}
-
-.ikon2 p {
-    font-size: .8em;
-}
 
 .knappar .active{
     color: white;
