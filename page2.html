@@ -112,10 +112,13 @@
 
             <h2> Sortera efter </h2>
             
-            <input type="checkbox" class="modalCheck" name="betyg">
-            <label for="betyg"> Betyg</label>
-            <input type="checkbox" class="modalCheck" name="avstånd">
-            <label for="avstånd"> Avstånd </label>
+            <select name="Sortering" id="sorterM">
+                <option value="nameAsc">Namn A-Ö</option>
+                <option value="nameDesc">Namn Ö-A</option>
+                <option value="ratingAsc">Högsta Betyg</option>
+                <option value="ratingDesc">Lägsta Betyg</option>
+            </select> 
+            <br>
             
             <button> Sortera </button>
         </div>

@@ -26,6 +26,12 @@ function init() {
 		console.log(sorter[i]);
 		sorter[i].addEventListener("click", sortCampings);
 	}
+
+	sorterM = document.getElementById("sorterM");
+	for (let i = 0; i < sorterM.length; i++) {
+		sorterM[i].addEventListener("click", sortCampings);
+	}
+	
 	//sorter.addEventListener("change", sortCampings);
 	skipPage = skipPage[0];
 	initMap();
@@ -44,7 +50,7 @@ function init() {
 
 	let checkboxes = document.getElementsByClassName("modalCheck"); // Filterknaparna
 	for (let i = 0; i < checkboxes.length; i++) {
-		checkboxes[i].addEventListener("click", requestCamping);
+		checkboxes[i].addEventListener("change", requestCamping);
 	}
 
 	let modalSmaland = document.getElementById("smålandM");
@@ -292,20 +298,26 @@ function openNext() {
 
 function autoFilter() {
 	let filterCall = sessionStorage.getItem("filterChecked");
-	let oland = document.getElementById("ölandM");
-	let strand = document.getElementById("strandM");
-	let natur = document.getElementById("naturM");
+	let oland = document.getElementById("öland");
+	let strand = document.getElementById("strand");
+	let natur = document.getElementById("natur");
+	let olandM = document.getElementById("ölandM");
+	let strandM = document.getElementById("strandM");
+	let naturM = document.getElementById("naturM");
 
 	if (filterCall == "oland") {
 		oland.checked = true;
+		olandM.checked = true;
 	}
 
 	else if (filterCall == "strand") {
 		strand.checked = true;
+		strandM.checked = true;
 	}
 
 	else if (filterCall == "natur") {
 		natur.checked = true;
+		naturM.checked = true;
 	}
 }
 
@@ -398,7 +410,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].province == "Småland") {
 				ixList.push(i);
-				console.log("Småland"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);
@@ -409,7 +420,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].province == "Öland") {
 				ixList.push(i);
-				console.log("Öland"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);
@@ -420,7 +430,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].text.includes("strand")) {
 				ixList.push(i);
-				console.log("Strand"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);
@@ -431,7 +440,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].text.includes("natur")) {
 				ixList.push(i);
-				console.log("Natur"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);	
@@ -443,7 +451,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].price_range.includes("0-25")) {
 				ixList.push(i);
-				console.log("0-250"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);	
@@ -454,7 +461,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].price_range.includes("250-500")) {
 				ixList.push(i);
-				console.log("250-500"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);	
@@ -465,7 +471,6 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 		for (let i = 0; i < resp.length; i++) {
 			if (resp[i].price_range.includes("500-1250")) {
 				ixList.push(i);
-				console.log("500-1250"); //----------------------------###
 			}
 		}
 		resp = removeNonIndexed(resp, ixList);	
