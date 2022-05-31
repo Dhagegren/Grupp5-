@@ -24,7 +24,6 @@ function init() {
 	
 	sorter = document.getElementsByClassName("sorter");
 	for (let i = 0; i < sorter.length; i++) {
-		console.log(sorter[i]);
 		sorter[i].addEventListener("click", sortCampings);
 	}
 
@@ -91,7 +90,7 @@ function init() {
         }
     });
 
-	for(let i = 0; i < span.length; i++){
+	for(let i = 0; i < span.length; i++) {
 		span[i].addEventListener("click", hideModal);
 	}
 }
@@ -158,7 +157,7 @@ function requestCamping() {
 			if (request.status == 200) checkCity(request.responseText);
 			else console.log("yes very many")
     };
-    function checkCity(response){
+    function checkCity(response) {
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
 		getCamping();  
@@ -197,7 +196,7 @@ function sortCampings(){
 	let sorting = this.id;
 
 	if (sorting == "nameAsc" || sorting == "nameAscM") {
-		campings.sort(function(a, b){
+		campings.sort(function(a, b) {
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
 			if (x < y) {return -1;}
@@ -206,7 +205,7 @@ function sortCampings(){
 		});
 	}
 	else if (sorting == "nameDesc" || sorting == "nameDescM") {
-		campings.sort(function(a, b){
+		campings.sort(function(a, b) {
 			let x = a[0].name.toLowerCase();
 			let y = b[0].name.toLowerCase();
 			if (x < y) {return 1;}
@@ -214,8 +213,8 @@ function sortCampings(){
 			return 0;
 		});
 	}
-	else if (sorting == "ratingAsc" || sorting == "ratingAscM"){
-		campings.sort(function(a, b){
+	else if (sorting == "ratingAsc" || sorting == "ratingAscM") {
+		campings.sort(function(a, b) {
 			let x = a[0].rating;
 			let y = b[0].rating;
 			if (x < y) {return 1;}
@@ -224,7 +223,7 @@ function sortCampings(){
 		});
 	}
 	else if (sorting == "ratingDesc" || sorting == "ratingDescM") {
-		campings.sort(function(a, b){
+		campings.sort(function(a, b) {
 			let x = a[0].rating;
 			let y = b[0].rating;
 			if (x < y) {return -1;}
