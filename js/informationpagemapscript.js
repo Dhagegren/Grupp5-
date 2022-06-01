@@ -1,5 +1,4 @@
 var mymap; // Min karta
-
 var knappKarta;
 var svgKarta;
 var knappLista;
@@ -10,8 +9,8 @@ var mapElem;
 var listElem;
 var svgAktiviteter;
 var svgMat;
-const SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P";
-var getCamp = window.location.search;
+const SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P";//Smapi nyckel
+var getCamp = window.location.search;//Vilken camping
 var campId ="";
 var latCamp;
 var lngCamp;
@@ -34,6 +33,7 @@ function init() {
 	console.log(campId);
 	requestCamp();
 	requestFac();
+	//Referenser 
 	moreText = document.getElementById("more");
 	btnMoreText = document.getElementById("visaMer");
 	knappKarta = document.getElementById("knappKarta");
@@ -65,7 +65,7 @@ function init() {
 window.addEventListener("load", init);
 
 
-
+//Hämtar campingen
 function requestCamp() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET", SMAPI + "&controller=establishment&method=getall&ids="+ campId + "&debug=true&format=json&nojsoncallback=1",true);
@@ -76,13 +76,13 @@ function requestCamp() {
 			else console.log("yes very many");
 	}
 }
-
+//Kollar vilken camping
 function checkCamp(response){
-	let ingenBeskrivning = document.getElementById("ingenBeskrivning");
+	let ingenBeskrivning = document.getElementById("ingenBeskrivning");//om de inte finns någon beskrivning
 	let close = document.getElementById("close");
 
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
-	let picture = document.getElementsByClassName("picture")[0];
+	let picture = document.getElementsByClassName("picture")[0];//Hämtar bilden
 	picture.style.background = "linear-gradient(to top, rgba(0, 0, 0, 1) 10%, rgba(0,0,0,.7) 20%, rgba(0,0,0,.4) 40%, rgba(0,0,0,0) 50%), url(campingImg/" + theResponse.id + ".jpg) no-repeat center";
 
 	picture.style.backgroundSize = "cover"
@@ -108,8 +108,8 @@ function checkCamp(response){
 	beskrivning.children[1].innerHTML = text2;
 	latCamp = theResponse.lat;
 	lngCamp = theResponse.lng;
-	let phoneNum = theResponse.phone_number;
-	let webSite = theResponse.website;
+	let phoneNum = theResponse.phone_number;//Telefonnummret
+	let webSite = theResponse.website;//Hemsidan
 	websiteDiv[0].href = webSite;
 	websiteDiv[1].href = webSite;
 	phoneDiv[0].alt = phoneNum;
@@ -119,14 +119,14 @@ function checkCamp(response){
 	requestActivity();
 
 }
-
+//Funktion för att kopiera telefonnummret
 function copyTele(){
-	let copyText = phoneDiv[0].alt;
+	let copyText = phoneDiv[0].alt;//Hämta tel nr
 	navigator.clipboard.writeText(copyText);
 	alert("Kopierad till urklipp")
 
 }
-
+//Hämnta faciliteter
 function requestFac(){
 	console.log("dd")
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
@@ -138,15 +138,15 @@ function requestFac(){
 			else console.log("yes very many");
 	}
 }
-
+//Hantera faciliteter och iconer
 function checkFac(response){
-	const faciliteter = ["breakfast", "free_parking", "restaurant", "conference", "laundry_service", "wifi", "spa", "gym", "bar", "pet_friendly"];
-	const faciliteterSvenska = ["Frukost", "Gratis parkering", "Restaurang", "Konferans", "Tvätt", "Wifi", "Spa", "Gym", "Bar", "Djurvänligt"];
-	let ikoner = document.getElementById("ikoner");
+	const faciliteter = ["breakfast", "free_parking", "restaurant", "conference", "laundry_service", "wifi", "spa", "gym", "bar", "pet_friendly"];//Faciliteter i smapi
+	const faciliteterSvenska = ["Frukost", "Gratis parkering", "Restaurang", "Konferans", "Tvätt", "Wifi", "Spa", "Gym", "Bar", "Djurvänligt"];//Factiliteter på svenska
+	let ikoner = document.getElementById("ikoner");//Referens till ikonerna
 	let theResponse = JSON.parse(response).payload[0];//Konverterar json svaret
-	let responseArray = Object.values(theResponse);
+	let responseArray = Object.values(theResponse);//Array med värdena på faciliteterna
 	let x = responseArray.splice(5,10);
-	let temp = ""
+	let temp = "";//Temporär variabel för att kunna lägga in i innerHTML
 	for (let i = 0; i < x.length; i++){
 		if (x[i] == "Y"){
 			temp += "<div class=ikon> <img src=ikoner/" + faciliteter[i] + ".svg  alt=" + faciliteterSvenska[i] + "> <p>" + faciliteterSvenska[i] + "</p> </div>";
@@ -155,6 +155,7 @@ function checkFac(response){
 	ikoner.innerHTML = temp;
 }
 
+//Funktion för att visa mer text
 function visaMerText() {
 	if (moreText.style.display === "inline") {
 	  btnMoreText.firstChild.src = "ikoner/cheveron-down.svg";
@@ -165,6 +166,7 @@ function visaMerText() {
 	}
   }
 
+//Skapa en ny karta
 function initMap1() {
 	myMap = new google.maps.Map(
 			document.getElementById('map'),
@@ -177,13 +179,13 @@ function initMap1() {
 				]
 			}
 		);
-		let tempVar ={lat:+latCamp, lng:+ lngCamp};
+		let tempVar ={lat:+latCamp, lng:+ lngCamp};//Centrera kartan på campingen
 		
-		var marker = new google.maps.Marker({
+		let marker = new google.maps.Marker({
 			position: tempVar,
 			myMap,
 			title: "Campingen",
-		});
+		});//Skapa ny marker
 		
 		myMarkers = [marker];
 		marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -192,6 +194,7 @@ function initMap1() {
 		marker.addListener("click", toggleBounce);
 } // End initMap
 
+//funktion för att få marker att studsa
 function toggleBounce() {
 	if (myMarkers[0].getAnimation() !== null) {
 		myMarkers[0].setAnimation(null);
@@ -200,6 +203,7 @@ function toggleBounce() {
 	}
   }
 
+  //Visa kartan
 function showMap(){
 	if (mapElem.classList.contains("hidden")){
 		listElem.classList.add("hidden");
@@ -215,7 +219,7 @@ function showMap(){
 		return;
 	}
 }
-
+//Visa listan
 function showList() {
 	if (listElem.classList.contains("hidden")){
 		mapElem.classList.add("hidden");
@@ -231,7 +235,7 @@ function showList() {
 		return;
 	}
 }
-
+//Visa aktiv
 function showActive() {
 	if (knappMat.classList.contains("active")){
 		knappMat.classList.remove("active");
@@ -245,7 +249,7 @@ function showActive() {
 		return;
 	}
 }
-
+//Visa maten
 function showFood() {
 	if (knappAktiviteter.classList.contains("active")){
 		knappAktiviteter.classList.remove("active");
@@ -259,7 +263,7 @@ function showFood() {
 		return;
 	}
 }
-
+//Hämta mat i närheten
  function requestMat(){
  	let request = new XMLHttpRequest();
  	request.open("GET", SMAPI +"&controller=food&method=getfromlatlng&lat="+latCamp+"&lng="+lngCamp+"&radius=30&format=json&nojsoncallback=1", true );
@@ -270,9 +274,10 @@ function showFood() {
  			else console.log("hittas inte")
 			
  	}
+	 //Hantera svaret med mat i närheten
  	function checkFood(response){
- 		let foodResponse = JSON.parse(response);
- 		let tempFood = "";
+ 		let foodResponse = JSON.parse(response);//Hantera responsen
+ 		let tempFood = "";//Temp variabel för maten
  		foodResponse = foodResponse.payload;
 		myMarkers2=[]; //tömmer arrayen
 		removeMarker();
@@ -281,14 +286,14 @@ function showFood() {
 			tempFood += "<div class=listobjekt > <h3>" + foodResponse[i].name+ "</h3> <ul> <li>" + foodResponse[i].search_tags + "</li> <li> Betyg: " +parseFloat (foodResponse[i].rating) + "/5 </li> </ul> </div>" ;
  			matRef.innerHTML=tempFood;
 			
-			 let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};
-			let tempDesc =foodResponse[i].name;
+			let tempVar ={lat:+foodResponse[i].lat, lng:+ foodResponse[i].lng};// lat lng för mat plats
+			let tempDesc =foodResponse[i].name; // beskrivning av matplats
 			
-			var marker = new google.maps.Marker({
+			let marker = new google.maps.Marker({
 			position: tempVar,
 				myMap,
 				title:tempDesc,
-			});
+			});//Skapa en marker 
 			myMarkers.push(marker);
 			myMarkers2.push(marker); //pushar in i den andra markörarrayen
 			marker.setMap(myMap);
@@ -296,7 +301,7 @@ function showFood() {
 			
 		}
 		addMarker();
-		let listElements = document.getElementsByClassName("listobjekt");
+		let listElements = document.getElementsByClassName("listobjekt");//Referens
 		for (i=0; i<listElements.length; i++){
 			
 			listElements[i].addEventListener("click", activeList);
@@ -305,7 +310,7 @@ function showFood() {
 
 	}
  }
-
+//Hämta aktiviteter i närheten
 function requestActivity(){
 	let request = new XMLHttpRequest();
 	request.open("GET", SMAPI +"&controller=activity&method=getfromlatlng&lat="+latCamp+"&lng="+lngCamp+"&radius=30&format=json&nojsoncallback=1", true );
@@ -316,24 +321,24 @@ function requestActivity(){
 			else console.log("hittas inte")
 			
 	}
-
+	//Hantera aktiviteter i närheten
 	function checkActivity(response){
 		removeMarker();
-		let activityResponse = JSON.parse(response);
-		let tempActivity = "";
+		let activityResponse = JSON.parse(response);//Hantera svaret
+		let tempActivity = "";//Temp variabel för aktiviteter
 		activityResponse = activityResponse.payload;
 		myMarkers2=[];
 		for (let i=0; i<activityResponse.length; i++){
 			tempActivity += " <div class=listobjekt> <h3>" + activityResponse[i].name+ "</h3> <ul> <li>" + activityResponse[i].description + "</li> <li> Betyg: " + parseFloat(activityResponse[i].rating)+ "/5 </li> </ul> </div>" ;
 			matRef.innerHTML=tempActivity;
 			
-			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};
-			let tempDesc =activityResponse[i].name;
-			var marker = new google.maps.Marker({
+			let tempVar ={lat:+activityResponse[i].lat, lng:+ activityResponse[i].lng};//Lat lng för aktiviteter
+			let tempDesc =activityResponse[i].name;//namnet på aktiviten
+			let marker = new google.maps.Marker({
 			position: tempVar,
 				myMap,
 				title: tempDesc,
-			}	
+			}//Skapa en marker	
 		);
 		myMarkers.push(marker);
 		myMarkers2.push(marker);//pushar in i den andra markör arrayen
@@ -341,7 +346,7 @@ function requestActivity(){
 		}
 		addMarker();
 		
-		var listElements = document.getElementsByClassName("listobjekt");
+		let listElements = document.getElementsByClassName("listobjekt");//referens till list objekt
 		for (i=0; i<listElements.length; i++){
 			
 			listElements[i].addEventListener("click", activeList);
@@ -351,6 +356,7 @@ function requestActivity(){
 	}
 }
 
+//Lägger till info om platserna i info ruta
 function addMarker(){
 	for (let i = 0; i < myMarkers.length; i++) {
 		myMarkers[i].addListener("click", () => {
@@ -361,7 +367,7 @@ function addMarker(){
 		
 	}
 }
-
+//tar bort markers
 function removeMarker(){
 	
 	for (let i = 1; i < myMarkers.length; i++) {
@@ -369,6 +375,7 @@ function removeMarker(){
 	}
 }
 
+//Hämta reviews
 function getReviews(){
 	let request = new XMLHttpRequest();
 	request.open("GET", SMAPI +"&controller=establishment&method=getreviews&id="+ campId +"&format=json&nojsoncallback=1", true );
@@ -379,31 +386,26 @@ function getReviews(){
 			else console.log("hittas inte")
 }
 }
-
+//Hantera reviews
 function checkReviews(response){
 	let reviewResponse = JSON.parse(response).payload;
-	
-	reviewRef = document.getElementById("recensioner");
-
-	console.log(reviewRef);
-	tempText = "";
-	if(reviewResponse.length >0){
+	let reviewRef = document.getElementById("recensioner");//Referens till reviews
+	let tempText = "";// temporär variabel för att kunna skriva ut reviews sen
+	if(reviewResponse.length > 0){
 		for (let i = 0; i < reviewResponse.length; i++) {
 			tempText += "<div class=recensionerobjekt> <h3>"+ reviewResponse[i].name + "</h3> <p> "+ reviewResponse[i].comment + "</p></div>"
 		}
-		
-
 	}
 	else{
-		let ingaReview = document.getElementById("ingarecensioner");
+		let ingaReview = document.getElementById("ingarecensioner");//Referens till inga reviews
 		ingaReview.style.display = "inline";
 
 	}
 	reviewRef.innerHTML = tempText;
 }
-
+//Aktiva listan
 function activeList(){
-	let className = document.getElementsByClassName("listobjekt");
+	let className = document.getElementsByClassName("listobjekt");//Referens
 	for(i=0; i<className.length;i++){
 		className[i].classList.remove("changeColor");	
 	}
