@@ -14,10 +14,12 @@ var skipPage = document.getElementsByClassName("nextPage");
 var perPage = 5;
 var sorter;
 var theResponse;
+var showMaps;
+var myMarkers =[];
+const infoWindow = new google.maps.InfoWindow();
 		// name, city, rating, id
 function init() {
 	let filterCall = sessionStorage.getItem("filterChecked");
-
 	if (filterCall != null) {
 		autoFilter();
 	}
@@ -93,9 +95,21 @@ function init() {
 	for(let i = 0; i < span.length; i++) {
 		span[i].addEventListener("click", hideModal);
 	}
+
 }
 window.onload = init;
 
+function showMyMap(){
+	modal[2].style.display = "block"
+	activeModal = modal[2];
+	let latlong= this.id.split(",");
+	let lat = latlong[1];
+	let lng = latlong[2];
+	let myLatLng = new google.maps.LatLng(lat,lng);
+	let zoom = 15;
+	myMap.setZoom(zoom);
+	myMap.setCenter(myLatLng);
+}
 //Open up modal
 function showModal(id) {
 	switch (id) {
@@ -110,6 +124,12 @@ function showModal(id) {
 		case "mapBtn":
 			modal[2].style.display = "block"
 			activeModal = modal[2]
+			let lat = 57.17112;
+			let lng = 15.34419;
+			let myLatLng = new google.maps.LatLng(lat,lng);
+			let zoom = 8;
+			myMap.setZoom(zoom);
+			myMap.setCenter(myLatLng);
 			break;
 		default:
 			break;
@@ -138,8 +158,8 @@ function initMap() {
 	myMap = new google.maps.Map(
 			document.getElementById('map'),
 			{
-				center: {lat:56.13708498823629, lng:15.584851190648239},
-				zoom: 12,
+				center: {lat:57.17112, lng:15.34419},
+				zoom: 8,
 				styles: [
 					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
 					{featureType:"transit.station",stylers:[{visibility:"off"}]}  // No bus stations, etc.
@@ -155,7 +175,7 @@ function requestCamping() {
 	request.onreadystatechange = function () { // Funktion för att avläsa status i kommunikationen
 		if (request.readyState == 4)
 			if (request.status == 200) checkCity(request.responseText);
-			else console.log("yes very many")
+			else console.log("Could not find")
     };
     function checkCity(response) {
 		theResponse = JSON.parse(response);//Konverterar json svaret
@@ -169,17 +189,33 @@ function getCamping() {
 	campings = [{name:"",
 	city:"",
 	rating:"",
-	id:""}];
+	id:"",
+	lat:"",
+	long:""}];
 	search = search.toLowerCase();
 	for (let i = 0; i < theResponse.length; i++) {
 		if (theResponse[i].city.toLowerCase().includes(search)|| theResponse[i].municipality.toLowerCase().includes(search) || theResponse[i].name.toLowerCase().includes(search) ||theResponse[i].province.toLowerCase().includes(search) || theResponse[i].county.toLowerCase().includes(search)) {
 			let tempCamping = [{name:theResponse[i].name,
 			city:theResponse[i].city,
 			rating:parseFloat(theResponse[i].rating),
-			id:theResponse[i].id}];
-			campings.push(tempCamping)
+			id:theResponse[i].id,
+			lat:theResponse[i].lat,
+			long:theResponse[i].lng}];
+			campings.push(tempCamping);
+			let tempVar ={lat:+theResponse[i].lat, lng:+ theResponse[i].lng};
+			let tempDesc =theResponse[i].name;
+	
+			let marker = new google.maps.Marker({
+			position: tempVar,
+				myMap,
+				title:tempDesc,
+				id:theResponse[i].id
+			});
+			myMarkers.push(marker);
+			marker.setMap(myMap);
 		}
 	}
+	addMarker();
 	let campingsRem = campings.shift();
 
 	campings.sort(function(a, b){
@@ -190,6 +226,19 @@ function getCamping() {
 		return 0;
 	});
 	print();
+}
+function addMarker(){
+	for (let i = 0; i < myMarkers.length; i++) {
+		myMarkers[i].addListener("click", () => {
+			infoWindow.close();
+			infoWindow.setContent("<div onClick = 'nextPage("+myMarkers[i].id+" )'>"+myMarkers[i].getTitle()+"</div>");
+			infoWindow.open(myMarkers[i].getMap(), myMarkers[i]);
+		  });
+		
+	}
+}
+function nextPage(id){
+	window.open("informationpage.html?value="+ id, "_self");
 }
 
 function sortCampings(){
@@ -242,7 +291,7 @@ function print(){
 		if (i+1 <= campings.length) {
 			let tempCamping = campings[i];
 			campingRef.innerHTML += "<div class = itemDiv> <img src='campingImg/" + tempCamping[0].id + ".jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
-			tempCamping[0].name + "</h2> <p>5km från "+ tempCamping[0].city + "</p> <p class ='showMap' > Visa på karta </p> <p class='betyg'>" +tempCamping[0].rating + "<span>/5</span></p>"+
+			tempCamping[0].name + "</h2> <p>5km från "+ tempCamping[0].city + "</p> <p class ='showMap' id="+tempCamping[0].id +","+ tempCamping[0].lat+","+ tempCamping[0].long+"> Visa på karta </p> <p class='betyg'>" +tempCamping[0].rating + "<span>/5</span></p>"+
 			'</div> <button class="infoBtn" id='+tempCamping[0].id+'> Info</button></div>';
 		}
 	}
@@ -250,6 +299,10 @@ function print(){
 	for (let i = 0; i < campingBtn.length; i++) {
 		campingBtn[i].addEventListener("click", openNext);
 
+	}
+	showMaps = document.getElementsByClassName("showMap");
+	for (let i = 0; i < showMaps.length; i++) {
+		showMaps[i].addEventListener("click", showMyMap);
 	}
 
 	if (campings.length > activeSide+5) {
@@ -271,8 +324,8 @@ function print(){
 }
 
 function changePage() {
-	let	num = this.id;
-	activeSide = activeSide+parseInt(num);
+	let	num = this.id.split(",");
+	activeSide = activeSide+parseInt(num[0]);
 	print();
 }
 

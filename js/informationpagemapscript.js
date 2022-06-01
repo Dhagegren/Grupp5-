@@ -10,7 +10,7 @@ var mapElem;
 var listElem;
 var svgAktiviteter;
 var svgMat;
-var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P";
+const SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P";
 var getCamp = window.location.search;
 var campId ="";
 var latCamp;
@@ -411,7 +411,7 @@ function activeList(){
 		this.classList.add("changeColor");
 	for(y=0; y<myMarkers2.length;y++){
 		className[y].setAttribute("id", y);
-	  infoWindow.close();
+	  	infoWindow.close();
 	  	infoWindow.setContent(myMarkers2[this.id].getTitle());
 	   	infoWindow.open(myMarkers2[this.id].getMap(), myMarkers2[this.id]);
 	}
