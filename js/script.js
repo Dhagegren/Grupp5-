@@ -15,10 +15,10 @@ var perPage = 5;
 var sorter;
 var theResponse;
 		// name, city, rating, id
-function init() {
-	let filterCall = sessionStorage.getItem("filterChecked");
+function init() { // När sidan först laddas in
+	let filterCall = sessionStorage.getItem("filterChecked"); // Data om vilken knapp på startsidan som valts skickas med
 
-	if (filterCall != null) {
+	if (filterCall != null) { // Sålänge datan inte är tom, kalla på autoFilter (som applicerar rätt filter)
 		autoFilter();
 	}
 	
@@ -40,36 +40,20 @@ function init() {
 	let span = document.getElementsByClassName("close");//Reference to span element
 	//Make all buttons clickable
 
-	let checkboxes = document.getElementsByClassName("modalCheck"); // Filterknaparna
+	let checkboxes = document.getElementsByClassName("modalCheck"); // När någon av checkboxarna för filtrering och sortering ändras uppdateras sökningen
 	for (let i = 0; i < checkboxes.length; i++) {
 		checkboxes[i].addEventListener("change", requestCamping);
 	}
 
-	let modalSmaland = document.getElementById("smålandM");
-	modalSmaland.addEventListener("change", filterSync);
-
-	let modalOland = document.getElementById("ölandM");
-	modalOland.addEventListener("change", filterSync);
-
-	let modalStrand = document.getElementById("strandM");
-	modalStrand.addEventListener("change", filterSync);
-
-	let modalNatur = document.getElementById("naturM");
-	modalNatur.addEventListener("change", filterSync);
+	let modalFilters = document.getElementsByClassName("modalFilters"); // Filterfunktionen i modalen synkas med den vanliga filterfunktionen så att den ska funka i båda versionerna
+	for (let i = 0; i < modalFilters.length; i++) {
+		modalFilters[i].addEventListener("change", filterSync);
+	}
 	
-
-	let modalPrice0 = document.getElementById("price0M");
-	modalPrice0.addEventListener("change", priceSync);
-
-	let modalPrice1 = document.getElementById("price1M");
-	modalPrice1.addEventListener("change", priceSync);
-
-	let modalPrice2 = document.getElementById("price2M");
-	modalPrice2.addEventListener("change", priceSync);
-
-	let modalPrice3 = document.getElementById("price3M");
-	modalPrice3.addEventListener("change", priceSync);
-
+	let modalPrice = document.getElementsByClassName("modalPrice"); // Prisklasserna synkas på samma sätt som filtren för att fungera i mobilversionen
+	for (let i = 0; i < modalPrice.length; i++) {
+		modalPrice[i].addEventListener("change", priceSync);
+	}
 	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", function() {
@@ -115,7 +99,6 @@ function showModal(id) {
 			break;
 	}
 	//modal[2].style.display = "block";
-
 }
 
 //Close modal
@@ -136,16 +119,15 @@ window.onclick = function(event) {
 
 function initMap() {
 	myMap = new google.maps.Map(
-			document.getElementById('map'),
-			{
-				center: {lat:56.13708498823629, lng:15.584851190648239},
-				zoom: 12,
-				styles: [
-					{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
-					{featureType:"transit.station",stylers:[{visibility:"off"}]}  // No bus stations, etc.
-				]
-			}
-		);		
+		document.getElementById('map'), {
+			center: {lat:56.13708498823629, lng:15.584851190648239},
+			zoom: 12,
+			styles: [
+				{featureType:"poi", stylers:[{visibility:"off"}]},  // No points of interest.
+				{featureType:"transit.station",stylers:[{visibility:"off"}]}  // No bus stations, etc.
+			]
+		}
+	);		
 } // End initMap
 
 function requestCamping() {
@@ -161,8 +143,9 @@ function requestCamping() {
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
 		getCamping();  
+	}
 }
-}
+
 function getCamping() {
 	let search = srcValue;
 	theResponse = searchFilters(theResponse);
@@ -236,7 +219,7 @@ function sortCampings(){
 }
 
 function print(){
-	let start=parseInt(activeSide);
+	let start = parseInt(activeSide);
 	campingRef.innerHTML ="";
 	for (let i = start; i < start+5; i++) {
 		if (i+1 <= campings.length) {
@@ -280,9 +263,9 @@ function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
 }
 
-function autoFilter() {
-	let filterCall = sessionStorage.getItem("filterChecked");
-	let oland = document.getElementById("öland");
+function autoFilter() { // Om en av de tre stora knapparna på första sidan väljs kommer denna funktion söka upp alla campingar och kryssa i rätt filter
+	let filterCall = sessionStorage.getItem("filterChecked"); // Vilken knapp som valts på förstasidan hämtas från sessionStrorage
+	let oland = document.getElementById("öland"); // Referenser till alla relevanta filter rutor till desktopversionen och mobilversionen sparas i variabler
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
 	let olandM = document.getElementById("ölandM");
@@ -305,8 +288,8 @@ function autoFilter() {
 	}
 }
 
-function filterSync() {
-	let smaland = document.getElementById("småland");
+function filterSync() { // Om ett filter väljs i mobilversionen väljs det filtret i desktopversionen så att filtren funkar i båda versioner
+	let smaland = document.getElementById("småland"); // Referenser till samtliga filter så att man kan kryssa i eller ur rutorna samtidigt som det görs i modalen
 	let oland = document.getElementById("öland");
 	let strand = document.getElementById("strand");
 	let natur = document.getElementById("natur");
@@ -352,13 +335,13 @@ function filterSync() {
 	}
 }
 
-function priceSync() {
-	let price0 = document.getElementById("price0");
+function priceSync() { // Om en prisklass väljs i mobilversionen väljs samma i desktopversionen
+	let price0 = document.getElementById("price0"); // En referens till elementet med id för varje prisklass
 	let price1 = document.getElementById("price1");
 	let price2 = document.getElementById("price2");
 	let price3 = document.getElementById("price3");
 
-	let priceId = this.id
+	let priceId = this.id // Denna variabel används för att kolla id:t på den valda prisklassen
 
 	if (priceId.slice(0, 6) == "price0") {
 		price0.checked = true;
@@ -378,27 +361,28 @@ function priceSync() {
 }
 
 function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall vilket och sorterar därefter
-	let ixList = [];
+	let ixList = []; // En array som används för att indexera vilka campingar som matchar kraven för filtren
 
-	let smaland = document.getElementById("småland");
-	let oland = document.getElementById("öland");
-	let strand = document.getElementById("strand");
-	let natur = document.getElementById("natur");
+	let smaland = document.getElementById("småland"); // En variabel som innehåller en referens till checkbox elementet för småland filtret
+	let oland = document.getElementById("öland"); // En variabel som innehåller en referens till checkbox elementet för öland filtret
+	let strand = document.getElementById("strand"); // En variabel som innehåller en referens till checkbox elementet för strand filtret
+	let natur = document.getElementById("natur"); // En variabel som innehåller en referens till checkbox elementet för natur filtret
 	
-	let price1 = document.getElementById("price1");
-	let price2 = document.getElementById("price2");
-	let price3 = document.getElementById("price3");
+	let price1 = document.getElementById("price1"); // En variabel som innehåller en referens till ett av radio button elementen till prisklass filtret
+	let price2 = document.getElementById("price2"); // En variabel som innehåller en referens till ett av radio button elementen till prisklass filtret
+	let price3 = document.getElementById("price3"); // En variabel som innehåller en referens till ett av radio button elementen till prisklass filtret
 
 
-	if (smaland.checked == true) {
+	if (smaland.checked == true) { // Om filtret för småland är ikryssat...
 		for (let i = 0; i < resp.length; i++) {
-			if (resp[i].province == "Småland") {
-				ixList.push(i);
+			if (resp[i].province == "Småland") { // ...kolla igenom listan med campingar efter campingar som har småland som provins...
+				ixList.push(i); // ...och indexera det
 			}
 		}
-		resp = removeNonIndexed(resp, ixList);
+		resp = removeNonIndexed(resp, ixList); // Skicka in indexlistan och listan med campingar till removeNonIndexed (där endast de indexerade campingarna sparas)
 		ixList = [];
 	}
+	// Samma (eller liknande) sak görs för resterande filter:
 
 	if (oland.checked == true) {
 		for (let i = 0; i < resp.length; i++) {
@@ -466,10 +450,10 @@ function searchFilters(resp) { // Kollar om ett filter är itryckt och isåfall 
 
 function removeNonIndexed(resp, ixList) { // Tar bort alla campingar som inte indexerats ur listan
 	if (ixList.length != 0) {
-		let newResp = [];
+		let newResp = []; // En array för attt innehålla den nya listan av campingar
 		
 		for (let i = 0; i < ixList.length; i++) {
-			let ix = ixList[i];
+			let ix = ixList[i]; // En variabel som tilldelas varje index som plockas ut ur index listan
 			newResp.push(resp[ix]);
 		}
 		return newResp;

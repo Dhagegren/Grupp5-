@@ -1,16 +1,19 @@
+
 var SMAPI = "https://smapi.lnu.se/api/?api_key=uXpykX9P"; //Smapi api
-var linkBoxes = document.getElementsByClassName("linkbox");
-var searchBtn = document.getElementsByClassName("search");
-var filterShortcut = document.getElementsByClassName("indexgridsection");
+
 //https://smapi.lnu.se/api/?api_key=uXpykX9P&controller=establishment&method=getall&descriptions=camping
-function init() {
+function init() { // När fönstret laddas in
+    let searchBtn = document.getElementsByClassName("search"); // En referens till sökknappen
     searchBtn = searchBtn[0].children[1];
+    searchBtn.addEventListener("click", requestCamping);
+    
+    let filterShortcut = document.getElementsByClassName("indexgridsection"); // 
     filterShortcut[0].addEventListener("click", filterOland);
     filterShortcut[1].addEventListener("click", filterStrand);
     filterShortcut[2].addEventListener("click", filterNatur);
-    searchBtn.addEventListener("click", requestCamping);
-    var input = document.getElementById("searchBar");
-    input.addEventListener("keypress", function(event){
+
+    let input = document.getElementById("searchBar");
+    input.addEventListener("keypress", function(event) {
         if (event.key ==="Enter") {
             event.preventDefault();
             searchBtn.click();   
@@ -50,6 +53,7 @@ function popularCamping() {
 
 function popCamping(response) {
     let theResponse = JSON.parse(response);//Konverterar json svaret
+    let linkBoxes = document.getElementsByClassName("linkbox");
     theResponse = theResponse.payload;
     for (let i = 0; i < theResponse.length; i++) {
         linkBoxes[i].childNodes[1].style.background = "url(campingImg/" + theResponse[i].id + ".jpg) center";
