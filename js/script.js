@@ -7,64 +7,56 @@ var srcValue ="";
 var campings = [{name:"",
 				city:"",
 				rating:"",
-				id:""}];
-var activeSide = 0;
-var activeModal;
-var skipPage = document.getElementsByClassName("nextPage");
-var perPage = 5;
-var sorter;
-var theResponse;
-var showMaps;
-var myMarkers =[];
-const infoWindow = new google.maps.InfoWindow();
+				id:""}];//Array för att samla in alla campingar till lokal sortering osv
+var activeSide = 0;// Kollar vilken sida vi är på
+var activeModal; // Kollar vilken modal som är öppen
+var skipPage = document.getElementsByClassName("nextPage");//Referens till knappar för next och prev page
+var perPage = 5;//Variabel för per page
+var sorter; //referens till sortering
+var theResponse;//Referens till svaret vi får för att kunna använda alla funktioner	
+var myMarkers =[];//Array för att spara alla markers på google maps
+const infoWindow = new google.maps.InfoWindow();// Referens till google maps info windows
 		// name, city, rating, id
 
 function init() { // När sidan först laddas in
+	campingRef = campingRef[0];
+	skipPage = skipPage[0];
+	let btn = document.getElementsByClassName("myBtn");//Reference to button
+	let span = document.getElementsByClassName("close");//Reference to span element
+	let checkboxes = document.getElementsByClassName("modalCheck"); // När någon av checkboxarna för filtrering och sortering ändras uppdateras sökningen
 	let filterCall = sessionStorage.getItem("filterChecked"); // Data om vilken knapp på startsidan som valts skickas med
-
+	let modalFilters = document.getElementsByClassName("modalFilters"); // Filterfunktionen i modalen synkas med den vanliga filterfunktionen så att den ska funka i båda versionerna
+	let modalPrice = document.getElementsByClassName("modalPrice"); // Prisklasserna synkas på samma sätt som filtren för att fungera i mobilversionen
+	let input = document.getElementById("searchBar");
+	sorter = document.getElementsByClassName("sorter");
+	searchValue = new URLSearchParams(searchValue);
+	srcValue = searchValue.get("value");
 	if (filterCall != null) { // Sålänge datan inte är tom, kalla på autoFilter (som applicerar rätt filter)
 		autoFilter();
 	}
-	
-	sorter = document.getElementsByClassName("sorter");
-	for (let i = 0; i < sorter.length; i++) {
-		sorter[i].addEventListener("click", sortCampings);
-	}
-
-	skipPage = skipPage[0];
 	initMap();
-	campingRef = campingRef[0];
-    searchValue = new URLSearchParams(searchValue);
-    srcValue = searchValue.get("value");
 	if (searchValue.has("side")) {
 		activeSide=parseInt(searchValue.get("side"));
 	}
     requestCamping();
-	let btn = document.getElementsByClassName("myBtn");//Reference to button
-	let span = document.getElementsByClassName("close");//Reference to span element
-	//Make all buttons clickable
-
-	let checkboxes = document.getElementsByClassName("modalCheck"); // När någon av checkboxarna för filtrering och sortering ändras uppdateras sökningen
+	//Lägger till event listeners
 	for (let i = 0; i < checkboxes.length; i++) {
 		checkboxes[i].addEventListener("change", requestCamping);
 	}
-
-	let modalFilters = document.getElementsByClassName("modalFilters"); // Filterfunktionen i modalen synkas med den vanliga filterfunktionen så att den ska funka i båda versionerna
 	for (let i = 0; i < modalFilters.length; i++) {
 		modalFilters[i].addEventListener("change", filterSync);
 	}
-	
-	let modalPrice = document.getElementsByClassName("modalPrice"); // Prisklasserna synkas på samma sätt som filtren för att fungera i mobilversionen
 	for (let i = 0; i < modalPrice.length; i++) {
 		modalPrice[i].addEventListener("change", priceSync);
 	}
-	
 	for (let i = 0; i < btn.length; i++) {
 		btn[i].addEventListener("click", function() {
 			showModal(this.id)
 		});
 	}
-	var input = document.getElementById("searchBar");
+	for (let i = 0; i < sorter.length; i++) {
+		sorter[i].addEventListener("click", sortCampings);
+	}
 	input.addEventListener("input", function(event) {
 		srcValue = input.value;
 		getCamping();
@@ -77,26 +69,14 @@ function init() { // När sidan först laddas in
             searchBtn.click();
         }
     });
-
 	for(let i = 0; i < span.length; i++) {
 		span[i].addEventListener("click", hideModal);
 	}
-
 }
 window.onload = init;
 
-function showMyMap(){
-	modal[2].style.display = "block"
-	activeModal = modal[2];
-	let latlong= this.id.split(",");
-	let lat = latlong[1];
-	let lng = latlong[2];
-	let myLatLng = new google.maps.LatLng(lat,lng);
-	let zoom = 15;
-	myMap.setZoom(zoom);
-	myMap.setCenter(myLatLng);
-}
-//Open up modal
+
+//Öppnar upp modal
 function showModal(id) {
 	switch (id) {
 		case "sortBtn":
@@ -120,14 +100,10 @@ function showModal(id) {
 		default:
 			break;
 	}
-	//modal[2].style.display = "block";
 }
 
 //Close modal
 function hideModal() {
-	//for(let i = 0; i < modal.length; i++){
-	//	modal[i].style.display = "none";
-	//}
 	activeModal.style.display = "none";
 	activeModal = null;
 }
@@ -138,7 +114,7 @@ window.onclick = function(event) {
 		hideModal();
 	}
 }
-
+//Skapar en karta
 function initMap() {
 	myMap = new google.maps.Map(
 			document.getElementById('map'),
@@ -152,7 +128,20 @@ function initMap() {
 			}
 		);		
 } // End initMap
+//Uppdatering för mapen
+function showMyMap(){
+	modal[2].style.display = "block"
+	activeModal = modal[2];
+	let latlong= this.id.split(",");//Splittar id från stället
+	let lat = latlong[1];// tar ut lat
+	let lng = latlong[2];// tar ut lng
+	let myLatLng = new google.maps.LatLng(lat,lng);//Skapar ny google maps lat lng
+	let zoom = 15;// skapar nytt zoom värde
+	myMap.setZoom(zoom);
+	myMap.setCenter(myLatLng);
+}
 
+//Hämta alla campingar
 function requestCamping() {
 	let request = new XMLHttpRequest(); // Object för Ajax-anropet
 	request.open("GET", SMAPI + "&controller=establishment&method=getall&descriptions=camping&debug=true", true);
@@ -162,15 +151,16 @@ function requestCamping() {
 			if (request.status == 200) checkCity(request.responseText);
 			else console.log("Could not find")
     };
+	//Hanterar svaret
     function checkCity(response) {
 		theResponse = JSON.parse(response);//Konverterar json svaret
 		theResponse = theResponse.payload;
 		getCamping();  
 	}
 }
-
+//Funktion för att hantera alla campingar samt sortera ut vid uppdaterad sökning
 function getCamping() {
-	let search = srcValue;
+	let search = srcValue;//Hämtar värdet från sökningen
 	theResponse = searchFilters(theResponse);
 	campings = [{name:"",
 	city:"",
@@ -186,23 +176,23 @@ function getCamping() {
 			rating:parseFloat(theResponse[i].rating),
 			id:theResponse[i].id,
 			lat:theResponse[i].lat,
-			long:theResponse[i].lng}];
+			long:theResponse[i].lng}];//skapar en camping som går att pusha
 			campings.push(tempCamping);
-			let tempVar ={lat:+theResponse[i].lat, lng:+ theResponse[i].lng};
-			let tempDesc =theResponse[i].name;
+			let tempVar ={lat:+theResponse[i].lat, lng:+ theResponse[i].lng};//Variabel för positionen
+			let tempDesc =theResponse[i].name; //Variabel för namnet
 	
 			let marker = new google.maps.Marker({
 			position: tempVar,
 				myMap,
 				title:tempDesc,
 				id:theResponse[i].id
-			});
+			});//Skapar en ny marker
 			myMarkers.push(marker);
 			marker.setMap(myMap);
 		}
 	}
 	addMarker();
-	let campingsRem = campings.shift();
+	let campingsRem = campings.shift(); //tar bort första värdet vid sorteringen
 
 	campings.sort(function(a, b){
 		let x = a[0].name.toLowerCase();
@@ -213,6 +203,7 @@ function getCamping() {
 	});
 	print();
 }
+//Funktion för att göra markers click bara och visa information
 function addMarker(){
 	for (let i = 0; i < myMarkers.length; i++) {
 		myMarkers[i].addListener("click", () => {
@@ -223,12 +214,13 @@ function addMarker(){
 		
 	}
 }
+//Funktion för att öppna nästa sida när man trycker på namnet på kartan
 function nextPage(id){
 	window.open("informationpage.html?value="+ id, "_self");
 }
-
+//Funktion för att sortera campingarna
 function sortCampings(){
-	let sorting = this.id;
+	let sorting = this.id;//Hämtar aktuella sorteringsmetoden
 
 	if (sorting == "nameAsc" || sorting == "nameAscM") {
 		campings.sort(function(a, b) {
@@ -269,52 +261,53 @@ function sortCampings(){
 	activeSide = 0;
 	print();
 }
-
+//Funktion för att skriva ut resultaten
 function print(){
-	let start = parseInt(activeSide);
+	let start = parseInt(activeSide);//Kolla vilken sida vi är på
 	campingRef.innerHTML ="";
 	for (let i = start; i < start+5; i++) {
 		if (i+1 <= campings.length) {
-			let tempCamping = campings[i];
+			let tempCamping = campings[i];// Referens för att enklare komma åt id och stad
 			campingRef.innerHTML += "<div class = itemDiv> <img src='campingImg/" + tempCamping[0].id + ".jpg' alt='bild på camping'> <div class ='textDiv'> <h2>"+
 			tempCamping[0].name + "</h2> <p>5km från "+ tempCamping[0].city + "</p> <p class ='showMap' id="+tempCamping[0].id +","+ tempCamping[0].lat+","+ tempCamping[0].long+"> Visa på karta </p> <p class='betyg'>" +tempCamping[0].rating + "<span>/5</span></p>"+
 			'</div> <button class="infoBtn" id='+tempCamping[0].id+'> Info</button></div>';
 		}
 	}
-	let campingBtn = document.getElementsByClassName("infoBtn");
+	let campingBtn = document.getElementsByClassName("infoBtn");//Referns till knapparna
+	//gör knapparna klickbara
 	for (let i = 0; i < campingBtn.length; i++) {
 		campingBtn[i].addEventListener("click", openNext);
 
 	}
-	showMaps = document.getElementsByClassName("showMap");
+	let showMaps = document.getElementsByClassName("showMap");//referens till visa karta
+	//gör visa karta clickbara
 	for (let i = 0; i < showMaps.length; i++) {
 		showMaps[i].addEventListener("click", showMyMap);
 	}
-
+	//Kollar om de finns fler sidor
 	if (campings.length > activeSide+5) {
 		skipPage.innerHTML="<button id='"+perPage+"'>></button>";
 	}
-
 	else skipPage.innerHTML="";
-
-
+	//Kollar om de finns sidor backåt
 	if (activeSide > 0) {
 		skipPage.innerHTML+="<button id='"+-perPage+"'><</button>";
 		
 	}
-
+	//Lägger till event listeners
 	for (let i = 0; i < skipPage.children.length; i++) {
 		skipPage.children[i].addEventListener("click", changePage)
 	}
 
 }
 
+//Byter sida
 function changePage() {
-	let	num = this.id.split(",");
+	let	num = this.id.split(",");//Hämtar vilken sida
 	activeSide = activeSide+parseInt(num[0]);
 	print();
 }
-
+//Funktion för att öppna campingens sida när man trycker på knappen
 function openNext() {
 	window.open("informationpage.html?value="+ this.id, "_self");
 }
